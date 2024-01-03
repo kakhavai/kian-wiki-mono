@@ -1,4 +1,4 @@
-# My Project: A Personal Website Resume and ML Sports Playground
+# Personal Website Resume and ML Sports Playground
 
 Welcome to my project! This repository serves as both my personal website resume and a fun, experimental playground for machine learning (ML) projects centered around sports. It's structured as a mono-repo, which means it contains multiple sub-projects in a single repository.
 
