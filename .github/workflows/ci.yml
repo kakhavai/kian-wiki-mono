@@ -10,6 +10,15 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    env:
+      NODE_VERSION: ${{ secrets.NODE_VERSION }}
+      MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
+      MYSQL_USER: ${{ secrets.MYSQL_USER }}
+      MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
+      MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
+      MYSQL_HOST: ${{ secrets.MYSQL_HOST }}
+      DATABASE_URL: 'mysql://${{ secrets.MYSQL_USER }}:${{ secrets.MYSQL_ROOT_PASSWORD }}@${{ secrets.MYSQL_HOST }}/${{ secrets.MYSQL_DATABASE }}'
+
     steps:
       - uses: actions/checkout@v2
 
