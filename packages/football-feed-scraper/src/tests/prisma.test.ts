@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import PlayerFeedRepository from '../repositories/PlayerFeedRepository';
-import IPlayer from '../interfaces/IPlayer';
+import { IPlayer } from 'football-feed-types';
 
 describe('PlayerFeedRepository (Integration Tests)', () => {
   let prisma: PrismaClient;

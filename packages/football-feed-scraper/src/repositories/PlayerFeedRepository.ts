@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import IPlayer from '../interfaces/IPlayer';
+import { IPlayer } from 'football-feed-types';
 
 class PlayerFeedRepository {
   private _prisma: PrismaClient;
