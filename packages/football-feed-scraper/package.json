@@ -14,7 +14,7 @@
     "docker-build": "docker-compose build",
     "docker-up": "docker-compose up -d --wait",
     "build": "yarn run clean && yarn tsc && yarn run docker-down && yarn run docker-build && yarn run docker-up && yarn run prisma-migrate deploy && node build/index.js",
-    "lint": "npx eslint ."
+    "lint": "yarn eslint ."
   },
   "author": "",
   "license": "ISC",

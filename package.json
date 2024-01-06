@@ -3,17 +3,18 @@
   "private": true,
   "version": "0.0.0",
   "devDependencies": {
-    "lerna": "^8.0.2"
+    "lerna": "^8.0.2",
+    "rimraf": "^5.0.5"
   },
   "useWorkspaces": true,
   "workspaces": [
     "packages/*"
   ],
   "scripts": {
-    "lint": "npx eslint .",
-    "build": "npx lerna run build",
-    "clean": "npx nx reset && npx lerna clean --yes",
-    "test": "npx lerna run test",
+    "lint": "yarn eslint .",
+    "build": "yarn lerna run build",
+    "clean": "rimraf ./.nx && yarn lerna clean --yes",
+    "test": "yarn lerna run test",
     "clean-build": "yarn run clean && yarn run build"
   },
   "packageManager": "yarn@4.0.2"

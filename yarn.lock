@@ -3739,6 +3739,8 @@ __metadata:
 "football-feed-types@workspace:^, football-feed-types@workspace:packages/football-feed-types":
   version: 0.0.0-use.local
   resolution: "football-feed-types@workspace:packages/football-feed-types"
+  dependencies:
+    typescript: "npm:^5.3.3"
   languageName: unknown
   linkType: soft
 
@@ -5558,6 +5560,7 @@ __metadata:
   resolution: "kian-wiki-mono@workspace:."
   dependencies:
     lerna: "npm:^8.0.2"
+    rimraf: "npm:^5.0.5"
   languageName: unknown
   linkType: soft
 
@@ -8470,7 +8473,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:>=3 < 6, typescript@npm:^5.3.2":
+"typescript@npm:>=3 < 6, typescript@npm:^5.3.2, typescript@npm:^5.3.3":
   version: 5.3.3
   resolution: "typescript@npm:5.3.3"
   bin:
@@ -8480,7 +8483,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@npm%3A>=3 < 6#optional!builtin<compat/typescript>, typescript@patch:typescript@npm%3A^5.3.2#optional!builtin<compat/typescript>":
+"typescript@patch:typescript@npm%3A>=3 < 6#optional!builtin<compat/typescript>, typescript@patch:typescript@npm%3A^5.3.2#optional!builtin<compat/typescript>, typescript@patch:typescript@npm%3A^5.3.3#optional!builtin<compat/typescript>":
   version: 5.3.3
   resolution: "typescript@patch:typescript@npm%3A5.3.3#optional!builtin<compat/typescript>::version=5.3.3&hash=e012d7"
   bin:
