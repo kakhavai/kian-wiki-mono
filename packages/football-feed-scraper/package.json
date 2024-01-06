@@ -9,7 +9,11 @@
   "scripts": {
     "clean": "rimraf ./build",
     "test": "jest ./build",
-    "build": "npm run clean && npx tsc && node build/index.js",
+    "prisma-migrate": "yarn prisma migrate deploy && yarn prisma generate",
+    "docker-down": "docker-compose down",
+    "docker-build": "docker-compose build",
+    "docker-up": "docker-compose up -d --wait",
+    "build": "yarn run clean && yarn tsc && yarn run docker-down && yarn run docker-build && yarn run docker-up && yarn run prisma-migrate deploy && node build/index.js",
     "lint": "npx eslint ."
   },
   "author": "",
@@ -21,13 +25,13 @@
     "eslint": "^8.54.0",
     "jest": "^29.7.0",
     "prettier": "3.1.0",
-    "prisma": "^5.7.1",
     "rimraf": "^5.0.5",
     "typescript": "^5.3.2"
   },
   "dependencies": {
     "@prisma/client": "^5.7.1",
     "dotenv": "^16.3.1",
-    "football-feed-types": "1.0.0"
+    "football-feed-types": "workspace:^",
+    "prisma": "^5.7.1"
   }
 }

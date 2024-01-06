@@ -1,14 +1,20 @@
 {
-  "name": "root",
+  "name": "kian-wiki-mono",
   "private": true,
-  "workspaces": [
-    "./packages/*"
-  ],
-  "dependencies": {},
+  "version": "0.0.0",
   "devDependencies": {
-    "lerna": "^8.0.0"
+    "lerna": "^8.0.2"
   },
+  "useWorkspaces": true,
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
-    "lint": "npx eslint ."
-  }
+    "lint": "npx eslint .",
+    "build": "npx lerna run build",
+    "clean": "npx nx reset && npx lerna clean --yes",
+    "test": "npx lerna run test",
+    "clean-build": "yarn run clean && yarn run build"
+  },
+  "packageManager": "yarn@4.0.2"
 }
