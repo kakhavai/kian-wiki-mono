@@ -3,6 +3,8 @@
   "private": true,
   "version": "0.0.0",
   "devDependencies": {
+    "@types/eslint": "^8",
+    "eslint": "^8.56.0",
     "lerna": "^8.0.2",
     "rimraf": "^5.0.5"
   },
@@ -15,7 +17,8 @@
     "build": "yarn lerna run build",
     "clean": "rimraf ./.nx && yarn lerna clean --yes",
     "test": "yarn lerna run test",
-    "clean-build": "yarn run clean && yarn run build"
+    "clean-build": "yarn run clean && yarn run build",
+    "clean-node-modules": "rimraf ./node_modules"
   },
   "packageManager": "yarn@4.0.2"
 }

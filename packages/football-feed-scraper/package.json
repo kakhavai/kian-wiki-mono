@@ -31,7 +31,7 @@
   "dependencies": {
     "@prisma/client": "^5.7.1",
     "dotenv": "^16.3.1",
-    "football-feed-types": "workspace:^",
+    "football-feed-types": "workspace:*",
     "prisma": "^5.7.1"
   }
 }
