@@ -13,7 +13,7 @@
     "docker-down": "docker-compose down",
     "docker-build": "docker-compose build",
     "docker-up": "docker-compose up -d --wait",
-    "build": "yarn run clean && yarn tsc && yarn run docker-down && yarn run docker-build && yarn run docker-up && yarn run prisma-migrate deploy && node build/index.js",
+    "build": "echo 'Cleaning...' && yarn run clean &&     echo 'Compiling TypeScript...' && yarn tsc &&     echo 'Stopping Docker containers...' && yarn run docker-down &&     echo 'Building Docker containers...' && yarn run docker-build &&     echo 'Starting Docker containers...' && yarn run docker-up &&     echo 'Running Prisma migrations...' && yarn run prisma-migrate deploy &&     echo 'Starting the application...' && node build/index.js",
     "lint": "yarn eslint ."
   },
   "author": "",
