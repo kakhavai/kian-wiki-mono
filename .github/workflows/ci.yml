@@ -17,7 +17,7 @@ jobs:
       MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
       MYSQL_HOST: ${{ secrets.MYSQL_HOST }}
       MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
-      DATABASE_URL: 'mysql://\${{ secrets.MYSQL_USER }}:${{ secrets.MYSQL_PASSWORD }}@${{ secrets.MYSQL_HOST }}/${{ secrets.MYSQL_DATABASE }}'
+      DATABASE_URL: 'mysql://${{ secrets.MYSQL_USER }}:${{ secrets.MYSQL_PASSWORD }}@database/${{ secrets.MYSQL_DATABASE }}'
 
     steps:
       - uses: actions/checkout@v4
@@ -25,6 +25,9 @@ jobs:
       - name: Read .nvmrc
         id: nvmrc
         run: echo "NODE_VERSION=$(cat .nvmrc)" >> "$GITHUB_OUTPUT"
+
+      - name: Read db url
+        run: echo "$DATABASE_URL"
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
