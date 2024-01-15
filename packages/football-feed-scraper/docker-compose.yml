@@ -16,7 +16,16 @@ services:
       - feed-volume:/var/lib/mysql
       - ./prisma/init.sql:/docker-entrypoint-initdb.d/init.sql
     healthcheck:
-      test: ['CMD', 'mysqladmin', 'ping', '-h', 'database']
+      test:
+        [
+          'CMD',
+          'mysqladmin',
+          'ping',
+          '-h',
+          'database',
+          '--user=$MYSQL_USER',
+          '--password=$MYSQL_PASSWORD',
+        ]
       interval: 15s
       timeout: 10s
       retries: 3
