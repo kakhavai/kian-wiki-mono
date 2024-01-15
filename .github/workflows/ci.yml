@@ -37,6 +37,9 @@ jobs:
       - name: Install dependencies using Yarn
         run: yarn install
 
+      - name: Check Docker Compose version
+        run: docker-compose --version
+
       - name: Run linting using Yarn
         run: yarn run lint
 
