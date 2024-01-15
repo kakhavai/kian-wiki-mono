@@ -4,6 +4,8 @@ services:
     ports:
       - '3306:3306'
     hostname: database
+    env_file:
+      - ./.env
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
@@ -13,12 +15,6 @@ services:
     volumes:
       - feed-volume:/var/lib/mysql
       - ./prisma/init.sql:/docker-entrypoint-initdb.d/init.sql
-    healthcheck:
-      test: ['CMD', 'mysqladmin', 'ping', '-h', '127.0.0.1', '--silent']
-      interval: 5s
-      timeout: 3s
-      retries: 2
-      start_period: 0s
 
 volumes:
   feed-volume:
