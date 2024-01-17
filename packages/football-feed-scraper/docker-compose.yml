@@ -19,6 +19,9 @@ services:
       test:
         [
           'CMD',
+          'sleep',
+          '10',
+          '&&',
           'mysqladmin',
           'ping',
           '-h',
