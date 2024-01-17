@@ -49,5 +49,11 @@ jobs:
       - name: Run build using Yarn
         run: yarn run clean-build
 
+      - name: Failure logs
+        if: failure()
+        run: |
+          container_id=$(docker ps -a --format "{{.ID}}" | head -n 1)
+          docker logs "$container_id"
+
       - name: Run tests using Yarn
         run: yarn run test
