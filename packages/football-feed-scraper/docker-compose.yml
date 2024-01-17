@@ -18,14 +18,10 @@ services:
     healthcheck:
       test:
         [
-          'CMD',
-          'sleep',
-          '10',
-          '&&',
           'mysqladmin',
           'ping',
           '-h',
-          'database',
+          '127.0.0.1',
           '--user=$MYSQL_USER',
           '--password=$MYSQL_PASSWORD',
         ]
