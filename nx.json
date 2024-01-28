@@ -1,23 +1,32 @@
 {
   "targetDefaults": {
+    "clean": {
+      "dependsOn": []
+    },
+    "test": {
+      "cache": true,
+      "dependsOn": []
+    },
+    "prisma-migrate": {
+      "dependsOn": []
+    },
+    "docker-down": {
+      "dependsOn": []
+    },
+    "docker-build": {
+      "dependsOn": []
+    },
+    "docker-up": {
+      "dependsOn": []
+    },
     "build": {
-      "dependsOn": [
-        "^build"
-      ],
-      "outputs": [
-        "{projectRoot}/build"
-      ],
-      "cache": true
+      "cache": true,
+      "dependsOn": ["^build"],
+      "outputs": ["{projectRoot}/build/*"]
+    },
+    "lint": {
+      "cache": true,
+      "dependsOn": []
     }
-  },
-  "namedInputs": {
-    "default": [
-      "{projectRoot}/**/*",
-      "sharedGlobals"
-    ],
-    "sharedGlobals": [],
-    "production": [
-      "default"
-    ]
   }
 }
