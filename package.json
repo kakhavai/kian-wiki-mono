@@ -14,11 +14,14 @@
   ],
   "scripts": {
     "lint": "yarn eslint .",
-    "build": "yarn lerna run build",
+    "build": "yarn lerna run build --verbose",
     "clean": "rimraf ./.nx && yarn lerna clean --yes",
     "test": "yarn lerna run test",
     "clean-build": "yarn run clean && yarn run build",
     "clean-node-modules": "rimraf ./node_modules"
   },
-  "packageManager": "yarn@4.0.2"
+  "packageManager": "yarn@4.0.2",
+  "dependencies": {
+    "nx": "^17.3.0"
+  }
 }

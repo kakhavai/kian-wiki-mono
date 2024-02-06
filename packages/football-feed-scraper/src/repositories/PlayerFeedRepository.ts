@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import { IPlayer } from 'football-feed-types';
+import { IPlayer, PlayerNotFoundException } from 'football-feed-types';
 
 class PlayerFeedRepository {
   private _prisma: PrismaClient;
@@ -19,6 +19,10 @@ class PlayerFeedRepository {
     const player: IPlayer | null = await this._prisma.player.findUnique({
       where: { jerseyNumber },
     });
+
+    if (!player) {
+      throw new PlayerNotFoundException(jerseyNumber);
+    }
 
     return player ? player : undefined;
   }

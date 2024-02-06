@@ -5,11 +5,21 @@ import { IPlayer } from 'football-feed-types';
 describe('PlayerFeedRepository (Integration Tests)', () => {
   let prisma: PrismaClient;
   let repository: PlayerFeedRepository;
+  let playerData: IPlayer;
 
   beforeAll(async () => {
     prisma = new PrismaClient();
     // Establish a connection to a test database
     await prisma.$connect();
+
+    repository = new PlayerFeedRepository(prisma);
+
+    playerData = {
+      name: 'John Doe',
+      birthDate: new Date('1990-01-01'),
+      jerseyNumber: 10,
+      position: 'K',
+    };
   });
 
   afterAll(async () => {
@@ -19,27 +29,55 @@ describe('PlayerFeedRepository (Integration Tests)', () => {
 
   beforeEach(async () => {
     // Initialize a new instance of PlayerFeedRepository for each test
-    repository = new PlayerFeedRepository(prisma);
   });
 
-  it('should add a player to the database', async () => {
-    const playerData: IPlayer = {
-      name: 'John Doe',
-      birthDate: new Date('1990-01-01'),
-      jerseyNumber: 10,
-      position: 'K',
-    };
-
-    const addedPlayer = await repository.addPlayer(playerData);
+  test('Adds player to Player table', async () => {
+    let addedPlayer: IPlayer | null = await repository.addPlayer(playerData);
 
     expect(addedPlayer).toEqual(expect.objectContaining(playerData));
 
     // You can also verify the player exists in the database if needed
-    const dbPlayer = await prisma.player.findUnique({
+    addedPlayer = await prisma.player.findUnique({
       where: { jerseyNumber: playerData.jerseyNumber },
     });
-    expect(dbPlayer).toEqual(expect.objectContaining(playerData));
+    expect(addedPlayer).toEqual(expect.objectContaining(playerData));
   });
 
-  // Write similar tests for other repository methods like getPlayer, updatePlayer, and deletePlayer
+  test('Get player from the Player table', async () => {
+    const getPlayerData: IPlayer | undefined = await repository.getPlayer(
+      playerData.jerseyNumber,
+    );
+
+    expect(getPlayerData).toEqual(expect.objectContaining(playerData));
+  });
+
+  test('Update a player in the Player table', async () => {
+    const updatedPlayerData: IPlayer = {
+      name: 'Brandon Aubrey',
+      birthDate: new Date('1995-03-14'),
+      jerseyNumber: 17,
+      position: 'K',
+    };
+
+    let updatedPlayer: IPlayer = await repository.updatePlayer(
+      playerData.jerseyNumber,
+      updatedPlayerData,
+    );
+
+    expect(updatedPlayer).toEqual(expect.objectContaining(updatedPlayerData));
+
+    updatedPlayer = await repository.updatePlayer(
+      updatedPlayerData.jerseyNumber,
+      playerData,
+    );
+
+    expect(updatedPlayer).toEqual(expect.objectContaining(playerData));
+  });
+
+  test('Remove player from player Player table', async () => {
+    const deletedPlayer = await repository.deletePlayer(
+      playerData.jerseyNumber,
+    );
+    expect(deletedPlayer).toEqual(expect.objectContaining(playerData));
+  });
 });
