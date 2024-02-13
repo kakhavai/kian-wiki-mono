@@ -1,0 +1,30 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Player {
+  id           Int       @id @default(autoincrement())
+  createdAt    DateTime  @default(now())
+  name         String
+  birthDate    DateTime
+  jerseyNumber Int       @unique
+  position     String
+}
+
+model Team {
+  id         Int      @id @default(autoincrement())
+  createdAt  DateTime @default(now())
+  name       String   @unique
+  abv        String   @unique
+  wins       Int
+  losses     Int
+  pa         Int
+  pf         Int
+  tie        Int
+  city       String
+}

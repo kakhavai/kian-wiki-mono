@@ -1,5 +1,5 @@
 {
-  "name": "football-feed-types",
+  "name": "nfl-feed-types",
   "version": "1.0.0",
   "description": "",
   "main": "./build/index.js",

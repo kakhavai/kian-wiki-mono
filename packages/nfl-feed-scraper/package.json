@@ -1,7 +1,7 @@
 {
-  "name": "football-feed-scraper",
+  "name": "nfl-feed-scraper",
   "version": "1.0.0",
-  "description": "Fantasy related football feed scraper for ML",
+  "description": "Fantasy related nfl feed scraper for ML",
   "main": "index.js",
   "prisma": {
     "schema": "./prisma/schema.prisma"
@@ -31,7 +31,7 @@
   "dependencies": {
     "@prisma/client": "^5.7.1",
     "dotenv": "^16.3.1",
-    "football-feed-types": "workspace:*",
+    "nfl-feed-types": "workspace:*",
     "prisma": "^5.7.1"
   }
 }

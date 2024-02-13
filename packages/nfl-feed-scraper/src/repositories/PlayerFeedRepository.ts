@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import { IPlayer, PlayerNotFoundException } from 'football-feed-types';
+import { IPlayer, PlayerNotFoundException } from 'nfl-feed-types';
 
 class PlayerFeedRepository {
   private _prisma: PrismaClient;
