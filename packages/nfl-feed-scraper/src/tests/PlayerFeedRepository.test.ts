@@ -1,11 +1,14 @@
 import { PrismaClient } from '@prisma/client';
 import PlayerFeedRepository from '../repositories/PlayerFeedRepository';
-import { IPlayer } from 'nfl-feed-types';
+import { IPlayer, ITeam } from 'nfl-feed-types';
+import TeamFeedRepository from '../repositories/TeamFeedRepository';
 
 describe('PlayerFeedRepository (Integration Tests)', () => {
   let prisma: PrismaClient;
   let repository: PlayerFeedRepository;
+  let teamRepository: TeamFeedRepository;
   let playerData: IPlayer;
+  let teamData: ITeam;
 
   beforeAll(async () => {
     prisma = new PrismaClient();
@@ -19,11 +22,30 @@ describe('PlayerFeedRepository (Integration Tests)', () => {
       birthDate: new Date('1990-01-01'),
       jerseyNumber: 10,
       position: 'K',
+      teamId: 'LAR',
     };
+
+    teamRepository = new TeamFeedRepository(prisma);
+
+    teamData = {
+      name: 'Los Angeles Rams',
+      abv: 'LAR',
+      wins: 15,
+      losses: 0,
+      pa: 300,
+      pf: 500,
+      tie: 0,
+      city: 'Los Angeles',
+    };
+
+    await teamRepository.addTeam(teamData);
   });
 
   afterAll(async () => {
     // Close the Prisma client and disconnect from the test database
+
+    await prisma.player.deleteMany(); // Cleans up all player records
+    await prisma.team.deleteMany(); // Cleans up all team records, make sure this runs after cleaning up players
     await prisma.$disconnect();
   });
 
@@ -57,6 +79,7 @@ describe('PlayerFeedRepository (Integration Tests)', () => {
       birthDate: new Date('1995-03-14'),
       jerseyNumber: 17,
       position: 'K',
+      teamId: 'LAR',
     };
 
     let updatedPlayer: IPlayer = await repository.updatePlayer(

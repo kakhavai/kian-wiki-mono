@@ -3,4 +3,5 @@ export interface IPlayer {
   birthDate: Date;
   jerseyNumber: number;
   position: string;
+  teamId: string;
 }
