@@ -43,9 +43,6 @@ describe('PlayerFeedRepository (Integration Tests)', () => {
 
   afterAll(async () => {
     // Close the Prisma client and disconnect from the test database
-
-    await prisma.player.deleteMany(); // Cleans up all player records
-    await prisma.team.deleteMany(); // Cleans up all team records, make sure this runs after cleaning up players
     await prisma.$disconnect();
   });
 

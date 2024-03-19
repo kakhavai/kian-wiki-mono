@@ -15,20 +15,18 @@ describe('TeamFeedRepository (Integration Tests)', () => {
     repository = new TeamFeedRepository(prisma);
 
     teamData = {
-      name: 'Los Angeles Rams',
-      abv: 'LAR',
+      name: 'Miami Dolphins',
+      abv: 'MIA',
       wins: 15,
       losses: 0,
       pa: 300,
       pf: 500,
       tie: 0,
-      city: 'Los Angeles',
+      city: 'Miami',
     };
   });
 
   afterAll(async () => {
-    await prisma.player.deleteMany(); // Cleans up all player records
-    await prisma.team.deleteMany(); // Cleans up all team records, make sure this runs after cleaning up players
     // Close the Prisma client and disconnect from the test database
     await prisma.$disconnect();
   });
@@ -59,14 +57,14 @@ describe('TeamFeedRepository (Integration Tests)', () => {
 
   test('Update a team in the Team table', async () => {
     const updatedTeamData: ITeam = {
-      name: 'Los Angeles Rams',
-      abv: 'LAR',
+      name: 'Miami Dolphins',
+      abv: 'MIA',
       wins: 20,
       losses: 0,
       pa: 100,
       pf: 500,
       tie: 0,
-      city: 'Los Angeles',
+      city: 'Miami',
     };
 
     let updatedTeam: ITeam = await repository.updateTeam(
