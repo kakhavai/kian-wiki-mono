@@ -4,7 +4,7 @@
   "description": "Fantasy related nfl feed scraper for ML",
   "main": "index.js",
   "prisma": {
-    "schema": "./prisma/schema.prisma"
+    "schema": "./src/prisma/schema.prisma"
   },
   "scripts": {
     "clean": "rimraf ./build",

@@ -1,11 +1,11 @@
-import { PrismaClient } from '@prisma/client';
 import { ITeam, TeamNotFoundException } from 'nfl-feed-types';
+import PrismaSingleton from '../prisma/PrismaSingleton';
 
 class TeamFeedRepository {
-  private _prisma: PrismaClient;
+  private _prisma: PrismaSingleton;
 
-  public constructor(prisma: PrismaClient) {
-    this._prisma = prisma;
+  public constructor() {
+    this._prisma = PrismaSingleton.getInstance();
   }
 
   public async addTeam(teamData: ITeam): Promise<ITeam> {

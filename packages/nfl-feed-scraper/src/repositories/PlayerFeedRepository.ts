@@ -1,11 +1,11 @@
-import { PrismaClient } from '@prisma/client';
 import { IPlayer, PlayerNotFoundException } from 'nfl-feed-types';
+import PrismaSingleton from '../prisma/PrismaSingleton';
 
 class PlayerFeedRepository {
-  private _prisma: PrismaClient;
+  private _prisma: PrismaSingleton;
 
-  public constructor(prisma: PrismaClient) {
-    this._prisma = prisma;
+  public constructor() {
+    this._prisma = PrismaSingleton.getInstance();
   }
 
   public async addPlayer(playerData: IPlayer): Promise<IPlayer> {

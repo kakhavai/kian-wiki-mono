@@ -14,7 +14,7 @@ services:
       MYSQL_HOST: '${MYSQL_HOST}'
     volumes:
       - feed-volume:/var/lib/mysql
-      - ./prisma/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./src/prisma/init.sql:/docker-entrypoint-initdb.d/init.sql
     healthcheck:
       test:
         [

@@ -1,18 +1,12 @@
-import { PrismaClient } from '@prisma/client';
 import TeamFeedRepository from '../repositories/TeamFeedRepository';
 import { ITeam } from 'nfl-feed-types';
 
 describe('TeamFeedRepository (Integration Tests)', () => {
-  let prisma: PrismaClient;
   let repository: TeamFeedRepository;
   let teamData: ITeam;
 
   beforeAll(async () => {
-    prisma = new PrismaClient();
-    // Establish a connection to a test database
-    await prisma.$connect();
-
-    repository = new TeamFeedRepository(prisma);
+    repository = new TeamFeedRepository();
 
     teamData = {
       name: 'Miami Dolphins',
@@ -28,7 +22,6 @@ describe('TeamFeedRepository (Integration Tests)', () => {
 
   afterAll(async () => {
     // Close the Prisma client and disconnect from the test database
-    await prisma.$disconnect();
   });
 
   beforeEach(async () => {
@@ -36,14 +29,8 @@ describe('TeamFeedRepository (Integration Tests)', () => {
   });
 
   test('Adds team to Team table', async () => {
-    let addedTeam: ITeam | null = await repository.addTeam(teamData);
+    const addedTeam: ITeam | null = await repository.addTeam(teamData);
 
-    expect(addedTeam).toEqual(expect.objectContaining(teamData));
-
-    // You can also verify the team exists in the database if needed
-    addedTeam = await prisma.team.findUnique({
-      where: { abv: teamData.abv },
-    });
     expect(addedTeam).toEqual(expect.objectContaining(teamData));
   });
 

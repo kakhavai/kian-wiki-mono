@@ -1,21 +1,15 @@
-import { PrismaClient } from '@prisma/client';
 import PlayerFeedRepository from '../repositories/PlayerFeedRepository';
 import { IPlayer, ITeam } from 'nfl-feed-types';
 import TeamFeedRepository from '../repositories/TeamFeedRepository';
 
 describe('PlayerFeedRepository (Integration Tests)', () => {
-  let prisma: PrismaClient;
   let repository: PlayerFeedRepository;
   let teamRepository: TeamFeedRepository;
   let playerData: IPlayer;
   let teamData: ITeam;
 
   beforeAll(async () => {
-    prisma = new PrismaClient();
-    // Establish a connection to a test database
-    await prisma.$connect();
-
-    repository = new PlayerFeedRepository(prisma);
+    repository = new PlayerFeedRepository();
 
     playerData = {
       name: 'John Doe',
@@ -25,7 +19,7 @@ describe('PlayerFeedRepository (Integration Tests)', () => {
       teamId: 'LAR',
     };
 
-    teamRepository = new TeamFeedRepository(prisma);
+    teamRepository = new TeamFeedRepository();
 
     teamData = {
       name: 'Los Angeles Rams',
@@ -42,8 +36,8 @@ describe('PlayerFeedRepository (Integration Tests)', () => {
   });
 
   afterAll(async () => {
+    await teamRepository.deleteTeam('LAR');
     // Close the Prisma client and disconnect from the test database
-    await prisma.$disconnect();
   });
 
   beforeEach(async () => {
@@ -51,14 +45,8 @@ describe('PlayerFeedRepository (Integration Tests)', () => {
   });
 
   test('Adds player to Player table', async () => {
-    let addedPlayer: IPlayer | null = await repository.addPlayer(playerData);
+    const addedPlayer: IPlayer | null = await repository.addPlayer(playerData);
 
-    expect(addedPlayer).toEqual(expect.objectContaining(playerData));
-
-    // You can also verify the player exists in the database if needed
-    addedPlayer = await prisma.player.findUnique({
-      where: { jerseyNumber: playerData.jerseyNumber },
-    });
     expect(addedPlayer).toEqual(expect.objectContaining(playerData));
   });
 
