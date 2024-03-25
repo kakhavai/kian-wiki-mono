@@ -1,6 +1,6 @@
-import PlayerFeedRepository from '../repositories/PlayerFeedRepository';
+import PlayerFeedRepository from '../../repositories/PlayerFeedRepository';
 import { IPlayer, ITeam } from 'nfl-feed-types';
-import TeamFeedRepository from '../repositories/TeamFeedRepository';
+import TeamFeedRepository from '../../repositories/TeamFeedRepository';
 
 describe('PlayerFeedRepository (Integration Tests)', () => {
   let repository: PlayerFeedRepository;

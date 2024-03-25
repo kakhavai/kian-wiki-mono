@@ -8,7 +8,9 @@
   },
   "scripts": {
     "clean": "rimraf ./build",
-    "test": "jest ./build",
+    "test": "jest ./build/tests",
+    "test:unit": "jest ./build/tests/unit",
+    "test:integration": "jest ./build/tests/integration",
     "prisma-migrate": "yarn prisma migrate deploy && yarn prisma generate",
     "docker-down": "docker compose down",
     "docker-build": "docker compose build",
