@@ -1,0 +1,7 @@
+{
+  "setupFilesAfterEnv": ["<rootDir>/src/prisma/MockPrismaSingleton.ts"],
+  "testMatch": ["<rootDir>/src/tests/unit/*"],
+  "clearMocks": true,
+  "preset": "ts-jest",
+  "testEnvironment": "node"
+}

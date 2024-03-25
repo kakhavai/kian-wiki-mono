@@ -9,8 +9,8 @@
   "scripts": {
     "clean": "rimraf ./build",
     "test": "jest ./build/tests",
-    "test:unit": "jest ./build/tests/unit",
-    "test:integration": "jest ./build/tests/integration",
+    "test:unit": "yarn jest -i --config=jest.unit.config.json",
+    "test:integration": "jest --config=jest.integration.config.json",
     "prisma-migrate": "yarn prisma migrate deploy && yarn prisma generate",
     "docker-down": "docker compose down",
     "docker-build": "docker compose build",
@@ -28,11 +28,13 @@
     "jest": "^29.7.0",
     "prettier": "3.1.0",
     "rimraf": "^5.0.5",
+    "ts-jest": "^29.1.2",
     "typescript": "^5.3.2"
   },
   "dependencies": {
     "@prisma/client": "^5.7.1",
     "dotenv": "^16.3.1",
+    "jest-mock-extended": "^3.0.5",
     "nfl-feed-types": "workspace:*",
     "prisma": "^5.7.1"
   }
