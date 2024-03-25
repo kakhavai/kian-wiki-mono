@@ -1,22 +1,16 @@
 import { IPlayer, PlayerNotFoundException } from 'nfl-feed-types';
-import PrismaSingleton from '../prisma/PrismaSingleton';
+import prisma from '../prisma/PrismaSingleton';
 
 class PlayerFeedRepository {
-  private _prisma: PrismaSingleton;
-
-  public constructor() {
-    this._prisma = PrismaSingleton.getInstance();
-  }
-
   public async addPlayer(playerData: IPlayer): Promise<IPlayer> {
-    const player: IPlayer = await this._prisma.player.create({
+    const player: IPlayer = await prisma.player.create({
       data: playerData,
     });
     return player;
   }
 
   public async getPlayer(jerseyNumber: number): Promise<IPlayer | undefined> {
-    const player: IPlayer | null = await this._prisma.player.findUnique({
+    const player: IPlayer | null = await prisma.player.findUnique({
       where: { jerseyNumber },
     });
 
@@ -31,7 +25,7 @@ class PlayerFeedRepository {
     jerseyNumber: number,
     playerData: IPlayer,
   ): Promise<IPlayer> {
-    const player: IPlayer = await this._prisma.player.update({
+    const player: IPlayer = await prisma.player.update({
       where: { jerseyNumber },
       data: playerData,
     });
@@ -39,7 +33,7 @@ class PlayerFeedRepository {
   }
 
   public async deletePlayer(jerseyNumber: number): Promise<IPlayer> {
-    const player: IPlayer = await this._prisma.player.delete({
+    const player: IPlayer = await prisma.player.delete({
       where: { jerseyNumber },
     });
     return player;
