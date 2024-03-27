@@ -9,4 +9,12 @@ module.exports = {
     '@rushstack/eslint-config/mixins/tsdoc',
   ], // <---- put your profile string here
   parserOptions: { tsconfigRootDir: __dirname },
+  overrides: [
+    {
+      files: ['./src/prisma/MockPrismaSingleton.ts'],
+      rules: {
+        '@typescript-eslint/no-use-before-define': 'off',
+      },
+    },
+  ],
 };
