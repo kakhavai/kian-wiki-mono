@@ -55,5 +55,8 @@ jobs:
           container_id=$(docker ps -a --format "{{.ID}}" | head -n 1)
           docker logs "$container_id"
 
-      - name: Run tests using Yarn
-        run: yarn run test
+      - name: Run unit tests using Yarn
+        run: yarn run test:unit
+
+      - name: Run integration tests using Yarn
+        run: yarn run test:integration
