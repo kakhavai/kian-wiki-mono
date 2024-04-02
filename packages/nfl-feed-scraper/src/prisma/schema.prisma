@@ -1,0 +1,56 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Player {
+  id               Int                @id @default(autoincrement())
+  createdAt        DateTime           @default(now())
+  name             String
+  birthDate        DateTime
+  jerseyNumber     Int                @unique
+  position         String
+  teamId           String
+  team             Team               @relation(fields: [teamId], references: [abv])
+  PlayerMatchStats PlayerMatchStats[]
+}
+
+model Team {
+  id               Int                @id @default(autoincrement())
+  createdAt        DateTime           @default(now())
+  name             String             @unique
+  abv              String             @unique
+  wins             Int
+  losses           Int
+  pa               Int
+  pf               Int
+  tie              Int
+  city             String
+  Player           Player[]
+  PlayerMatchStats PlayerMatchStats[]
+}
+
+model PlayerMatchStats {
+  id             Int      @id @default(autoincrement())
+  createdAt      DateTime @default(now())
+  playerId       Int
+  player         Player   @relation(fields: [playerId], references: [id])
+  targets        Int
+  receptions     Int
+  yards          Int
+  touchdowns     Int
+  carries        Int
+  passes         Int
+  completions    Int
+  passingYards   Int
+  passingTds     Int
+  interceptions  Int
+  fumbles        Int
+  opponentTeamId String
+  opponent       Team     @relation(fields: [opponentTeamId], references: [abv])
+  matchDate      DateTime
+}

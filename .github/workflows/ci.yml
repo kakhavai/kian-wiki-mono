@@ -18,6 +18,9 @@ jobs:
       MYSQL_HOST: ${{ secrets.MYSQL_HOST }}
       MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
       DATABASE_URL: 'mysql://${{ secrets.MYSQL_USER }}:${{ secrets.MYSQL_PASSWORD }}@127.0.0.1/${{ secrets.MYSQL_DATABASE }}'
+      RAPID_API_HOST: ${{secrets.RAPID_API_HOST}}
+      RAPID_API_KEY: ${{secrets.RAPID_API_KEY}}
+      RAPID_API_URL: ${{secrets.RAPID_API_URL}}
 
     steps:
       - uses: actions/checkout@v4
@@ -55,5 +58,8 @@ jobs:
           container_id=$(docker ps -a --format "{{.ID}}" | head -n 1)
           docker logs "$container_id"
 
-      - name: Run tests using Yarn
-        run: yarn run test
+      - name: Run unit tests using Yarn
+        run: yarn run test:unit
+
+      - name: Run integration tests using Yarn
+        run: yarn run test:integration

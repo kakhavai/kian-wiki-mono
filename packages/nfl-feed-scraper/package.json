@@ -1,0 +1,42 @@
+{
+  "name": "nfl-feed-scraper",
+  "version": "1.0.0",
+  "description": "Fantasy related nfl feed scraper for ML",
+  "main": "index.js",
+  "prisma": {
+    "schema": "./src/prisma/schema.prisma"
+  },
+  "scripts": {
+    "clean": "rimraf ./build",
+    "test": "jest ./build/tests",
+    "test:unit": "yarn jest -i --config=jest.unit.config.json",
+    "test:integration": "jest --config=jest.integration.config.json",
+    "prisma-migrate": "yarn prisma migrate deploy && yarn prisma generate",
+    "docker-down": "docker compose down",
+    "docker-build": "docker compose build",
+    "docker-up": "docker compose up -d --wait",
+    "build": "echo 'Step: Creating .env file' && ([ -f ./.env ] || touch ./.env) && echo 'Step: Cleaning' && yarn run clean && echo 'Step: Transpiling TypeScript' && yarn tsc && echo 'Step: Stopping Docker containers' && yarn run docker-down && echo 'Step: Building Docker images' && yarn run docker-build && echo 'Step: Starting Docker containers' && yarn run docker-up && docker ps -a && echo 'Step: Running Prisma migrations' && yarn run prisma-migrate deploy && echo 'Step: Starting Node.js server' && node build/index.js",
+    "lint": "yarn eslint ."
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@rushstack/eslint-config": "^3.5.0",
+    "@types/jest": "^29.5.10",
+    "@types/node": "^20.10.1",
+    "eslint": "^8.54.0",
+    "jest": "^29.7.0",
+    "prettier": "3.1.0",
+    "rimraf": "^5.0.5",
+    "ts-jest": "^29.1.2",
+    "typescript": "^5.3.2"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.7.1",
+    "common-types": "workspace:*",
+    "dotenv": "^16.3.1",
+    "jest-mock-extended": "^3.0.5",
+    "nfl-feed-types": "workspace:*",
+    "prisma": "^5.7.1"
+  }
+}
