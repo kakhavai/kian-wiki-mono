@@ -1,7 +1,7 @@
 import PlayerFeedRepository from '../../repositories/PlayerFeedRepository';
 import { prismaMock } from '../../prisma/MockPrismaSingleton';
 import { IPlayer } from 'nfl-feed-types';
-import { IPlayerDAO } from '../../types/IPlayerDAO';
+import { IPlayerDAO } from '../../types/dao/IPlayerDAO';
 
 describe('PlayerFeedRepository (Unit Tests)', () => {
   let repository: PlayerFeedRepository;

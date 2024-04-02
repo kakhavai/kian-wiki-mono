@@ -1,7 +1,7 @@
 import TeamFeedRepository from '../../repositories/TeamFeedRepository';
 import { prismaMock } from '../../prisma/MockPrismaSingleton';
 import { ITeam } from 'nfl-feed-types';
-import { ITeamDAO } from '../../types/ITeamDAO';
+import { ITeamDAO } from '../../types/dao/ITeamDAO';
 
 describe('TeamFeedRepository (Unit Tests)', () => {
   let repository: TeamFeedRepository;
