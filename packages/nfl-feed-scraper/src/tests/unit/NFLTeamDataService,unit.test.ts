@@ -5,11 +5,13 @@ import axios from 'axios';
 import { NFLTeamDataService } from '../../services/NFLTeamDataService';
 import { ITeamDTO } from '../../types/dto/ITeamDTO';
 import { ITeam } from 'nfl-feed-types';
+import { IGetNFLTeamsResponse } from '../../types/http/IGetNFLTeamsResponse';
 
 const mockedAxios = axios as jest.Mocked<typeof axios>;
 
 describe('NFLTeamDataService (Unit Tests)', () => {
   // Test data for mocking responses
+
   const mockResponseData: ITeamDTO[] = [
     {
       teamName: 'New England Patriots',
@@ -22,6 +24,10 @@ describe('NFLTeamDataService (Unit Tests)', () => {
       teamCity: 'Foxborough',
     },
   ];
+
+  const mockHttpResponse: IGetNFLTeamsResponse = {
+    body: mockResponseData,
+  };
 
   const expectedResult: ITeam[] = [
     {
@@ -45,7 +51,7 @@ describe('NFLTeamDataService (Unit Tests)', () => {
     // Setup mocked axios response
     mockedAxios.request.mockResolvedValue({
       status: 200,
-      data: mockResponseData,
+      data: mockHttpResponse,
     });
 
     const result = await NFLTeamDataService.getNFLTeamData();
