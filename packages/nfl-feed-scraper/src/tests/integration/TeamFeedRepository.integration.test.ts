@@ -2,12 +2,9 @@ import TeamFeedRepository from '../../repositories/TeamFeedRepository';
 import { ITeam } from 'nfl-feed-types';
 
 describe('TeamFeedRepository (Integration Tests)', () => {
-  let repository: TeamFeedRepository;
   let teamData: ITeam;
 
   beforeAll(async () => {
-    repository = new TeamFeedRepository();
-
     teamData = {
       name: 'Miami Dolphins',
       abv: 'MIA',
@@ -29,13 +26,13 @@ describe('TeamFeedRepository (Integration Tests)', () => {
   });
 
   test('Adds team to Team table', async () => {
-    const addedTeam: ITeam | null = await repository.addTeam(teamData);
+    const addedTeam: ITeam | null = await TeamFeedRepository.addTeam(teamData);
 
     expect(addedTeam).toEqual(expect.objectContaining(teamData));
   });
 
   test('Get team from the Team table', async () => {
-    const getTeamData: ITeam | undefined = await repository.getTeam(
+    const getTeamData: ITeam | undefined = await TeamFeedRepository.getTeam(
       teamData.abv,
     );
 
@@ -54,14 +51,17 @@ describe('TeamFeedRepository (Integration Tests)', () => {
       city: 'Miami',
     };
 
-    let updatedTeam: ITeam = await repository.updateTeam(
+    let updatedTeam: ITeam = await TeamFeedRepository.updateTeam(
       teamData.abv,
       updatedTeamData,
     );
 
     expect(updatedTeam).toEqual(expect.objectContaining(updatedTeamData));
 
-    updatedTeam = await repository.updateTeam(updatedTeamData.abv, teamData);
+    updatedTeam = await TeamFeedRepository.updateTeam(
+      updatedTeamData.abv,
+      teamData,
+    );
 
     expect(updatedTeam).toEqual(expect.objectContaining(teamData));
   });
@@ -78,20 +78,21 @@ describe('TeamFeedRepository (Integration Tests)', () => {
       city: 'Miami',
     };
 
-    let updatedTeam: ITeam = await repository.upsertTeam(
-      teamData.abv,
-      updatedTeamData,
-    );
+    let updatedTeam: ITeam =
+      await TeamFeedRepository.upsertTeam(updatedTeamData);
 
     expect(updatedTeam).toEqual(expect.objectContaining(updatedTeamData));
 
-    updatedTeam = await repository.updateTeam(updatedTeamData.abv, teamData);
+    updatedTeam = await TeamFeedRepository.updateTeam(
+      updatedTeamData.abv,
+      teamData,
+    );
 
     expect(updatedTeam).toEqual(expect.objectContaining(teamData));
   });
 
   test('Remove team from team Team table', async () => {
-    const deletedTeam = await repository.deleteTeam(teamData.abv);
+    const deletedTeam = await TeamFeedRepository.deleteTeam(teamData.abv);
     expect(deletedTeam).toEqual(expect.objectContaining(teamData));
   });
 });

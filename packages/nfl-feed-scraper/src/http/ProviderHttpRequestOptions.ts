@@ -29,4 +29,13 @@ export class ProviderHttpRequestOptions implements IHttpRequestOptions {
   public get params(): { [key: string]: string } | undefined {
     return this._params;
   }
+
+  public getAxiosRequestOptions(): IHttpRequestOptions {
+    return {
+      method: this._method,
+      url: this._url,
+      params: this._params || {},
+      headers: this._headers,
+    };
+  }
 }

@@ -3,10 +3,16 @@ import { ITeam } from 'nfl-feed-types';
 import { ITeamDTO } from '../types/dto/ITeamDTO';
 import { IGetNFLTeamsResponse } from '../types/http/IGetNFLTeamsResponse';
 import { ProviderHttpRequestOptions } from '../http/ProviderHttpRequestOptions';
+import TeamFeedRepository from '../repositories/TeamFeedRepository';
 
 export class TeamDataService {
   public static async updateTeamRecords(): Promise<boolean> {
-    const newRecordData: Array<ITeam> = await this.getTeamDataFromProvider();
+    const newRecords: Array<ITeam> = await this.getTeamDataFromProvider();
+
+    for (let i: number = 0; i < newRecords.length; i++) {
+      const newRecord: ITeam = newRecords[i];
+      await TeamFeedRepository.upsertTeam(newRecord);
+    }
 
     return true;
   }
@@ -25,7 +31,9 @@ export class TeamDataService {
     try {
       // Make a GET request to the API endpoint
       const response: AxiosResponse<IGetNFLTeamsResponse> =
-        await axios.request<IGetNFLTeamsResponse>(options);
+        await axios.request<IGetNFLTeamsResponse>(
+          options.getAxiosRequestOptions(),
+        );
 
       // Check if the response is successful and parse the data
       if (
