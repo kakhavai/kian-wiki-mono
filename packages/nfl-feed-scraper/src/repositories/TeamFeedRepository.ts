@@ -29,6 +29,15 @@ class TeamFeedRepository {
     return team;
   }
 
+  public async upsertTeam(abv: string, teamData: ITeam): Promise<ITeam> {
+    const team: ITeam = await prisma.team.upsert({
+      where: { abv },
+      update: teamData,
+      create: teamData,
+    });
+    return team;
+  }
+
   public async deleteTeam(abv: string): Promise<ITeam> {
     const team: ITeam = await prisma.team.delete({
       where: { abv },

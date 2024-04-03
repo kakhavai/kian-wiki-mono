@@ -110,6 +110,53 @@ describe('TeamFeedRepository (Unit Tests)', () => {
     ).rejects.toThrow();
   });
 
+  test('Upsert a team in the Team table', async () => {
+    const updatedTeamData: ITeam = {
+      name: 'Miami Dolphins',
+      abv: 'MIA',
+      wins: 20,
+      losses: 0,
+      pa: 100,
+      pf: 500,
+      tie: 0,
+      city: 'Miami',
+    };
+
+    const updatedTeamDataMock: ITeamDAO = {
+      id: 1, // Arbitrary mock value for id
+      createdAt: new Date(), // Arbitrary mock value for createdAt
+      ...updatedTeamData,
+    };
+
+    prismaMock.team.upsert.mockResolvedValue(updatedTeamDataMock);
+
+    const updatedTeam: ITeam = await repository.upsertTeam(
+      teamData.abv,
+      updatedTeamData,
+    );
+
+    expect(updatedTeam).toEqual(expect.objectContaining(updatedTeamData));
+  });
+
+  test('Fails to upsert a team in the Team table', async () => {
+    const updatedTeamData: ITeam = {
+      name: 'Miami Dolphins',
+      abv: 'MIA',
+      wins: 20,
+      losses: 0,
+      pa: 100,
+      pf: 500,
+      tie: 0,
+      city: 'Miami',
+    };
+
+    prismaMock.team.update.mockRejectedValue(new Error());
+
+    await expect(
+      repository.updateTeam(teamData.abv, updatedTeamData),
+    ).rejects.toThrow();
+  });
+
   test('Remove team from team Team table', async () => {
     prismaMock.team.delete.mockResolvedValue(teamDataMock);
     const deletedTeam: ITeam = await repository.deleteTeam(teamData.abv);

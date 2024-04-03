@@ -66,6 +66,30 @@ describe('TeamFeedRepository (Integration Tests)', () => {
     expect(updatedTeam).toEqual(expect.objectContaining(teamData));
   });
 
+  test('Upsert a team in the Team table', async () => {
+    const updatedTeamData: ITeam = {
+      name: 'Miami Dolphins',
+      abv: 'MIA',
+      wins: 20,
+      losses: 0,
+      pa: 100,
+      pf: 500,
+      tie: 0,
+      city: 'Miami',
+    };
+
+    let updatedTeam: ITeam = await repository.upsertTeam(
+      teamData.abv,
+      updatedTeamData,
+    );
+
+    expect(updatedTeam).toEqual(expect.objectContaining(updatedTeamData));
+
+    updatedTeam = await repository.updateTeam(updatedTeamData.abv, teamData);
+
+    expect(updatedTeam).toEqual(expect.objectContaining(teamData));
+  });
+
   test('Remove team from team Team table', async () => {
     const deletedTeam = await repository.deleteTeam(teamData.abv);
     expect(deletedTeam).toEqual(expect.objectContaining(teamData));
