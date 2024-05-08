@@ -1,7 +1,7 @@
-import { NFLTeamDataService } from '../../services/NFLTeamDataService';
+import { TeamDataService } from '../../services/TeamDataService';
 import { ITeam } from 'nfl-feed-types';
 
-describe('NFLTeamDataService (Unit Tests)', () => {
+describe('TeamDataService (Integration Tests)', () => {
   const expectedResult: ITeam = {
     name: 'Cardinals',
     abv: 'ARI',
@@ -14,7 +14,7 @@ describe('NFLTeamDataService (Unit Tests)', () => {
   };
 
   test('Successfully fetches NFL team data', async () => {
-    const result = await NFLTeamDataService.getNFLTeamData();
+    const result = await TeamDataService.getTeamDataFromProvider();
 
     // Expectations
     expect(result[0]).toEqual(expectedResult);

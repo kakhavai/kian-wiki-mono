@@ -4,7 +4,6 @@ import TeamFeedRepository from '../../repositories/TeamFeedRepository';
 
 describe('PlayerFeedRepository (Integration Tests)', () => {
   let repository: PlayerFeedRepository;
-  let teamRepository: TeamFeedRepository;
   let playerData: IPlayer;
   let teamData: ITeam;
 
@@ -19,8 +18,6 @@ describe('PlayerFeedRepository (Integration Tests)', () => {
       teamId: 'LAR',
     };
 
-    teamRepository = new TeamFeedRepository();
-
     teamData = {
       name: 'Los Angeles Rams',
       abv: 'LAR',
@@ -32,11 +29,11 @@ describe('PlayerFeedRepository (Integration Tests)', () => {
       city: 'Los Angeles',
     };
 
-    await teamRepository.addTeam(teamData);
+    await TeamFeedRepository.addTeam(teamData);
   });
 
   afterAll(async () => {
-    await teamRepository.deleteTeam('LAR');
+    await TeamFeedRepository.deleteTeam('LAR');
     // Close the Prisma client and disconnect from the test database
   });
 

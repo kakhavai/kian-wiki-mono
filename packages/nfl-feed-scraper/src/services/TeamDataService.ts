@@ -1,37 +1,52 @@
 import axios, { AxiosResponse } from 'axios';
 import { ITeam } from 'nfl-feed-types';
-import { IHttpRequestOptions } from 'common-types';
 import { ITeamDTO } from '../types/dto/ITeamDTO';
 import { IGetNFLTeamsResponse } from '../types/http/IGetNFLTeamsResponse';
+import { ProviderHttpRequestOptions } from '../http/ProviderHttpRequestOptions';
+import TeamFeedRepository from '../repositories/TeamFeedRepository';
 
-export class NFLTeamDataService {
-  public static async getNFLTeamData(): Promise<ITeam[]> {
-    const options: IHttpRequestOptions = {
-      method: 'GET',
-      url: `${process.env.RAPID_API_URL}/getNFLTeams`,
-      params: {
+export class TeamDataService {
+  public static async updateTeamRecords(): Promise<boolean> {
+    const newRecords: Array<ITeam> = await this.getTeamDataFromProvider();
+    const promises: Array<Promise<ITeam>> = new Array<Promise<ITeam>>();
+
+    for (let i: number = 0; i < newRecords.length; i++) {
+      const newRecord: ITeam = newRecords[i];
+      promises.push(TeamFeedRepository.upsertTeam(newRecord));
+    }
+    try {
+      await Promise.all(promises);
+      return true;
+    } catch (error) {
+      console.error('TeamDataService: Failed to upsert teams');
+      return false;
+    }
+  }
+
+  public static async getTeamDataFromProvider(): Promise<ITeam[]> {
+    const options: ProviderHttpRequestOptions = new ProviderHttpRequestOptions(
+      'getNFLTeams',
+      {
         rosters: 'true',
         schedules: 'true',
         topPerformers: 'true',
         teamStats: 'true',
       },
-      headers: {
-        'X-RapidAPI-Key': `${process.env.RAPID_API_KEY}`,
-        'X-RapidAPI-Host': `${process.env.RAPID_API_HOST}`,
-      },
-    };
+    );
 
     try {
       // Make a GET request to the API endpoint
       const response: AxiosResponse<IGetNFLTeamsResponse> =
-        await axios.request<IGetNFLTeamsResponse>(options);
+        await axios.request<IGetNFLTeamsResponse>(
+          options.getAxiosRequestOptions(),
+        );
 
       // Check if the response is successful and parse the data
       if (
         response.status === 200 &&
         this._isITeamDTOArray(response.data.body)
       ) {
-        return this._parseTeamData(response.data.body);
+        return this._parseProviderTeamData(response.data.body);
       } else {
         throw new Error('Failed to fetch NFL team data');
       }
@@ -41,7 +56,7 @@ export class NFLTeamDataService {
     }
   }
 
-  private static _parseTeamData(unparsedTeams: ITeamDTO[]): ITeam[] {
+  private static _parseProviderTeamData(unparsedTeams: ITeamDTO[]): ITeam[] {
     const teams: ITeam[] = [];
 
     for (const unparsedTeam of unparsedTeams) {

@@ -4,13 +4,10 @@ import { ITeam } from 'nfl-feed-types';
 import { ITeamDAO } from '../../types/dao/ITeamDAO';
 
 describe('TeamFeedRepository (Unit Tests)', () => {
-  let repository: TeamFeedRepository;
   let teamData: ITeam;
   let teamDataMock: ITeamDAO;
 
   beforeAll(async () => {
-    repository = new TeamFeedRepository();
-
     teamData = {
       name: 'Miami Dolphins',
       abv: 'MIA',
@@ -39,19 +36,19 @@ describe('TeamFeedRepository (Unit Tests)', () => {
 
   test('Adds team to Team table', async () => {
     prismaMock.team.create.mockResolvedValue(teamDataMock);
-    const addedTeam: ITeam | null = await repository.addTeam(teamData);
+    const addedTeam: ITeam | null = await TeamFeedRepository.addTeam(teamData);
 
     expect(addedTeam).toEqual(expect.objectContaining(teamData));
   });
 
   test('Fails to add team to Team table', async () => {
     prismaMock.team.create.mockRejectedValue(new Error());
-    await expect(repository.addTeam(teamData)).rejects.toThrow();
+    await expect(TeamFeedRepository.addTeam(teamData)).rejects.toThrow();
   });
 
   test('Get team from the Team table', async () => {
     prismaMock.team.findUnique.mockResolvedValue(teamDataMock);
-    const getTeamData: ITeam | undefined = await repository.getTeam(
+    const getTeamData: ITeam | undefined = await TeamFeedRepository.getTeam(
       teamData.abv,
     );
 
@@ -60,7 +57,7 @@ describe('TeamFeedRepository (Unit Tests)', () => {
 
   test('Fails to get team from the Team table', async () => {
     prismaMock.team.findUnique.mockRejectedValue(new Error());
-    await expect(repository.getTeam(teamData.abv)).rejects.toThrow();
+    await expect(TeamFeedRepository.getTeam(teamData.abv)).rejects.toThrow();
   });
 
   test('Update a team in the Team table', async () => {
@@ -83,7 +80,7 @@ describe('TeamFeedRepository (Unit Tests)', () => {
 
     prismaMock.team.update.mockResolvedValue(updatedTeamDataMock);
 
-    const updatedTeam: ITeam = await repository.updateTeam(
+    const updatedTeam: ITeam = await TeamFeedRepository.updateTeam(
       teamData.abv,
       updatedTeamData,
     );
@@ -106,18 +103,65 @@ describe('TeamFeedRepository (Unit Tests)', () => {
     prismaMock.team.update.mockRejectedValue(new Error());
 
     await expect(
-      repository.updateTeam(teamData.abv, updatedTeamData),
+      TeamFeedRepository.updateTeam(teamData.abv, updatedTeamData),
+    ).rejects.toThrow();
+  });
+
+  test('Upsert a team in the Team table', async () => {
+    const updatedTeamData: ITeam = {
+      name: 'Miami Dolphins',
+      abv: 'MIA',
+      wins: 20,
+      losses: 0,
+      pa: 100,
+      pf: 500,
+      tie: 0,
+      city: 'Miami',
+    };
+
+    const updatedTeamDataMock: ITeamDAO = {
+      id: 1, // Arbitrary mock value for id
+      createdAt: new Date(), // Arbitrary mock value for createdAt
+      ...updatedTeamData,
+    };
+
+    prismaMock.team.upsert.mockResolvedValue(updatedTeamDataMock);
+
+    const updatedTeam: ITeam =
+      await TeamFeedRepository.upsertTeam(updatedTeamData);
+
+    expect(updatedTeam).toEqual(expect.objectContaining(updatedTeamData));
+  });
+
+  test('Fails to upsert a team in the Team table', async () => {
+    const updatedTeamData: ITeam = {
+      name: 'Miami Dolphins',
+      abv: 'MIA',
+      wins: 20,
+      losses: 0,
+      pa: 100,
+      pf: 500,
+      tie: 0,
+      city: 'Miami',
+    };
+
+    prismaMock.team.update.mockRejectedValue(new Error());
+
+    await expect(
+      TeamFeedRepository.updateTeam(teamData.abv, updatedTeamData),
     ).rejects.toThrow();
   });
 
   test('Remove team from team Team table', async () => {
     prismaMock.team.delete.mockResolvedValue(teamDataMock);
-    const deletedTeam: ITeam = await repository.deleteTeam(teamData.abv);
+    const deletedTeam: ITeam = await TeamFeedRepository.deleteTeam(
+      teamData.abv,
+    );
     expect(deletedTeam).toEqual(expect.objectContaining(teamData));
   });
 
   test('Fails to remove a team from team Team table', async () => {
     prismaMock.team.delete.mockRejectedValue(new Error());
-    await expect(repository.deleteTeam(teamData.abv)).rejects.toThrow();
+    await expect(TeamFeedRepository.deleteTeam(teamData.abv)).rejects.toThrow();
   });
 });

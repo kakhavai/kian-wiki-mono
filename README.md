@@ -10,6 +10,7 @@ To get started with this project on your machine, follow these steps:
 
 - Ensure you have Node.js installed. This project uses `.nvmrc` to specify the Node.js version, so it's recommended to use [NVM (Node Version Manager)](https://github.com/nvm-sh/nvm) to manage Node.js versions.
 - This project uses `lerna` to manage multiple packages. Ideally you should have `lerna` installed globally:
+- This project requires `yarn` for linking packages and managing workspaces.
 
 ### Setup
 
@@ -25,28 +26,28 @@ To get started with this project on your machine, follow these steps:
 
 - Install all required dependencies:
   ```
-  npm install
+  yarn install
   ```
 
 3. **Run Linting**:
 
 - To ensure code quality, run the linting scripts:
   ```
-  npm run lint
+  yarn run lint
   ```
 
 4. **Build the Project**:
 
-- Compile the project using `lerna`:
+- Compile the project using `yarn`:
   ```
-  lerna run build
+  yarn run build
   ```
 
 5. **Run Tests**:
 
 - Execute the tests to verify everything is working:
   ```
-  lerna run test
+  yarn run test:unit
   ```
 
 Enjoy exploring and contributing to my project!
