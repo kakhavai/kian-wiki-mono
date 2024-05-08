@@ -1,0 +1,19 @@
+service: lambda-api-gateway
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  region: us-east-1
+
+functions:
+  mainFunction:
+    handler: build/handler.mainHandler
+    timeout: 30
+    events:
+      - http:
+          path: /
+          method: get
+          cors: true
+
+plugins:
+  - serverless-offline

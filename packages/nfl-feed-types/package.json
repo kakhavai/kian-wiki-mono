@@ -2,12 +2,12 @@
   "name": "nfl-feed-types",
   "version": "1.0.0",
   "description": "",
+  "author": "kakhavai",
   "main": "./build/index.js",
   "scripts": {
     "build": "yarn run clean && yarn tsc",
     "clean": "rimraf ./build"
   },
-  "author": "",
   "license": "ISC",
   "devDependencies": {
     "typescript": "^5.3.3"

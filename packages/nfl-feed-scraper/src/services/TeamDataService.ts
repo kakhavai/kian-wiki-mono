@@ -8,13 +8,19 @@ import TeamFeedRepository from '../repositories/TeamFeedRepository';
 export class TeamDataService {
   public static async updateTeamRecords(): Promise<boolean> {
     const newRecords: Array<ITeam> = await this.getTeamDataFromProvider();
+    const promises: Array<Promise<ITeam>> = new Array<Promise<ITeam>>();
 
     for (let i: number = 0; i < newRecords.length; i++) {
       const newRecord: ITeam = newRecords[i];
-      await TeamFeedRepository.upsertTeam(newRecord);
+      promises.push(TeamFeedRepository.upsertTeam(newRecord));
     }
-
-    return true;
+    try {
+      await Promise.all(promises);
+      return true;
+    } catch (error) {
+      console.error('TeamDataService: Failed to upsert teams');
+      return false;
+    }
   }
 
   public static async getTeamDataFromProvider(): Promise<ITeam[]> {

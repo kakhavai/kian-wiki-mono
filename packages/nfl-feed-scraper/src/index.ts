@@ -1,1 +1,1 @@
-console.log('Unbelievable');
+export { TeamDataService } from './services/TeamDataService';

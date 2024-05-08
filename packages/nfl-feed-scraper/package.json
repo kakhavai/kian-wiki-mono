@@ -2,7 +2,7 @@
   "name": "nfl-feed-scraper",
   "version": "1.0.0",
   "description": "Fantasy related nfl feed scraper for ML",
-  "main": "index.js",
+  "main": "./build/index.js",
   "prisma": {
     "schema": "./src/prisma/schema.prisma"
   },
@@ -15,10 +15,10 @@
     "docker-down": "docker compose down",
     "docker-build": "docker compose build",
     "docker-up": "docker compose up -d --wait",
-    "build": "echo 'Step: Creating .env file' && ([ -f ./.env ] || touch ./.env) && echo 'Step: Cleaning' && yarn run clean && echo 'Step: Transpiling TypeScript' && yarn tsc && echo 'Step: Stopping Docker containers' && yarn run docker-down && echo 'Step: Building Docker images' && yarn run docker-build && echo 'Step: Starting Docker containers' && yarn run docker-up && docker ps -a && echo 'Step: Running Prisma migrations' && yarn run prisma-migrate deploy && echo 'Step: Starting Node.js server' && node build/index.js",
+    "build": "echo 'Step: Creating .env file' && ([ -f ./.env ] || touch ./.env) && echo 'Step: Cleaning' && yarn run clean && echo 'Step: Transpiling TypeScript' && yarn tsc && echo 'Step: Stopping Docker containers' && echo 'Step: Building Docker images'  && echo 'Step: Starting Docker containers' && echo 'Step: Running Prisma migrations' && yarn run prisma-migrate deploy && echo 'Step: Starting Node.js server' && node build/index.js",
     "lint": "yarn eslint ."
   },
-  "author": "",
+  "author": "kakhavai",
   "license": "ISC",
   "devDependencies": {
     "@rushstack/eslint-config": "^3.5.0",

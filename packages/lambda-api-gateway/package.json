@@ -1,0 +1,25 @@
+{
+  "name": "lambda-api-gateway",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./build/index.js",
+  "author": "kakhavai",
+  "scripts": {
+    "build": "yarn run clean && yarn tsc",
+    "clean": "rimraf ./build"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.137",
+    "@types/node": "^20.12.10",
+    "@types/serverless": "^3",
+    "serverless": "^3.38.0",
+    "serverless-offline": "^13.5.0",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "nfl-feed-scraper": "workspace:*",
+    "nfl-feed-types": "workspace:*",
+    "rimraf": "^5.0.5"
+  }
+}

@@ -2,6 +2,7 @@
   "name": "kian-wiki-mono",
   "private": true,
   "version": "0.0.0",
+  "author": "kakhavai",
   "devDependencies": {
     "@types/eslint": "^8",
     "eslint": "^8.56.0",
@@ -16,8 +17,9 @@
     "lint": "yarn eslint .",
     "build": "yarn lerna run build --verbose",
     "clean": "rimraf ./.nx && yarn lerna clean --yes",
-    "test": "yarn lerna run test",
+    "test": "yarn lerna run test:unit",
     "clean-build": "yarn run clean && yarn run build",
+    "serverless": "yarn --cwd packages/lambda-api-gateway serverless offline",
     "clean-node-modules": "rimraf ./node_modules"
   },
   "packageManager": "yarn@4.0.2",

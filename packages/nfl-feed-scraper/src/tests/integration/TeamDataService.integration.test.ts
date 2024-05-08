@@ -1,7 +1,7 @@
 import { TeamDataService } from '../../services/TeamDataService';
 import { ITeam } from 'nfl-feed-types';
 
-describe('TeamDataService (Unit Tests)', () => {
+describe('TeamDataService (Integration Tests)', () => {
   const expectedResult: ITeam = {
     name: 'Cardinals',
     abv: 'ARI',
