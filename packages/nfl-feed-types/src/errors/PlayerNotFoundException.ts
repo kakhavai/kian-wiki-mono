@@ -2,8 +2,8 @@
 import { NotFoundException } from './NotFoundException';
 
 export class PlayerNotFoundException extends NotFoundException {
-  public constructor(jerseyNumber: number) {
-    super(`Player not found with number: ${jerseyNumber}`);
+  public constructor(id: string) {
+    super(`Player not found with number: ${id}`);
     Object.setPrototypeOf(this, PlayerNotFoundException.prototype);
   }
 }

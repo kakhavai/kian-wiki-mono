@@ -12,6 +12,7 @@ describe('PlayerFeedRepository (Unit Tests)', () => {
     repository = new PlayerFeedRepository();
 
     playerData = {
+      id: '1',
       name: 'John Doe',
       birthDate: new Date('1990-01-01'),
       jerseyNumber: 10,
@@ -20,7 +21,8 @@ describe('PlayerFeedRepository (Unit Tests)', () => {
     };
 
     playerDataMock = {
-      id: 1, // Arbitrary mock value for id
+      // Arbitrary mock value for id
+      remoteId: '1',
       createdAt: new Date(), // Arbitrary mock value for createdAt
       ...playerData,
     };
@@ -49,7 +51,7 @@ describe('PlayerFeedRepository (Unit Tests)', () => {
   test('Get player from the Player table', async () => {
     prismaMock.player.findUnique.mockResolvedValue(playerDataMock);
     const getPlayerData: IPlayer | undefined = await repository.getPlayer(
-      playerData.jerseyNumber,
+      playerData.id,
     );
 
     expect(getPlayerData).toEqual(expect.objectContaining(playerData));
@@ -57,13 +59,12 @@ describe('PlayerFeedRepository (Unit Tests)', () => {
 
   test('Fail to get player from the Player table', async () => {
     prismaMock.player.findUnique.mockRejectedValue(new Error());
-    await expect(
-      repository.getPlayer(playerData.jerseyNumber),
-    ).rejects.toThrow();
+    await expect(repository.getPlayer(playerData.id)).rejects.toThrow();
   });
 
   test('Update a player in the Player table', async () => {
     const updatedPlayerData: IPlayer = {
+      id: '1',
       name: 'Brandon Aubrey',
       birthDate: new Date('1995-03-14'),
       jerseyNumber: 17,
@@ -72,7 +73,7 @@ describe('PlayerFeedRepository (Unit Tests)', () => {
     };
 
     const updatedPlayerDataMock: IPlayerDAO = {
-      id: 1,
+      remoteId: '1',
       createdAt: new Date(),
       ...updatedPlayerData,
     };
@@ -80,7 +81,7 @@ describe('PlayerFeedRepository (Unit Tests)', () => {
     prismaMock.player.update.mockResolvedValue(updatedPlayerDataMock);
 
     const updatedPlayer: IPlayer = await repository.updatePlayer(
-      playerData.jerseyNumber,
+      playerData.id,
       updatedPlayerData,
     );
 
@@ -89,6 +90,7 @@ describe('PlayerFeedRepository (Unit Tests)', () => {
 
   test('Fail to update a player in the Player table', async () => {
     const updatedPlayerData: IPlayer = {
+      id: '1',
       name: 'Brandon Aubrey',
       birthDate: new Date('1995-03-14'),
       jerseyNumber: 17,
@@ -99,24 +101,20 @@ describe('PlayerFeedRepository (Unit Tests)', () => {
     prismaMock.player.update.mockRejectedValue(new Error());
 
     await expect(
-      repository.updatePlayer(playerData.jerseyNumber, updatedPlayerData),
+      repository.updatePlayer(playerData.id, updatedPlayerData),
     ).rejects.toThrow();
   });
 
   test('Remove player from player Player table', async () => {
     prismaMock.player.delete.mockResolvedValue(playerDataMock);
 
-    const deletedPlayer = await repository.deletePlayer(
-      playerData.jerseyNumber,
-    );
+    const deletedPlayer = await repository.deletePlayer(playerData.id);
     expect(deletedPlayer).toEqual(expect.objectContaining(playerData));
   });
 
   test('Fail to remove player from player Player table', async () => {
     prismaMock.player.delete.mockRejectedValue(new Error());
 
-    await expect(
-      repository.deletePlayer(playerData.jerseyNumber),
-    ).rejects.toThrow();
+    await expect(repository.deletePlayer(playerData.id)).rejects.toThrow();
   });
 });

@@ -1,6 +1,7 @@
 -- CreateTable
 CREATE TABLE "Player" (
-    "id" SERIAL NOT NULL,
+    "id" UUID NOT NULL DEFAULT gen_random_uuid(),
+    "remoteId" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "name" TEXT NOT NULL,
     "birthDate" TIMESTAMP(3) NOT NULL,
@@ -13,7 +14,7 @@ CREATE TABLE "Player" (
 
 -- CreateTable
 CREATE TABLE "Team" (
-    "id" SERIAL NOT NULL,
+    "id" UUID NOT NULL DEFAULT gen_random_uuid(),
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "name" TEXT NOT NULL,
     "abv" TEXT NOT NULL,
@@ -29,9 +30,9 @@ CREATE TABLE "Team" (
 
 -- CreateTable
 CREATE TABLE "PlayerMatchStats" (
-    "id" SERIAL NOT NULL,
+    "id" UUID NOT NULL DEFAULT gen_random_uuid(),
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "playerId" INTEGER NOT NULL,
+    "playerId" UUID NOT NULL,
     "targets" INTEGER NOT NULL,
     "receptions" INTEGER NOT NULL,
     "yards" INTEGER NOT NULL,
@@ -50,7 +51,7 @@ CREATE TABLE "PlayerMatchStats" (
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Player_jerseyNumber_key" ON "Player"("jerseyNumber");
+CREATE UNIQUE INDEX "Player_remoteId_key" ON "Player"("remoteId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Team_name_key" ON "Team"("name");

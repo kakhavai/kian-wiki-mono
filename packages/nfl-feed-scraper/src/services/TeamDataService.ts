@@ -8,12 +8,11 @@ import TeamFeedRepository from '../repositories/TeamFeedRepository';
 export class TeamDataService {
   public static async updateTeamRecords(): Promise<boolean> {
     const newRecords: Array<ITeam> = await this.getTeamDataFromProvider();
-    const promises: Array<Promise<ITeam>> = new Array<Promise<ITeam>>();
+    const promises: Array<Promise<boolean>> = new Array<Promise<boolean>>();
 
-    for (let i: number = 0; i < newRecords.length; i++) {
-      const newRecord: ITeam = newRecords[i];
-      promises.push(TeamFeedRepository.upsertTeam(newRecord));
-    }
+    promises.push(TeamFeedRepository.bulkDeleteMissing(newRecords));
+    promises.push(TeamFeedRepository.bulkUpsertTeams(newRecords));
+
     try {
       await Promise.all(promises);
       return true;
