@@ -20,7 +20,7 @@ describe('TeamFeedRepository (Unit Tests)', () => {
     };
 
     teamDataMock = {
-      id: 1, // Arbitrary mock value for id
+      id: '1', // Arbitrary mock value for id
       createdAt: new Date(), // Arbitrary mock value for createdAt
       ...teamData,
     };
@@ -73,7 +73,7 @@ describe('TeamFeedRepository (Unit Tests)', () => {
     };
 
     const updatedTeamDataMock: ITeamDAO = {
-      id: 1, // Arbitrary mock value for id
+      id: '1', // Arbitrary mock value for id
       createdAt: new Date(), // Arbitrary mock value for createdAt
       ...updatedTeamData,
     };
@@ -120,7 +120,7 @@ describe('TeamFeedRepository (Unit Tests)', () => {
     };
 
     const updatedTeamDataMock: ITeamDAO = {
-      id: 1, // Arbitrary mock value for id
+      id: '1', // Arbitrary mock value for id
       createdAt: new Date(), // Arbitrary mock value for createdAt
       ...updatedTeamData,
     };
@@ -163,5 +163,73 @@ describe('TeamFeedRepository (Unit Tests)', () => {
   test('Fails to remove a team from team Team table', async () => {
     prismaMock.team.delete.mockRejectedValue(new Error());
     await expect(TeamFeedRepository.deleteTeam(teamData.abv)).rejects.toThrow();
+  });
+
+  test('bulkUpsertTeams', async () => {
+    const teamsData: ITeam[] = [
+      {
+        name: 'Falcons',
+        abv: 'ATL',
+        wins: 5,
+        losses: 3,
+        pa: 150,
+        pf: 170,
+        tie: 0,
+        city: 'Atlanta',
+      },
+      {
+        name: 'Seahawks',
+        abv: 'SEA',
+        wins: 4,
+        losses: 4,
+        pa: 140,
+        pf: 160,
+        tie: 0,
+        city: 'Seattle',
+      },
+    ];
+    prismaMock.$executeRawUnsafe.mockResolvedValue(1);
+    let result = await TeamFeedRepository.bulkUpsertTeams(teamsData);
+    expect(prismaMock.$executeRawUnsafe).toHaveBeenCalled();
+    expect(result).toBe(true);
+
+    prismaMock.$executeRawUnsafe.mockRejectedValue(new Error('Mock error'));
+    result = await TeamFeedRepository.bulkUpsertTeams(teamsData);
+    expect(prismaMock.$executeRawUnsafe).toHaveBeenCalled();
+    expect(result).toBe(false);
+  });
+
+  test('bulkDeleteMissing', async () => {
+    const teamsData: ITeam[] = [
+      {
+        name: 'Falcons',
+        abv: 'ATL',
+        wins: 5,
+        losses: 3,
+        pa: 150,
+        pf: 170,
+        tie: 0,
+        city: 'Atlanta',
+      },
+      {
+        name: 'Seahawks',
+        abv: 'SEA',
+        wins: 4,
+        losses: 4,
+        pa: 140,
+        pf: 160,
+        tie: 0,
+        city: 'Seattle',
+      },
+    ];
+    prismaMock.$executeRawUnsafe.mockResolvedValue(1);
+    let result = await TeamFeedRepository.bulkDeleteMissing(teamsData);
+    expect(prismaMock.$executeRawUnsafe).toHaveBeenCalled();
+    expect(result).toBe(true);
+
+    prismaMock.$executeRawUnsafe.mockRejectedValue(new Error('Mock error'));
+    result = await TeamFeedRepository.bulkDeleteMissing(teamsData);
+    expect(prismaMock.$executeRawUnsafe).toHaveBeenCalled();
+    expect(result).toBe(false);
   });
 });

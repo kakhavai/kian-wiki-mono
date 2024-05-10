@@ -1,6 +1,7 @@
 import PlayerFeedRepository from '../../repositories/PlayerFeedRepository';
 import { IPlayer, ITeam } from 'nfl-feed-types';
 import TeamFeedRepository from '../../repositories/TeamFeedRepository';
+import { v4 as uuidv4 } from 'uuid';
 
 describe('PlayerFeedRepository (Integration Tests)', () => {
   let repository: PlayerFeedRepository;
@@ -11,6 +12,7 @@ describe('PlayerFeedRepository (Integration Tests)', () => {
     repository = new PlayerFeedRepository();
 
     playerData = {
+      id: uuidv4(),
       name: 'John Doe',
       birthDate: new Date('1990-01-01'),
       jerseyNumber: 10,
@@ -49,7 +51,7 @@ describe('PlayerFeedRepository (Integration Tests)', () => {
 
   test('Get player from the Player table', async () => {
     const getPlayerData: IPlayer | undefined = await repository.getPlayer(
-      playerData.jerseyNumber,
+      playerData.id,
     );
 
     expect(getPlayerData).toEqual(expect.objectContaining(playerData));
@@ -57,6 +59,7 @@ describe('PlayerFeedRepository (Integration Tests)', () => {
 
   test('Update a player in the Player table', async () => {
     const updatedPlayerData: IPlayer = {
+      id: uuidv4(),
       name: 'Brandon Aubrey',
       birthDate: new Date('1995-03-14'),
       jerseyNumber: 17,
@@ -65,14 +68,14 @@ describe('PlayerFeedRepository (Integration Tests)', () => {
     };
 
     let updatedPlayer: IPlayer = await repository.updatePlayer(
-      playerData.jerseyNumber,
+      playerData.id,
       updatedPlayerData,
     );
 
     expect(updatedPlayer).toEqual(expect.objectContaining(updatedPlayerData));
 
     updatedPlayer = await repository.updatePlayer(
-      updatedPlayerData.jerseyNumber,
+      updatedPlayerData.id,
       playerData,
     );
 
@@ -80,9 +83,7 @@ describe('PlayerFeedRepository (Integration Tests)', () => {
   });
 
   test('Remove player from player Player table', async () => {
-    const deletedPlayer = await repository.deletePlayer(
-      playerData.jerseyNumber,
-    );
+    const deletedPlayer = await repository.deletePlayer(playerData.id);
     expect(deletedPlayer).toEqual(expect.objectContaining(playerData));
   });
 });

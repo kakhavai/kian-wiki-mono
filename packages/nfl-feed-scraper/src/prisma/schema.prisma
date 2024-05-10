@@ -8,37 +8,38 @@ datasource db {
 }
 
 model Player {
-  id               Int                @id @default(autoincrement())
-  createdAt        DateTime           @default(now())
+  id               String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  remoteId         String          @unique @default(uuid())
+  createdAt        DateTime        @default(now())
   name             String
   birthDate        DateTime
-  jerseyNumber     Int                @unique
+  jerseyNumber     Int
   position         String
   teamId           String
-  team             Team               @relation(fields: [teamId], references: [abv])
+  team             Team            @relation(fields: [teamId], references: [abv])
   PlayerMatchStats PlayerMatchStats[]
 }
 
 model Team {
-  id               Int                @id @default(autoincrement())
-  createdAt        DateTime           @default(now())
-  name             String             @unique
-  abv              String             @unique
+  id               String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  createdAt        DateTime        @default(now())
+  name             String          @unique
+  abv              String          @unique
   wins             Int
   losses           Int
   pa               Int
   pf               Int
   tie              Int
   city             String
-  Player           Player[]
+  Player           Player[]        
   PlayerMatchStats PlayerMatchStats[]
 }
 
 model PlayerMatchStats {
-  id             Int      @id @default(autoincrement())
-  createdAt      DateTime @default(now())
-  playerId       Int
-  player         Player   @relation(fields: [playerId], references: [id])
+  id             String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  createdAt      DateTime          @default(now())
+  playerId       String            @db.Uuid
+  player         Player            @relation(fields: [playerId], references: [id])
   targets        Int
   receptions     Int
   yards          Int
@@ -50,7 +51,7 @@ model PlayerMatchStats {
   passingTds     Int
   interceptions  Int
   fumbles        Int
-  opponentTeamId String
-  opponent       Team     @relation(fields: [opponentTeamId], references: [abv])
+  opponentTeamId String           
+  opponent       Team             @relation(fields: [opponentTeamId], references: [abv])
   matchDate      DateTime
 }

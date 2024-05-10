@@ -44,6 +44,77 @@ class TeamFeedRepository {
     });
     return team;
   }
+
+  public static async bulkUpsertTeams(
+    teamData: Array<ITeam>,
+  ): Promise<boolean> {
+    const values: string = teamData
+      .map(
+        (team) =>
+          `('${team.name}', '${team.abv}', ${team.wins}, ${team.losses}, ${team.pa}, ${team.pf}, ${team.tie}, '${team.city}')`,
+      )
+      .join(', ');
+
+    const query: string = `
+      INSERT INTO "Team" (name, abv, wins, losses, pa, pf, tie, city)
+      VALUES ${values}
+      ON CONFLICT (abv) DO UPDATE SET
+        name = EXCLUDED.name,
+        wins = EXCLUDED.wins,
+        losses = EXCLUDED.losses,
+        pa = EXCLUDED.pa,
+        pf = EXCLUDED.pf,
+        tie = EXCLUDED.tie,
+        city = EXCLUDED.city;
+    `;
+
+    try {
+      await prisma.$executeRawUnsafe(query);
+      console.log('TeamFeedRepository: Bulk upserted teams');
+      return true;
+    } catch (error) {
+      console.error(
+        'TeamFeedRepository: Error inserting/updating teams:',
+        error,
+      );
+
+      console.error(query);
+      return false;
+    }
+  }
+
+  public static async bulkDeleteMissing(
+    teamData: Array<ITeam>,
+  ): Promise<boolean> {
+    // Construct the list of values to be retained
+    const values: string = teamData
+      .map(
+        (team) =>
+          `('${team.name}', '${team.abv}', ${team.wins}, ${team.losses}, ${team.pa}, ${team.pf}, ${team.tie}, '${team.city}')`,
+      )
+      .join(', ');
+
+    // SQL query that sets up a CTE with the desired data and deletes rows that do not match
+    const query: string = `
+      WITH retained_data (name, abv, wins, losses, pa, pf, tie, city) AS (
+        VALUES ${values}
+      )
+      DELETE FROM "Team"
+      WHERE NOT EXISTS (
+        SELECT 1 FROM retained_data WHERE retained_data.abv = "Team".abv
+      );
+    `;
+
+    try {
+      // Executes the deletion query
+      await prisma.$executeRawUnsafe(query);
+      console.log('TeamFeedRepository: Rows deleted');
+      return true;
+    } catch (error) {
+      console.error('TeamFeedRepository: Error deleting teams:', error);
+      return false;
+    }
+  }
 }
 
 export default TeamFeedRepository;

@@ -95,4 +95,68 @@ describe('TeamFeedRepository (Integration Tests)', () => {
     const deletedTeam = await TeamFeedRepository.deleteTeam(teamData.abv);
     expect(deletedTeam).toEqual(expect.objectContaining(teamData));
   });
+
+  test('bulkUpsertTeams', async () => {
+    const teamsData: ITeam[] = [
+      {
+        name: 'Falcons',
+        abv: 'ATL',
+        wins: 5,
+        losses: 3,
+        pa: 150,
+        pf: 170,
+        tie: 0,
+        city: 'Atlanta',
+      },
+      {
+        name: 'Seahawks',
+        abv: 'SEA',
+        wins: 4,
+        losses: 4,
+        pa: 140,
+        pf: 160,
+        tie: 0,
+        city: 'Seattle',
+      },
+    ];
+    const result = await TeamFeedRepository.bulkUpsertTeams(teamsData);
+    expect(result).toBe(true);
+  });
+
+  test('bulkDeleteMissing', async () => {
+    const teamsData: ITeam[] = [
+      {
+        name: 'Falcons',
+        abv: 'ATL',
+        wins: 5,
+        losses: 3,
+        pa: 150,
+        pf: 170,
+        tie: 0,
+        city: 'Atlanta',
+      },
+      {
+        name: 'Seahawks',
+        abv: 'SEA',
+        wins: 4,
+        losses: 4,
+        pa: 140,
+        pf: 160,
+        tie: 0,
+        city: 'Seattle',
+      },
+      {
+        name: 'Miami Dolphins',
+        abv: 'MIA',
+        wins: 20,
+        losses: 0,
+        pa: 100,
+        pf: 500,
+        tie: 0,
+        city: 'Miami',
+      },
+    ];
+    const result = await TeamFeedRepository.bulkDeleteMissing(teamsData);
+    expect(result).toBe(true);
+  });
 });

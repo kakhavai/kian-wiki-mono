@@ -9,32 +9,29 @@ class PlayerFeedRepository {
     return player;
   }
 
-  public async getPlayer(jerseyNumber: number): Promise<IPlayer | undefined> {
+  public async getPlayer(id: string): Promise<IPlayer | undefined> {
     const player: IPlayer | null = await prisma.player.findUnique({
-      where: { jerseyNumber },
+      where: { id },
     });
 
     if (!player) {
-      throw new PlayerNotFoundException(jerseyNumber);
+      throw new PlayerNotFoundException(id);
     }
 
     return player ? player : undefined;
   }
 
-  public async updatePlayer(
-    jerseyNumber: number,
-    playerData: IPlayer,
-  ): Promise<IPlayer> {
+  public async updatePlayer(id: string, playerData: IPlayer): Promise<IPlayer> {
     const player: IPlayer = await prisma.player.update({
-      where: { jerseyNumber },
+      where: { id },
       data: playerData,
     });
     return player;
   }
 
-  public async deletePlayer(jerseyNumber: number): Promise<IPlayer> {
+  public async deletePlayer(id: string): Promise<IPlayer> {
     const player: IPlayer = await prisma.player.delete({
-      where: { jerseyNumber },
+      where: { id },
     });
     return player;
   }
