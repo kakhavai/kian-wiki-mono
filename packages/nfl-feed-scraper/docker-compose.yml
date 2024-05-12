@@ -1,31 +1,22 @@
 services:
   database:
-    image: mysql:latest
+    image: postgres:latest
     ports:
-      - '3306:3306'
+      - '5432:5432'
     hostname: database
     env_file:
       - ./.env
     environment:
-      DATABASE_ROOT_PASSWORD: '${DATABASE_ROOT_PASSWORD}'
-      DATABASE_NAME: '${DATABASE_NAME}'
-      DATABASE_USER: '${DATABASE_USER}'
-      DATABASE_PASSWORD: '${DATABASE_PASSWORD}'
-      DATABASE_HOST: '${DATABASE_HOST}'
+      POSTGRES_DB: '${DATABASE_NAME}'
+      POSTGRES_USER: '${DATABASE_USER}'
+      POSTGRES_PASSWORD: '${DATABASE_PASSWORD}'
+      POSTGRES_HOST: '${DATABASE_HOST}'
     volumes:
-      - feed-volume:/var/lib/mysql
-      - ./src/prisma/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - feed-volume:/var/lib/postgresql/data
+      # If you need to initialize the PostgreSQL database with custom SQL scripts:
+      # - ./src/prisma/init.sql:/docker-entrypoint-initdb.d/init.sql
     healthcheck:
-      test:
-        [
-          'CMD',
-          'mysqladmin',
-          'ping',
-          '-h',
-          '127.0.0.1',
-          '--user=$DATABASE_USER',
-          '--password=$DATABASE_PASSWORD',
-        ]
+      test: ['CMD', 'pg_isready']
       interval: 15s
       timeout: 10s
       retries: 3

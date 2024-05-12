@@ -5,6 +5,7 @@
   "author": "kakhavai",
   "devDependencies": {
     "@types/eslint": "^8",
+    "dotenv-cli": "^7.4.2",
     "eslint": "^8.56.0",
     "lerna": "^8.0.2",
     "rimraf": "^5.0.5"
@@ -16,9 +17,11 @@
   "scripts": {
     "lint": "yarn eslint .",
     "build": "yarn lerna run build --verbose",
+    "build:prod": "yarn lerna run build:prod --verbose",
     "clean": "rimraf ./.nx && yarn lerna clean --yes",
     "test": "yarn lerna run test:unit",
     "clean-build": "yarn run clean && yarn run build",
+    "clean-build:prod": "yarn run clean && yarn run build:prod",
     "serverless": "yarn --cwd packages/lambda-api-gateway serverless offline",
     "clean-node-modules": "rimraf ./node_modules"
   },

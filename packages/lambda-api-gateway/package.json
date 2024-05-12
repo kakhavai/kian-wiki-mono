@@ -6,6 +6,7 @@
   "author": "kakhavai",
   "scripts": {
     "build": "yarn run clean && yarn tsc",
+    "build:prod": "yarn run clean && yarn tsc",
     "clean": "rimraf ./build"
   },
   "license": "ISC",
