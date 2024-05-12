@@ -16,7 +16,17 @@ services:
       # If you need to initialize the PostgreSQL database with custom SQL scripts:
       # - ./src/prisma/init.sql:/docker-entrypoint-initdb.d/init.sql
     healthcheck:
-      test: ['CMD', 'pg_isready']
+      test:
+        [
+          'CMD',
+          'pg_isready',
+          '-U',
+          '$POSTGRES_USER',
+          '-d',
+          '$POSTGRES_DB',
+          '-h',
+          '$POSTGRES_DB',
+        ]
       interval: 15s
       timeout: 10s
       retries: 3
