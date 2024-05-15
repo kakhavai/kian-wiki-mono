@@ -4,6 +4,8 @@ import { ITeam } from 'nfl-feed-types';
 describe('TeamFeedRepository (Integration Tests)', () => {
   let teamData: ITeam;
 
+  const teamRepo: TeamFeedRepository = new TeamFeedRepository();
+
   beforeAll(async () => {
     teamData = {
       name: 'Miami Dolphins',
@@ -26,15 +28,13 @@ describe('TeamFeedRepository (Integration Tests)', () => {
   });
 
   test('Adds team to Team table', async () => {
-    const addedTeam: ITeam | null = await TeamFeedRepository.addTeam(teamData);
+    const addedTeam: ITeam | null = await teamRepo.addTeam(teamData);
 
     expect(addedTeam).toEqual(expect.objectContaining(teamData));
   });
 
   test('Get team from the Team table', async () => {
-    const getTeamData: ITeam | undefined = await TeamFeedRepository.getTeam(
-      teamData.abv,
-    );
+    const getTeamData: ITeam | undefined = await teamRepo.getTeam(teamData.abv);
 
     expect(getTeamData).toEqual(expect.objectContaining(teamData));
   });
@@ -51,17 +51,14 @@ describe('TeamFeedRepository (Integration Tests)', () => {
       city: 'Miami',
     };
 
-    let updatedTeam: ITeam = await TeamFeedRepository.updateTeam(
+    let updatedTeam: ITeam = await teamRepo.updateTeam(
       teamData.abv,
       updatedTeamData,
     );
 
     expect(updatedTeam).toEqual(expect.objectContaining(updatedTeamData));
 
-    updatedTeam = await TeamFeedRepository.updateTeam(
-      updatedTeamData.abv,
-      teamData,
-    );
+    updatedTeam = await teamRepo.updateTeam(updatedTeamData.abv, teamData);
 
     expect(updatedTeam).toEqual(expect.objectContaining(teamData));
   });
@@ -78,21 +75,17 @@ describe('TeamFeedRepository (Integration Tests)', () => {
       city: 'Miami',
     };
 
-    let updatedTeam: ITeam =
-      await TeamFeedRepository.upsertTeam(updatedTeamData);
+    let updatedTeam: ITeam = await teamRepo.upsertTeam(updatedTeamData);
 
     expect(updatedTeam).toEqual(expect.objectContaining(updatedTeamData));
 
-    updatedTeam = await TeamFeedRepository.updateTeam(
-      updatedTeamData.abv,
-      teamData,
-    );
+    updatedTeam = await teamRepo.updateTeam(updatedTeamData.abv, teamData);
 
     expect(updatedTeam).toEqual(expect.objectContaining(teamData));
   });
 
   test('Remove team from team Team table', async () => {
-    const deletedTeam = await TeamFeedRepository.deleteTeam(teamData.abv);
+    const deletedTeam = await teamRepo.deleteTeam(teamData.abv);
     expect(deletedTeam).toEqual(expect.objectContaining(teamData));
   });
 
@@ -119,7 +112,7 @@ describe('TeamFeedRepository (Integration Tests)', () => {
         city: 'Seattle',
       },
     ];
-    const result = await TeamFeedRepository.bulkUpsertTeams(teamsData);
+    const result = await teamRepo.bulkUpsert(teamsData);
     expect(result).toBe(true);
   });
 
@@ -156,7 +149,7 @@ describe('TeamFeedRepository (Integration Tests)', () => {
         city: 'Miami',
       },
     ];
-    const result = await TeamFeedRepository.bulkDeleteMissing(teamsData);
+    const result = await teamRepo.bulkDeleteMissing(teamsData);
     expect(result).toBe(true);
   });
 });

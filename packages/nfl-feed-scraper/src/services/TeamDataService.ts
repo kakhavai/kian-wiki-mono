@@ -6,12 +6,18 @@ import { ProviderHttpRequestOptions } from '../http/ProviderHttpRequestOptions';
 import TeamFeedRepository from '../repositories/TeamFeedRepository';
 
 export class TeamDataService {
-  public static async updateTeamRecords(): Promise<boolean> {
+  private _teamRepo: TeamFeedRepository;
+
+  public constructor() {
+    this._teamRepo = new TeamFeedRepository();
+  }
+
+  public async updateTeamRecords(): Promise<boolean> {
     const newRecords: Array<ITeam> = await this.getTeamDataFromProvider();
     const promises: Array<Promise<boolean>> = new Array<Promise<boolean>>();
 
-    promises.push(TeamFeedRepository.bulkDeleteMissing(newRecords));
-    promises.push(TeamFeedRepository.bulkUpsertTeams(newRecords));
+    promises.push(this._teamRepo.bulkDeleteMissing(newRecords));
+    promises.push(this._teamRepo.bulkUpsert(newRecords));
 
     try {
       await Promise.all(promises);
@@ -22,7 +28,7 @@ export class TeamDataService {
     }
   }
 
-  public static async getTeamDataFromProvider(): Promise<ITeam[]> {
+  public async getTeamDataFromProvider(): Promise<ITeam[]> {
     const options: ProviderHttpRequestOptions = new ProviderHttpRequestOptions(
       'getNFLTeams',
       {
@@ -55,7 +61,7 @@ export class TeamDataService {
     }
   }
 
-  private static _parseProviderTeamData(unparsedTeams: ITeamDTO[]): ITeam[] {
+  private _parseProviderTeamData(unparsedTeams: ITeamDTO[]): ITeam[] {
     const teams: ITeam[] = [];
 
     for (const unparsedTeam of unparsedTeams) {
@@ -75,7 +81,7 @@ export class TeamDataService {
     return teams;
   }
 
-  private static _isITeamDTOArray(
+  private _isITeamDTOArray(
     unparsedTeams: unknown,
   ): unparsedTeams is ITeamDTO[] {
     return (
