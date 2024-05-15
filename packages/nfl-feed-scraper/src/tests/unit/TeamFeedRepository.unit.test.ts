@@ -6,6 +6,7 @@ import { ITeamDAO } from '../../types/dao/ITeamDAO';
 describe('TeamFeedRepository (Unit Tests)', () => {
   let teamData: ITeam;
   let teamDataMock: ITeamDAO;
+  const teamRepo: TeamFeedRepository = new TeamFeedRepository();
 
   beforeAll(async () => {
     teamData = {
@@ -36,28 +37,26 @@ describe('TeamFeedRepository (Unit Tests)', () => {
 
   test('Adds team to Team table', async () => {
     prismaMock.team.create.mockResolvedValue(teamDataMock);
-    const addedTeam: ITeam | null = await TeamFeedRepository.addTeam(teamData);
+    const addedTeam: ITeam | null = await teamRepo.addTeam(teamData);
 
     expect(addedTeam).toEqual(expect.objectContaining(teamData));
   });
 
   test('Fails to add team to Team table', async () => {
     prismaMock.team.create.mockRejectedValue(new Error());
-    await expect(TeamFeedRepository.addTeam(teamData)).rejects.toThrow();
+    await expect(teamRepo.addTeam(teamData)).rejects.toThrow();
   });
 
   test('Get team from the Team table', async () => {
     prismaMock.team.findUnique.mockResolvedValue(teamDataMock);
-    const getTeamData: ITeam | undefined = await TeamFeedRepository.getTeam(
-      teamData.abv,
-    );
+    const getTeamData: ITeam | undefined = await teamRepo.getTeam(teamData.abv);
 
     expect(getTeamData).toEqual(expect.objectContaining(teamData));
   });
 
   test('Fails to get team from the Team table', async () => {
     prismaMock.team.findUnique.mockRejectedValue(new Error());
-    await expect(TeamFeedRepository.getTeam(teamData.abv)).rejects.toThrow();
+    await expect(teamRepo.getTeam(teamData.abv)).rejects.toThrow();
   });
 
   test('Update a team in the Team table', async () => {
@@ -80,7 +79,7 @@ describe('TeamFeedRepository (Unit Tests)', () => {
 
     prismaMock.team.update.mockResolvedValue(updatedTeamDataMock);
 
-    const updatedTeam: ITeam = await TeamFeedRepository.updateTeam(
+    const updatedTeam: ITeam = await teamRepo.updateTeam(
       teamData.abv,
       updatedTeamData,
     );
@@ -103,7 +102,7 @@ describe('TeamFeedRepository (Unit Tests)', () => {
     prismaMock.team.update.mockRejectedValue(new Error());
 
     await expect(
-      TeamFeedRepository.updateTeam(teamData.abv, updatedTeamData),
+      teamRepo.updateTeam(teamData.abv, updatedTeamData),
     ).rejects.toThrow();
   });
 
@@ -127,8 +126,7 @@ describe('TeamFeedRepository (Unit Tests)', () => {
 
     prismaMock.team.upsert.mockResolvedValue(updatedTeamDataMock);
 
-    const updatedTeam: ITeam =
-      await TeamFeedRepository.upsertTeam(updatedTeamData);
+    const updatedTeam: ITeam = await teamRepo.upsertTeam(updatedTeamData);
 
     expect(updatedTeam).toEqual(expect.objectContaining(updatedTeamData));
   });
@@ -148,21 +146,19 @@ describe('TeamFeedRepository (Unit Tests)', () => {
     prismaMock.team.update.mockRejectedValue(new Error());
 
     await expect(
-      TeamFeedRepository.updateTeam(teamData.abv, updatedTeamData),
+      teamRepo.updateTeam(teamData.abv, updatedTeamData),
     ).rejects.toThrow();
   });
 
   test('Remove team from team Team table', async () => {
     prismaMock.team.delete.mockResolvedValue(teamDataMock);
-    const deletedTeam: ITeam = await TeamFeedRepository.deleteTeam(
-      teamData.abv,
-    );
+    const deletedTeam: ITeam = await teamRepo.deleteTeam(teamData.abv);
     expect(deletedTeam).toEqual(expect.objectContaining(teamData));
   });
 
   test('Fails to remove a team from team Team table', async () => {
     prismaMock.team.delete.mockRejectedValue(new Error());
-    await expect(TeamFeedRepository.deleteTeam(teamData.abv)).rejects.toThrow();
+    await expect(teamRepo.deleteTeam(teamData.abv)).rejects.toThrow();
   });
 
   test('bulkUpsertTeams', async () => {
@@ -189,12 +185,12 @@ describe('TeamFeedRepository (Unit Tests)', () => {
       },
     ];
     prismaMock.$executeRawUnsafe.mockResolvedValue(1);
-    let result = await TeamFeedRepository.bulkUpsertTeams(teamsData);
+    let result = await teamRepo.bulkUpsert(teamsData);
     expect(prismaMock.$executeRawUnsafe).toHaveBeenCalled();
     expect(result).toBe(true);
 
     prismaMock.$executeRawUnsafe.mockRejectedValue(new Error('Mock error'));
-    result = await TeamFeedRepository.bulkUpsertTeams(teamsData);
+    result = await teamRepo.bulkUpsert(teamsData);
     expect(prismaMock.$executeRawUnsafe).toHaveBeenCalled();
     expect(result).toBe(false);
   });
@@ -223,12 +219,12 @@ describe('TeamFeedRepository (Unit Tests)', () => {
       },
     ];
     prismaMock.$executeRawUnsafe.mockResolvedValue(1);
-    let result = await TeamFeedRepository.bulkDeleteMissing(teamsData);
+    let result = await teamRepo.bulkDeleteMissing(teamsData);
     expect(prismaMock.$executeRawUnsafe).toHaveBeenCalled();
     expect(result).toBe(true);
 
     prismaMock.$executeRawUnsafe.mockRejectedValue(new Error('Mock error'));
-    result = await TeamFeedRepository.bulkDeleteMissing(teamsData);
+    result = await teamRepo.bulkDeleteMissing(teamsData);
     expect(prismaMock.$executeRawUnsafe).toHaveBeenCalled();
     expect(result).toBe(false);
   });

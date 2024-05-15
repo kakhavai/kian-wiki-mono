@@ -7,6 +7,7 @@ describe('PlayerFeedRepository (Integration Tests)', () => {
   let repository: PlayerFeedRepository;
   let playerData: IPlayer;
   let teamData: ITeam;
+  const teamRepo: TeamFeedRepository = new TeamFeedRepository();
 
   beforeAll(async () => {
     repository = new PlayerFeedRepository();
@@ -31,11 +32,11 @@ describe('PlayerFeedRepository (Integration Tests)', () => {
       city: 'Los Angeles',
     };
 
-    await TeamFeedRepository.addTeam(teamData);
+    await teamRepo.addTeam(teamData);
   });
 
   afterAll(async () => {
-    await TeamFeedRepository.deleteTeam('LAR');
+    await teamRepo.deleteTeam('LAR');
     // Close the Prisma client and disconnect from the test database
   });
 

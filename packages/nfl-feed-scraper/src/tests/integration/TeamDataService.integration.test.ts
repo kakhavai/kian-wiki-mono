@@ -1,6 +1,8 @@
 import { TeamDataService } from '../../services/TeamDataService';
 import { ITeam } from 'nfl-feed-types';
 
+const teamDataService = new TeamDataService();
+
 describe('TeamDataService (Integration Tests)', () => {
   const expectedResult: ITeam = {
     name: 'Cardinals',
@@ -14,7 +16,7 @@ describe('TeamDataService (Integration Tests)', () => {
   };
 
   test('Successfully fetches NFL team data', async () => {
-    const result = await TeamDataService.getTeamDataFromProvider();
+    const result = await teamDataService.getTeamDataFromProvider();
 
     // Expectations
     expect(result[0]).toEqual(expectedResult);
