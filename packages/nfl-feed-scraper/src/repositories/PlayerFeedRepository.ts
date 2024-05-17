@@ -1,7 +1,19 @@
 import { IPlayer, PlayerNotFoundException } from 'nfl-feed-types';
 import prisma from '../prisma/PrismaSingleton';
+import BaseRepository from './BaseRepository';
 
-class PlayerFeedRepository {
+class PlayerFeedRepository extends BaseRepository<IPlayer> {
+  public constructor() {
+    super('Player', 'remoteId', [
+      'remoteId',
+      'name',
+      'birthDate',
+      'jerseyNumber',
+      'position',
+      'teamId',
+    ]);
+  }
+
   public async addPlayer(playerData: IPlayer): Promise<IPlayer> {
     const player: IPlayer = await prisma.player.create({
       data: playerData,
@@ -9,29 +21,32 @@ class PlayerFeedRepository {
     return player;
   }
 
-  public async getPlayer(id: string): Promise<IPlayer | undefined> {
+  public async getPlayer(remoteId: string): Promise<IPlayer | undefined> {
     const player: IPlayer | null = await prisma.player.findUnique({
-      where: { id },
+      where: { remoteId },
     });
 
     if (!player) {
-      throw new PlayerNotFoundException(id);
+      throw new PlayerNotFoundException(remoteId);
     }
 
     return player ? player : undefined;
   }
 
-  public async updatePlayer(id: string, playerData: IPlayer): Promise<IPlayer> {
+  public async updatePlayer(
+    remoteId: string,
+    playerData: IPlayer,
+  ): Promise<IPlayer> {
     const player: IPlayer = await prisma.player.update({
-      where: { id },
+      where: { remoteId },
       data: playerData,
     });
     return player;
   }
 
-  public async deletePlayer(id: string): Promise<IPlayer> {
+  public async deletePlayer(remoteId: string): Promise<IPlayer> {
     const player: IPlayer = await prisma.player.delete({
-      where: { id },
+      where: { remoteId },
     });
     return player;
   }

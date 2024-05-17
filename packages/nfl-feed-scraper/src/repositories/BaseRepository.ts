@@ -25,6 +25,11 @@ class BaseRepository<T extends IDbEntity> {
           return `'${value.replace(/'/g, "''")}'`;
         } else if (typeof value === 'number' || typeof value === 'boolean') {
           return `${value}`;
+        } else if (value instanceof Date) {
+          if (isNaN(value.getTime())) {
+            return `'${new Date().toISOString()}'`;
+          }
+          return `'${value.toISOString()}'`;
         } else {
           // Optionally handle or throw an error for unsupported types
           throw new Error('Unsupported type for SQL generation');
@@ -36,12 +41,12 @@ class BaseRepository<T extends IDbEntity> {
   }
 
   private _columns(): string {
-    return `(${this._fields.map(String).join(', ')})`;
+    return `(${this._fields.map((field) => `"${String(field)}"`).join(', ')})`;
   }
 
   private _updateSet(): string {
     return this._fields
-      .map((field) => `${String(field)} = EXCLUDED.${String(field)}`)
+      .map((field) => `"${String(field)}" = EXCLUDED."${String(field)}"`)
       .join(', ');
   }
 
@@ -58,20 +63,20 @@ class BaseRepository<T extends IDbEntity> {
     const query: string = `
         INSERT INTO "${this._tableName}" ${this._columns()}
         VALUES ${values}
-        ON CONFLICT (${this._uniqueKey}) DO UPDATE SET
+        ON CONFLICT ("${this._uniqueKey}") DO UPDATE SET
           ${this._updateSet()};
       `;
 
     try {
       await prisma.$executeRawUnsafe(query);
-      console.log(`${this._tableName} Repository: Bulk upserted data`);
       return true;
     } catch (error) {
       console.error(
         `${this._tableName} Repository: Error inserting/updating data:`,
         error,
+        query,
       );
-      return false;
+      throw error;
     }
   }
 
@@ -84,22 +89,23 @@ class BaseRepository<T extends IDbEntity> {
         WITH retained_data ${this._columns()} AS (VALUES ${values})
         DELETE FROM "${this._tableName}"
         WHERE NOT EXISTS (
-          SELECT 1 FROM retained_data WHERE retained_data.${
+          SELECT 1 FROM retained_data WHERE retained_data."${
             this._uniqueKey
-          } = "${this._tableName}".${this._uniqueKey}
+          }" = "${this._tableName}"."${this._uniqueKey}"
         );
       `;
 
     try {
       await prisma.$executeRawUnsafe(query);
-      console.log(`${this._tableName} Repository: Deleted missing data`);
       return true;
     } catch (error) {
       console.error(
         `${this._tableName} Repository: Error deleting data:`,
         error,
+        query,
       );
-      return false;
+
+      throw error;
     }
   }
 }
