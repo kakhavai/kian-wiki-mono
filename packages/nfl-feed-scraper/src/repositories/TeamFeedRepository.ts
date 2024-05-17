@@ -3,8 +3,6 @@ import prisma from '../prisma/PrismaSingleton';
 import BaseRepository from './BaseRepository';
 
 class TeamFeedRepository extends BaseRepository<ITeam> {
-  private _instance: TeamFeedRepository | null = null;
-
   public constructor() {
     super('Team', 'abv', [
       'name',

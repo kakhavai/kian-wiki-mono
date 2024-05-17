@@ -1,4 +1,5 @@
 import TeamFeedRepository from '../../repositories/TeamFeedRepository';
+import { testTeamData } from '../data/TestTeamData';
 import { ITeam } from 'nfl-feed-types';
 
 describe('TeamFeedRepository (Integration Tests)', () => {
@@ -8,8 +9,8 @@ describe('TeamFeedRepository (Integration Tests)', () => {
 
   beforeAll(async () => {
     teamData = {
-      name: 'Miami Dolphins',
-      abv: 'MIA',
+      name: 'Miami DolphinsX',
+      abv: 'MIAX',
       wins: 15,
       losses: 0,
       pa: 300,
@@ -41,8 +42,8 @@ describe('TeamFeedRepository (Integration Tests)', () => {
 
   test('Update a team in the Team table', async () => {
     const updatedTeamData: ITeam = {
-      name: 'Miami Dolphins',
-      abv: 'MIA',
+      name: 'Miami DolphinsX',
+      abv: 'MIAX',
       wins: 20,
       losses: 0,
       pa: 100,
@@ -65,8 +66,8 @@ describe('TeamFeedRepository (Integration Tests)', () => {
 
   test('Upsert a team in the Team table', async () => {
     const updatedTeamData: ITeam = {
-      name: 'Miami Dolphins',
-      abv: 'MIA',
+      name: 'Miami DolphinsX',
+      abv: 'MIAX',
       wins: 20,
       losses: 0,
       pa: 100,
@@ -92,8 +93,8 @@ describe('TeamFeedRepository (Integration Tests)', () => {
   test('bulkUpsertTeams', async () => {
     const teamsData: ITeam[] = [
       {
-        name: 'Falcons',
-        abv: 'ATL',
+        name: 'FalconsX',
+        abv: 'ZZZ',
         wins: 5,
         losses: 3,
         pa: 150,
@@ -102,8 +103,8 @@ describe('TeamFeedRepository (Integration Tests)', () => {
         city: 'Atlanta',
       },
       {
-        name: 'Seahawks',
-        abv: 'SEA',
+        name: 'SeahawksX',
+        abv: 'XXX',
         wins: 4,
         losses: 4,
         pa: 140,
@@ -111,44 +112,14 @@ describe('TeamFeedRepository (Integration Tests)', () => {
         tie: 0,
         city: 'Seattle',
       },
+      ...testTeamData,
     ];
     const result = await teamRepo.bulkUpsert(teamsData);
     expect(result).toBe(true);
   });
 
   test('bulkDeleteMissing', async () => {
-    const teamsData: ITeam[] = [
-      {
-        name: 'Falcons',
-        abv: 'ATL',
-        wins: 5,
-        losses: 3,
-        pa: 150,
-        pf: 170,
-        tie: 0,
-        city: 'Atlanta',
-      },
-      {
-        name: 'Seahawks',
-        abv: 'SEA',
-        wins: 4,
-        losses: 4,
-        pa: 140,
-        pf: 160,
-        tie: 0,
-        city: 'Seattle',
-      },
-      {
-        name: 'Miami Dolphins',
-        abv: 'MIA',
-        wins: 20,
-        losses: 0,
-        pa: 100,
-        pf: 500,
-        tie: 0,
-        city: 'Miami',
-      },
-    ];
+    const teamsData: ITeam[] = testTeamData;
     const result = await teamRepo.bulkDeleteMissing(teamsData);
     expect(result).toBe(true);
   });

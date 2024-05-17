@@ -16,7 +16,7 @@ describe('TeamDataService (Integration Tests)', () => {
   };
 
   test('Successfully fetches NFL team data', async () => {
-    const result = await teamDataService.getTeamDataFromProvider();
+    const result = await teamDataService.getProviderTeamData();
 
     // Expectations
     expect(result[0]).toEqual(expectedResult);

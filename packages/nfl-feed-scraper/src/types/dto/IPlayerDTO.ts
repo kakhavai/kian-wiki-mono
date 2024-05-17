@@ -1,8 +1,8 @@
 export interface IPlayerDTO {
-  id: string;
-  name: string;
-  birthDate: Date;
-  jerseyNumber: number;
-  position: string;
-  teamId: string;
+  playerID: string;
+  longName: string;
+  bDay: string;
+  jerseyNum: string;
+  pos: string;
+  team: string;
 }

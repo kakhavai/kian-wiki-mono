@@ -5,7 +5,7 @@ import axios from 'axios';
 import { TeamDataService } from '../../services/TeamDataService';
 import { ITeamDTO } from '../../types/dto/ITeamDTO';
 import { ITeam } from 'nfl-feed-types';
-import { IGetNFLTeamsResponse } from '../../types/http/IGetNFLTeamsResponse';
+import { IHttpResponse } from 'common-types';
 
 const mockedAxios = axios as jest.Mocked<typeof axios>;
 
@@ -27,7 +27,8 @@ describe('TeamDataService (Unit Tests)', () => {
     },
   ];
 
-  const mockHttpResponse: IGetNFLTeamsResponse = {
+  const mockHttpResponse: IHttpResponse = {
+    status: 200,
     body: mockResponseData,
   };
 
@@ -56,7 +57,7 @@ describe('TeamDataService (Unit Tests)', () => {
       data: mockHttpResponse,
     });
 
-    const result = await teamDataService.getTeamDataFromProvider();
+    const result = await teamDataService.getProviderTeamData();
 
     // Expectations
     expect(result).toEqual(expectedResult);
@@ -79,7 +80,7 @@ describe('TeamDataService (Unit Tests)', () => {
     // Setup mocked axios failure
     mockedAxios.request.mockRejectedValue(new Error('Network error'));
 
-    await expect(teamDataService.getTeamDataFromProvider()).rejects.toThrow(
+    await expect(teamDataService.getProviderTeamData()).rejects.toThrow(
       'Network error',
     );
     expect(mockedAxios.request).toHaveBeenCalledTimes(1);

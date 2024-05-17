@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 import { ITeam } from 'nfl-feed-types';
 import { ITeamDTO } from '../types/dto/ITeamDTO';
-import { IGetNFLTeamsResponse } from '../types/http/IGetNFLTeamsResponse';
+import { IHttpResponse } from 'common-types';
 import { ProviderHttpRequestOptions } from '../http/ProviderHttpRequestOptions';
 import TeamFeedRepository from '../repositories/TeamFeedRepository';
 
@@ -13,7 +13,7 @@ export class TeamDataService {
   }
 
   public async updateTeamRecords(): Promise<boolean> {
-    const newRecords: Array<ITeam> = await this.getTeamDataFromProvider();
+    const newRecords: Array<ITeam> = await this.getProviderTeamData();
     const promises: Array<Promise<boolean>> = new Array<Promise<boolean>>();
 
     promises.push(this._teamRepo.bulkDeleteMissing(newRecords));
@@ -28,7 +28,7 @@ export class TeamDataService {
     }
   }
 
-  public async getTeamDataFromProvider(): Promise<ITeam[]> {
+  public async getProviderTeamData(): Promise<ITeam[]> {
     const options: ProviderHttpRequestOptions = new ProviderHttpRequestOptions(
       'getNFLTeams',
       {
@@ -41,10 +41,8 @@ export class TeamDataService {
 
     try {
       // Make a GET request to the API endpoint
-      const response: AxiosResponse<IGetNFLTeamsResponse> =
-        await axios.request<IGetNFLTeamsResponse>(
-          options.getAxiosRequestOptions(),
-        );
+      const response: AxiosResponse<IHttpResponse> =
+        await axios.request<IHttpResponse>(options.getAxiosRequestOptions());
 
       // Check if the response is successful and parse the data
       if (

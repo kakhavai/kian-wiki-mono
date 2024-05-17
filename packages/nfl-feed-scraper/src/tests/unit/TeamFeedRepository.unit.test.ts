@@ -185,14 +185,12 @@ describe('TeamFeedRepository (Unit Tests)', () => {
       },
     ];
     prismaMock.$executeRawUnsafe.mockResolvedValue(1);
-    let result = await teamRepo.bulkUpsert(teamsData);
+    const result = await teamRepo.bulkUpsert(teamsData);
     expect(prismaMock.$executeRawUnsafe).toHaveBeenCalled();
     expect(result).toBe(true);
 
     prismaMock.$executeRawUnsafe.mockRejectedValue(new Error('Mock error'));
-    result = await teamRepo.bulkUpsert(teamsData);
-    expect(prismaMock.$executeRawUnsafe).toHaveBeenCalled();
-    expect(result).toBe(false);
+    await expect(teamRepo.bulkUpsert(teamsData)).rejects.toThrow('Mock error');
   });
 
   test('bulkDeleteMissing', async () => {
@@ -219,13 +217,13 @@ describe('TeamFeedRepository (Unit Tests)', () => {
       },
     ];
     prismaMock.$executeRawUnsafe.mockResolvedValue(1);
-    let result = await teamRepo.bulkDeleteMissing(teamsData);
+    const result = await teamRepo.bulkDeleteMissing(teamsData);
     expect(prismaMock.$executeRawUnsafe).toHaveBeenCalled();
     expect(result).toBe(true);
 
     prismaMock.$executeRawUnsafe.mockRejectedValue(new Error('Mock error'));
-    result = await teamRepo.bulkDeleteMissing(teamsData);
-    expect(prismaMock.$executeRawUnsafe).toHaveBeenCalled();
-    expect(result).toBe(false);
+    await expect(teamRepo.bulkDeleteMissing(teamsData)).rejects.toThrow(
+      'Mock error',
+    );
   });
 });
