@@ -39,7 +39,7 @@ model PlayerMatchStats {
   id             String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   createdAt      DateTime          @default(now())
   playerId       String            @db.Uuid
-  player         Player            @relation(fields: [playerId], references: [id])
+  player         Player            @relation(fields: [playerId], references: [remoteId])
   targets        Int
   receptions     Int
   yards          Int
