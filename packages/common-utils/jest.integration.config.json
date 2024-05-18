@@ -1,0 +1,8 @@
+{
+  "testMatch": ["<rootDir>/build/tests/integration/*.js"],
+  "clearMocks": true,
+  "preset": "ts-jest",
+  "testEnvironment": "node",
+  "setupFiles": ["dotenv/config"],
+  "maxWorkers": 1
+}
