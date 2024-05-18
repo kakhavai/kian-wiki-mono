@@ -1,0 +1,32 @@
+{
+  "name": "common-utils",
+  "version": "1.0.0",
+  "description": "",
+  "author": "kakhavai",
+  "main": "./build/index.js",
+  "scripts": {
+    "build": "yarn run clean && yarn tsc",
+    "build:prod": "yarn run clean && yarn tsc",
+    "clean": "rimraf ./build",
+    "test:integration": "yarn jest --config=jest.integration.config.json"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "@rushstack/eslint-config": "^3.5.0",
+    "@types/jest": "^29.5.10",
+    "@types/node": "^20.10.1",
+    "@types/uuid": "^9",
+    "eslint": "^8.54.0",
+    "jest": "^29.7.0",
+    "prettier": "3.1.0",
+    "rimraf": "^5.0.5",
+    "ts-jest": "^29.1.2",
+    "typescript": "^5.3.2"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.577.0",
+    "dotenv": "^16.4.5",
+    "jest": "^29.7.0",
+    "rimraf": "^5.0.5"
+  }
+}

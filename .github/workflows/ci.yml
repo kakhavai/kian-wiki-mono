@@ -21,6 +21,9 @@ jobs:
       RAPID_API_HOST: ${{secrets.RAPID_API_HOST}}
       RAPID_API_KEY: ${{secrets.RAPID_API_KEY}}
       RAPID_API_URL: ${{secrets.RAPID_API_URL}}
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      NFL_SCRAPE_BUCKET_NAME: ${{secrets.NFL_SCRAPE_BUCKET_NAME}}
 
     steps:
       - uses: actions/checkout@v4
