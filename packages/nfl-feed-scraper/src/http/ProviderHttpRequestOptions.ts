@@ -1,41 +1,38 @@
-import { IHttpRequestOptions } from 'common-types';
-export class ProviderHttpRequestOptions implements IHttpRequestOptions {
-  private _method: string = 'GET';
-  private _url: string;
-  private _params?: { [key: string]: string };
-  private _headers: { [key: string]: string } = {
-    'X-RapidAPI-Key': `${process.env.RAPID_API_KEY}`,
-    'X-RapidAPI-Host': `${process.env.RAPID_API_HOST}`,
-  };
+import { AxiosRequestConfig, AxiosHeaders } from 'axios';
 
-  private _baseURL: string = `${process.env.RAPID_API_URL}`;
+export class ProviderHttpRequestOptions {
+  private _config: AxiosRequestConfig;
 
   public constructor(path: string, params?: { [key: string]: string }) {
-    this._url = `${this._baseURL}/${path}`;
-    this._params = params;
-  }
-  public get method(): string {
-    return this._method;
+    this._config = {
+      method: 'GET',
+      baseURL: process.env.RAPID_API_URL,
+      url: path,
+      params: params,
+      headers: {
+        'X-RapidAPI-Key': process.env.RAPID_API_KEY,
+        'X-RapidAPI-Host': process.env.RAPID_API_HOST,
+      },
+    };
   }
 
-  public get url(): string {
-    return this._url;
+  public get method(): string | undefined {
+    return this._config.method;
   }
 
-  public get headers(): { [key: string]: string } {
-    return this._headers;
+  public get url(): string | undefined {
+    return this._config.url;
+  }
+
+  public get headers(): AxiosHeaders {
+    return this._config.headers as AxiosHeaders;
   }
 
   public get params(): { [key: string]: string } | undefined {
-    return this._params;
+    return this._config.params;
   }
 
-  public getAxiosRequestOptions(): IHttpRequestOptions {
-    return {
-      method: this._method,
-      url: this._url,
-      params: this._params || {},
-      headers: this._headers,
-    };
+  public getAxiosRequestOptions(): AxiosRequestConfig {
+    return this._config;
   }
 }

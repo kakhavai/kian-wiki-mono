@@ -51,10 +51,10 @@ export class TeamDataService {
       ) {
         return this._parseProviderTeamData(response.data.body);
       } else {
-        throw new Error('Failed to fetch NFL team data');
+        throw new Error('TeamDataService: Failed to fetch NFL team data');
       }
     } catch (error) {
-      console.error('Error fetching NFL team data:', error);
+      console.error('TeamDataService: Error fetching NFL team data:', error);
       throw error;
     }
   }

@@ -1,9 +1,9 @@
 import axios, { AxiosResponse } from 'axios';
 import { IPlayer } from 'nfl-feed-types';
-import { IHttpResponse } from 'common-types';
 import { ProviderHttpRequestOptions } from '../http/ProviderHttpRequestOptions';
 import PlayerFeedRepository from '../repositories/PlayerFeedRepository';
 import { IPlayerDTO } from '../types/dto/IPlayerDTO';
+import { IHttpResponse } from 'common-types';
 
 const relevantPositions: string[] = ['K', 'QB', 'RB', 'TE', 'WR'];
 
@@ -49,10 +49,13 @@ export class PlayerDataService {
         );
         return this._parseProviderPlayerData(validPlayerDtos);
       } else {
-        throw new Error('Failed to fetch NFL player data');
+        throw new Error('PlayerDataService: Failed to fetch NFL player data');
       }
     } catch (error) {
-      console.error('Error fetching NFL player data:', error);
+      console.error(
+        'PlayerDataService: Error fetching NFL player data:',
+        error,
+      );
       throw error;
     }
   }
@@ -75,7 +78,7 @@ export class PlayerDataService {
   }
   private _filterValidIPlayerDTOArray(unparsedPlayers: unknown): IPlayerDTO[] {
     if (!Array.isArray(unparsedPlayers)) {
-      console.error('Not an array:', unparsedPlayers);
+      console.error('PlayerDataService: Not an array:', unparsedPlayers);
       return [];
     }
 

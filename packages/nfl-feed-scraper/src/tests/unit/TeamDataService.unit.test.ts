@@ -5,7 +5,6 @@ import axios from 'axios';
 import { TeamDataService } from '../../services/TeamDataService';
 import { ITeamDTO } from '../../types/dto/ITeamDTO';
 import { ITeam } from 'nfl-feed-types';
-import { IHttpResponse } from 'common-types';
 
 const mockedAxios = axios as jest.Mocked<typeof axios>;
 
@@ -27,7 +26,7 @@ describe('TeamDataService (Unit Tests)', () => {
     },
   ];
 
-  const mockHttpResponse: IHttpResponse = {
+  const mockHttpResponse = {
     status: 200,
     body: mockResponseData,
   };
@@ -65,7 +64,7 @@ describe('TeamDataService (Unit Tests)', () => {
     expect(mockedAxios.request).toHaveBeenCalledWith(
       expect.objectContaining({
         method: 'GET',
-        url: expect.stringContaining('/getNFLTeams'),
+        url: expect.stringContaining('getNFLTeams'),
         params: expect.objectContaining({
           rosters: 'true',
           schedules: 'true',
