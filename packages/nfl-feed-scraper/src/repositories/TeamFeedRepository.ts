@@ -1,8 +1,8 @@
 import { ITeam, TeamNotFoundException } from 'nfl-feed-types';
-import prisma from '../prisma/PrismaSingleton';
-import BaseRepository from './BaseRepository';
+import { prisma } from '../prisma/PrismaSingleton';
+import { BaseRepository } from './BaseRepository';
 
-class TeamFeedRepository extends BaseRepository<ITeam> {
+export class TeamFeedRepository extends BaseRepository<ITeam> {
   public constructor() {
     super('Team', 'abv', [
       'name',
@@ -59,5 +59,3 @@ class TeamFeedRepository extends BaseRepository<ITeam> {
     return team;
   }
 }
-
-export default TeamFeedRepository;

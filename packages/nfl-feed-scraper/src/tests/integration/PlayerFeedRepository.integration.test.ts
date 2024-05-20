@@ -1,6 +1,6 @@
-import PlayerFeedRepository from '../../repositories/PlayerFeedRepository';
+import { PlayerFeedRepository } from '../../repositories/PlayerFeedRepository';
 import { IPlayer } from 'nfl-feed-types';
-import TeamFeedRepository from '../../repositories/TeamFeedRepository';
+import { TeamFeedRepository } from '../../repositories/TeamFeedRepository';
 import { testTeamData } from '../data/TestTeamData';
 import { v4 as uuidv4 } from 'uuid';
 

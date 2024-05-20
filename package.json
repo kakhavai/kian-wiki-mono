@@ -20,7 +20,7 @@
     "build:prod": "yarn lerna run build:prod --verbose",
     "clean": "rimraf ./.nx && yarn lerna clean --yes",
     "test:unit": "yarn lerna run test:unit --stream -- --verbose",
-    "test:integration": "yarn lerna run test:integration --stream -- --verbose",
+    "test:integration": "yarn lerna run test:integration",
     "clean-build": "yarn run clean && yarn run build",
     "clean-build:prod": "yarn run clean && yarn run build:prod",
     "serverless": "yarn --cwd packages/lambda-api-gateway serverless offline",

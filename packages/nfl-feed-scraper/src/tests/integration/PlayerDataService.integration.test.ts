@@ -1,5 +1,5 @@
 import { PlayerDataService } from '../../services/PlayerDataService';
-import TeamFeedRepository from '../../repositories/TeamFeedRepository';
+import { TeamFeedRepository } from '../../repositories/TeamFeedRepository';
 import { testTeamData } from '../data/TestTeamData';
 const playerDataService = new PlayerDataService();
 

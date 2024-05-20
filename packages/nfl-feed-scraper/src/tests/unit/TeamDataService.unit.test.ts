@@ -3,7 +3,7 @@ jest.mock('axios');
 
 import axios from 'axios';
 import { TeamDataService } from '../../services/TeamDataService';
-import { ITeamDTO } from '../../types/dto/ITeamDTO';
+import { ITeamDTO } from '../../types/dto/info/ITeamDTO';
 import { ITeam } from 'nfl-feed-types';
 
 const mockedAxios = axios as jest.Mocked<typeof axios>;

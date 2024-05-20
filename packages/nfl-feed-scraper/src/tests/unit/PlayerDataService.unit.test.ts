@@ -4,7 +4,7 @@ jest.mock('../../repositories/PlayerFeedRepository');
 import axios from 'axios';
 import { PlayerDataService } from '../../services/PlayerDataService';
 import { IPlayer } from 'nfl-feed-types';
-import PlayerFeedRepository from '../../repositories/PlayerFeedRepository';
+import { PlayerFeedRepository } from '../../repositories/PlayerFeedRepository';
 import { IHttpResponse } from 'common-types';
 
 // Mock the necessary dependencies
