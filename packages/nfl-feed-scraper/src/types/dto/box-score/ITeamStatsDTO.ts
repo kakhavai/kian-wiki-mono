@@ -1,0 +1,30 @@
+export interface ITeamStatsDTO {
+  totalYards: string;
+  rushingAttempts: string;
+  rushingYards: string;
+  fumblesLost: string;
+  penalties: string;
+  totalPlays: string;
+  possession: string;
+  safeties: string;
+  passCompletionsAndAttempts: string;
+  passingFirstDowns: string;
+  interceptionsThrown: string;
+  sacksAndYardsLost: string;
+  thirdDownEfficiency: string;
+  yardsPerPlay: string;
+  redZoneScoredAndAttempted: string;
+  teamID: string;
+  defensiveOrSpecialTeamsTds: string;
+  totalDrives: string;
+  rushingFirstDowns: string;
+  firstDowns: string;
+  team: string;
+  teamAbv: string;
+  firstDownsFromPenalties: string;
+  fourthDownEfficiency: string;
+  passingYards: string;
+  yardsPerRush: string;
+  turnovers: string;
+  yardsPerPass: string;
+}

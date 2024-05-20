@@ -1,4 +1,4 @@
-import TeamFeedRepository from '../../repositories/TeamFeedRepository';
+import { TeamFeedRepository } from '../../repositories/TeamFeedRepository';
 import { testTeamData } from '../data/TestTeamData';
 import { ITeam } from 'nfl-feed-types';
 

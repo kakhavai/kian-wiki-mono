@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
-import { IGameDetails } from 'nfl-feed-types';
+import { IMatch } from 'nfl-feed-types';
 import { ProviderHttpRequestOptions } from '../http/ProviderHttpRequestOptions';
-import { IGameDetailsDTO } from '../types/dto/IGameDetailsDTO';
+import { IMatchDTO } from '../types/dto/info/IMatchDTO';
 import { IHttpResponse } from 'common-types';
 
 export class ScheduleDataService {
@@ -9,7 +9,7 @@ export class ScheduleDataService {
     week: string,
     seasonType: string,
     season: string,
-  ): Promise<IGameDetails[]> {
+  ): Promise<IMatch[]> {
     const requestOptions: ProviderHttpRequestOptions =
       new ProviderHttpRequestOptions('getNFLGamesForWeek', {
         week,
@@ -21,8 +21,11 @@ export class ScheduleDataService {
       const response: AxiosResponse<IHttpResponse> = await axios.request(
         requestOptions.getAxiosRequestOptions(),
       );
-      if (this._isValidApiResponse(response.data.body)) {
-        return this._parseGameDetails(response.data.body);
+      if (
+        response.status === 200 &&
+        this._isIMatchDTOArray(response.data.body)
+      ) {
+        return this._parseMatchDetails(response.data.body);
       } else {
         throw new Error('ScheduleDataService: Invalid response format');
       }
@@ -32,13 +35,7 @@ export class ScheduleDataService {
     }
   }
 
-  private static _isValidApiResponse(
-    data: unknown[],
-  ): data is IGameDetailsDTO[] {
-    return Array.isArray(data) && this._isIGameDetailsArray(data);
-  }
-
-  private static _parseGameDetails(data: IGameDetailsDTO[]): IGameDetails[] {
+  private static _parseMatchDetails(data: IMatchDTO[]): IMatch[] {
     return data.map((game) => ({
       gameId: game.gameID,
       home: game.home,
@@ -47,9 +44,9 @@ export class ScheduleDataService {
     }));
   }
 
-  private static _isIGameDetailsArray(
+  private static _isIMatchDTOArray(
     unparsedGameDetails: unknown[],
-  ): unparsedGameDetails is IGameDetailsDTO[] {
+  ): unparsedGameDetails is IMatchDTO[] {
     return (
       Array.isArray(unparsedGameDetails) &&
       unparsedGameDetails.every(

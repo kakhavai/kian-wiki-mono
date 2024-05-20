@@ -6052,7 +6052,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"common-utils@workspace:packages/common-utils":
+"common-utils@workspace:*, common-utils@workspace:packages/common-utils":
   version: 0.0.0-use.local
   resolution: "common-utils@workspace:packages/common-utils"
   dependencies:
@@ -11053,6 +11053,7 @@ __metadata:
     "@types/node": "npm:^20.10.1"
     "@types/uuid": "npm:^9"
     common-types: "workspace:*"
+    common-utils: "workspace:*"
     dotenv: "npm:^16.3.1"
     eslint: "npm:^8.54.0"
     jest: "npm:^29.7.0"

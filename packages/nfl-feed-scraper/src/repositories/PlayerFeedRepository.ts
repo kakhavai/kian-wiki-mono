@@ -1,8 +1,8 @@
 import { IPlayer, PlayerNotFoundException } from 'nfl-feed-types';
-import prisma from '../prisma/PrismaSingleton';
-import BaseRepository from './BaseRepository';
+import { prisma } from '../prisma/PrismaSingleton';
+import { BaseRepository } from './BaseRepository';
 
-class PlayerFeedRepository extends BaseRepository<IPlayer> {
+export class PlayerFeedRepository extends BaseRepository<IPlayer> {
   public constructor() {
     super('Player', 'remoteId', [
       'remoteId',
@@ -51,5 +51,3 @@ class PlayerFeedRepository extends BaseRepository<IPlayer> {
     return player;
   }
 }
-
-export default PlayerFeedRepository;

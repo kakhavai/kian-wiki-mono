@@ -1,4 +1,4 @@
-import PlayerFeedRepository from '../../repositories/PlayerFeedRepository';
+import { PlayerFeedRepository } from '../../repositories/PlayerFeedRepository';
 import { prismaMock } from '../../prisma/MockPrismaSingleton';
 import { IPlayer } from 'nfl-feed-types';
 import { IPlayerDAO } from '../../types/dao/IPlayerDAO';

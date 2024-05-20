@@ -1,4 +1,4 @@
-export interface IGameDetailsDTO {
+export interface IMatchDTO {
   gameID: string;
   home: string;
   away: string;

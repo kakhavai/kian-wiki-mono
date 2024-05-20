@@ -1,7 +1,7 @@
-import prisma from '../prisma/PrismaSingleton';
+import { prisma } from '../prisma/PrismaSingleton';
 import { IDbEntity } from 'common-types';
 
-class BaseRepository<T extends IDbEntity> {
+export class BaseRepository<T extends IDbEntity> {
   private _tableName: string;
   private _uniqueKey: string;
   private _fields: Array<string>;
@@ -109,5 +109,3 @@ class BaseRepository<T extends IDbEntity> {
     }
   }
 }
-
-export default BaseRepository;

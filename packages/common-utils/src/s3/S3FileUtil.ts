@@ -61,6 +61,3 @@ export class S3FileUtil {
     await this._s3Client.send(command);
   }
 }
-
-// Export the class for use in other parts of the monorepo
-export default S3FileUtil;
