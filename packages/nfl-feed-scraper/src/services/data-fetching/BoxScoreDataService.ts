@@ -2,13 +2,13 @@ import { IHttpResponse } from 'common-types';
 import { ConversionUtil } from 'common-utils';
 import axios, { AxiosResponse } from 'axios';
 import { FantasyScoringRules } from 'nfl-feed-types';
-import { ProviderHttpRequestOptions } from '../http/ProviderHttpRequestOptions';
-import { IBoxScoreDTO } from '../types/dto/box-score/IBoxScoreDTO';
-import { IDstStatsDTO } from '../types/dto/box-score/IDstStatsDTO';
-import { ILineScoreDTO } from '../types/dto/box-score/ILineScoreDTO';
-import { IPlayerMatchStats } from '../types/dto/box-score/IPlayerMatchStatsDTO';
-import { IScoringPlayDTO } from '../types/dto/box-score/IScoringPlayDTO';
-import { ITeamStatsDTO } from '../types/dto/box-score/ITeamStatsDTO';
+import { ProviderHttpRequestOptions } from '../../http/ProviderHttpRequestOptions';
+import { IBoxScoreDTO } from '../../types/dto/box-score/IBoxScoreDTO';
+import { IDstStatsDTO } from '../../types/dto/box-score/IDstStatsDTO';
+import { ILineScoreDTO } from '../../types/dto/box-score/ILineScoreDTO';
+import { IPlayerMatchStatsDTO } from '../../types/dto/box-score/IPlayerMatchStatsDTO';
+import { IScoringPlayDTO } from '../../types/dto/box-score/IScoringPlayDTO';
+import { ITeamStatsDTO } from '../../types/dto/box-score/ITeamStatsDTO';
 
 export class BoxScoreDataService {
   public static async fetchGameDetails(
@@ -31,7 +31,9 @@ export class BoxScoreDataService {
       if (response.status === 200 && this._isIBoxScoreDTO(response.data.body)) {
         return response.data.body as IBoxScoreDTO;
       } else {
-        throw new Error('ScheduleDataService: Invalid response format');
+        throw new Error(
+          `BoxScoreDataService: Invalid response format ${response.data.body} ${gameId}`,
+        );
       }
     } catch (error) {
       console.error(error);
@@ -39,7 +41,7 @@ export class BoxScoreDataService {
     }
   }
   private static _isIBoxScoreDTO(unparsed: unknown): unparsed is IBoxScoreDTO {
-    return (
+    if (
       typeof unparsed === 'object' &&
       unparsed !== null &&
       'gameStatus' in unparsed &&
@@ -58,7 +60,6 @@ export class BoxScoreDataService {
       'teamIDHome' in unparsed &&
       'homeResult' in unparsed &&
       'away' in unparsed &&
-      'attendance' in unparsed &&
       'lineScore' in unparsed &&
       this._isILineScoreDTO(unparsed.lineScore) &&
       'currentPeriod' in unparsed &&
@@ -71,7 +72,6 @@ export class BoxScoreDataService {
       'homePts' in unparsed &&
       'awayResult' in unparsed &&
       'teamIDAway' in unparsed &&
-      'Referees' in unparsed &&
       'gameClock' in unparsed &&
       'awayPts' in unparsed &&
       'gameID' in unparsed &&
@@ -83,13 +83,18 @@ export class BoxScoreDataService {
       'home' in unparsed.DST &&
       this._isDstStatsDTO(unparsed.DST.away) &&
       this._isDstStatsDTO(unparsed.DST.home)
-    );
+    ) {
+      return true;
+    }
+    console.error(`7 ${unparsed}`);
+
+    return false;
   }
 
   private static _isITeamStatsDTO(
     unparsed: unknown,
   ): unparsed is ITeamStatsDTO {
-    return (
+    if (
       typeof unparsed === 'object' &&
       unparsed !== null &&
       'totalYards' in unparsed &&
@@ -120,13 +125,18 @@ export class BoxScoreDataService {
       'yardsPerRush' in unparsed &&
       'turnovers' in unparsed &&
       'yardsPerPass' in unparsed
-    );
+    ) {
+      return true;
+    }
+
+    console.error(`2 ${unparsed}`);
+    return false;
   }
 
   private static _isIScoringPlayDTO(
     unparsed: unknown,
   ): unparsed is IScoringPlayDTO {
-    return (
+    if (
       typeof unparsed === 'object' &&
       unparsed !== null &&
       'score' in unparsed &&
@@ -140,13 +150,18 @@ export class BoxScoreDataService {
       'team' in unparsed &&
       'playerIDs' in unparsed &&
       Array.isArray((unparsed as IScoringPlayDTO).playerIDs)
-    );
+    ) {
+      return true;
+    }
+    console.error(`3 ${unparsed}`);
+
+    return false;
   }
 
   private static _isILineScoreDTO(
     unparsed: unknown,
   ): unparsed is ILineScoreDTO {
-    return (
+    if (
       typeof unparsed === 'object' &&
       unparsed !== null &&
       'period' in unparsed &&
@@ -169,14 +184,20 @@ export class BoxScoreDataService {
       'teamID' in (unparsed as ILineScoreDTO).home &&
       'totalPts' in (unparsed as ILineScoreDTO).home &&
       'teamAbv' in (unparsed as ILineScoreDTO).home
-    );
+    ) {
+      return true;
+    }
+
+    console.error(`4 ${unparsed}`);
+
+    return false;
   }
 
   private static _isIPlayerMatchStatsDTO(
     unparsed: unknown,
-  ): unparsed is IPlayerMatchStats {
+  ): unparsed is IPlayerMatchStatsDTO {
     if (typeof unparsed !== 'object' || unparsed === null) return false;
-    const playerStats: IPlayerMatchStats = unparsed as IPlayerMatchStats;
+    const playerStats: IPlayerMatchStatsDTO = unparsed as IPlayerMatchStatsDTO;
     for (const playerID in playerStats) {
       if (
         typeof playerStats[playerID] !== 'object' ||
@@ -188,6 +209,7 @@ export class BoxScoreDataService {
         !('longName' in playerStats[playerID]) ||
         !('fantasyPointsDefault' in playerStats[playerID])
       ) {
+        console.error(`1 ${unparsed}`);
         return false;
       }
     }
@@ -195,7 +217,7 @@ export class BoxScoreDataService {
   }
 
   private static _isDstStatsDTO(unparsed: unknown): unparsed is IDstStatsDTO {
-    return (
+    if (
       typeof unparsed === 'object' &&
       unparsed !== null &&
       'teamAbv' in unparsed &&
@@ -207,6 +229,12 @@ export class BoxScoreDataService {
       'fumblesRecovered' in unparsed &&
       'ptsAllowed' in unparsed &&
       'safeties' in unparsed
-    );
+    ) {
+      return true;
+    } else {
+      console.error(`5 ${unparsed}`);
+
+      return false;
+    }
   }
 }

@@ -1,6 +1,6 @@
 import { IScoringPlayDTO } from './IScoringPlayDTO';
 
-export interface IPlayerMatchStats {
+export interface IPlayerMatchStatsDTO {
   [playerID: string]: {
     gameID: string;
     teamID: string;

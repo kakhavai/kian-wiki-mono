@@ -1,4 +1,4 @@
-import { TeamDataService } from '../../services/TeamDataService';
+import { TeamDataService } from '../../services/data-fetching/TeamDataService';
 import { ITeam } from 'nfl-feed-types';
 
 const teamDataService = new TeamDataService();

@@ -1,1 +1,1 @@
-export { TeamDataService } from './services/TeamDataService';
+export { TeamDataService } from './services/data-fetching/TeamDataService';

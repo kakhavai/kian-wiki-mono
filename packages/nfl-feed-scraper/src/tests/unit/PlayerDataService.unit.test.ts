@@ -2,7 +2,7 @@ jest.mock('axios');
 jest.mock('../../repositories/PlayerFeedRepository');
 
 import axios from 'axios';
-import { PlayerDataService } from '../../services/PlayerDataService';
+import { PlayerDataService } from '../../services/data-fetching/PlayerDataService';
 import { IPlayer } from 'nfl-feed-types';
 import { PlayerFeedRepository } from '../../repositories/PlayerFeedRepository';
 import { IHttpResponse } from 'common-types';

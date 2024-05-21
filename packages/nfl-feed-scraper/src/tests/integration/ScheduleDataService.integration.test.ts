@@ -1,4 +1,4 @@
-import { ScheduleDataService } from '../../services/ScheduleDataService';
+import { ScheduleDataService } from '../../services/data-fetching/ScheduleDataService';
 import { IMatch } from 'nfl-feed-types';
 
 describe('ScheduleDataService Integration Test', () => {
@@ -8,7 +8,7 @@ describe('ScheduleDataService Integration Test', () => {
     const season = '2023';
 
     // Call the actual service method
-    const result: IMatch[] = await ScheduleDataService.fetchGameDetails(
+    const result: IMatch[] = await ScheduleDataService.fetchWeekMatches(
       week,
       seasonType,
       season,

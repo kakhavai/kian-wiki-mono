@@ -7,6 +7,9 @@ import {
   PutObjectCommandInput,
   DeleteObjectCommandInput,
   DeleteObjectCommand,
+  ListObjectsV2Command,
+  ListObjectsV2CommandInput,
+  ListObjectsV2CommandOutput,
 } from '@aws-sdk/client-s3';
 import { Readable } from 'stream';
 
@@ -59,5 +62,23 @@ export class S3FileUtil {
 
     const command: DeleteObjectCommand = new DeleteObjectCommand(deleteParams);
     await this._s3Client.send(command);
+  }
+
+  public async listFiles(
+    bucketName: string,
+    prefix: string = '',
+    maxKeys: number = 1000,
+  ): Promise<ListObjectsV2CommandOutput> {
+    const listParams: ListObjectsV2CommandInput = {
+      Bucket: bucketName,
+      Prefix: prefix,
+      MaxKeys: maxKeys,
+    };
+
+    const command: ListObjectsV2Command = new ListObjectsV2Command(listParams);
+    const response: ListObjectsV2CommandOutput =
+      await this._s3Client.send(command);
+
+    return response;
   }
 }

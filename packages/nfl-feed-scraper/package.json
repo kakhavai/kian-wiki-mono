@@ -9,7 +9,7 @@
   "scripts": {
     "clean": "rimraf ./build",
     "test:unit": "yarn jest -i --config=jest.unit.config.json",
-    "test:integration": "yarn jest --config=jest.integration.config.json",
+    "test:integration": "yarn jest -i --config=jest.integration.config.json --silent=false --verbose false",
     "prisma-migrate": "yarn prisma migrate deploy && yarn prisma generate",
     "docker-down": "docker compose down",
     "docker-build": "docker compose build",
