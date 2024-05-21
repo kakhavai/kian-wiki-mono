@@ -3,4 +3,5 @@ export interface IMatchDTO {
   home: string;
   away: string;
   gameTime_epoch: string;
+  gameStatus: string;
 }

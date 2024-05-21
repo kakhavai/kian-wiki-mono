@@ -2,7 +2,7 @@
 jest.mock('axios');
 
 import axios from 'axios';
-import { TeamDataService } from '../../services/TeamDataService';
+import { TeamDataService } from '../../services/data-fetching/TeamDataService';
 import { ITeamDTO } from '../../types/dto/info/ITeamDTO';
 import { ITeam } from 'nfl-feed-types';
 

@@ -1,8 +1,4 @@
-export interface IWrMatchStats {
-  playerID: string;
-  gameID: string;
-  away: string;
-  home: string;
+export interface IWrMatchStatsDTO {
   fantasyPoints: number;
   fumblesLost: number;
   passAttempts: number;
@@ -21,7 +17,6 @@ export interface IWrMatchStats {
   longRec: number;
   targets: number;
   recYds: number;
-  recAvg: number;
   receivingTwoPointConversion: number;
   //   fantasyPointsDefault: {
   //     standard: number;

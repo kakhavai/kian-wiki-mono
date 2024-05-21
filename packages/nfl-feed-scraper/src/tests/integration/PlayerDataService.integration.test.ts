@@ -1,4 +1,4 @@
-import { PlayerDataService } from '../../services/PlayerDataService';
+import { PlayerDataService } from '../../services/data-fetching/PlayerDataService';
 import { TeamFeedRepository } from '../../repositories/TeamFeedRepository';
 import { testTeamData } from '../data/TestTeamData';
 const playerDataService = new PlayerDataService();

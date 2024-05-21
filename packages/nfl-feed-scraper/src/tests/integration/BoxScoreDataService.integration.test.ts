@@ -1,6 +1,6 @@
 // src/__tests__/BoxScoreDataService.test.ts
 
-import { BoxScoreDataService } from '../../services/BoxScoreDataService';
+import { BoxScoreDataService } from '../../services/data-fetching/BoxScoreDataService';
 import { IBoxScoreDTO } from '../../types/dto/box-score/IBoxScoreDTO';
 
 describe('BoxScoreDataService Integration Test', () => {

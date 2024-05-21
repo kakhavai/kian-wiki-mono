@@ -3,4 +3,8 @@ export interface IMatch {
   home: string;
   away: string;
   gameTimeEpoch: number;
+  gameStatus: string;
+  week: number;
+  season: number;
+  seasonType: string;
 }

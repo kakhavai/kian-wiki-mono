@@ -1,9 +1,9 @@
 import axios, { AxiosResponse } from 'axios';
 import { ITeam } from 'nfl-feed-types';
-import { ITeamDTO } from '../types/dto/info/ITeamDTO';
+import { ITeamDTO } from '../../types/dto/info/ITeamDTO';
 import { IHttpResponse } from 'common-types';
-import { ProviderHttpRequestOptions } from '../http/ProviderHttpRequestOptions';
-import { TeamFeedRepository } from '../repositories/TeamFeedRepository';
+import { ProviderHttpRequestOptions } from '../../http/ProviderHttpRequestOptions';
+import { TeamFeedRepository } from '../../repositories/TeamFeedRepository';
 
 export class TeamDataService {
   private _teamRepo: TeamFeedRepository;

@@ -1,11 +1,11 @@
 import axios, { AxiosResponse } from 'axios';
 import { IMatch } from 'nfl-feed-types';
-import { ProviderHttpRequestOptions } from '../http/ProviderHttpRequestOptions';
-import { IMatchDTO } from '../types/dto/info/IMatchDTO';
+import { ProviderHttpRequestOptions } from '../../http/ProviderHttpRequestOptions';
+import { IMatchDTO } from '../../types/dto/info/IMatchDTO';
 import { IHttpResponse } from 'common-types';
 
 export class ScheduleDataService {
-  public static async fetchGameDetails(
+  public static async fetchWeekMatches(
     week: string,
     seasonType: string,
     season: string,
@@ -25,9 +25,18 @@ export class ScheduleDataService {
         response.status === 200 &&
         this._isIMatchDTOArray(response.data.body)
       ) {
-        return this._parseMatchDetails(response.data.body);
+        return this._parseMatchDetails(
+          response.data.body,
+          week,
+          season,
+          seasonType,
+        );
       } else {
-        throw new Error('ScheduleDataService: Invalid response format');
+        throw new Error(
+          `ScheduleDataService: Invalid response format ${JSON.stringify(
+            response,
+          )}, ${week}, ${seasonType}, ${season}`,
+        );
       }
     } catch (error) {
       console.error(error);
@@ -35,12 +44,21 @@ export class ScheduleDataService {
     }
   }
 
-  private static _parseMatchDetails(data: IMatchDTO[]): IMatch[] {
+  private static _parseMatchDetails(
+    data: IMatchDTO[],
+    week: string,
+    season: string,
+    seasonType: string,
+  ): IMatch[] {
     return data.map((game) => ({
       gameId: game.gameID,
       home: game.home,
       away: game.away,
       gameTimeEpoch: parseFloat(game.gameTime_epoch), // Convert to number
+      gameStatus: game.gameStatus,
+      week: parseInt(week),
+      season: parseInt(season),
+      seasonType: seasonType,
     }));
   }
 
@@ -60,7 +78,9 @@ export class ScheduleDataService {
           'away' in gameDetail &&
           typeof gameDetail.away === 'string' &&
           'gameTime_epoch' in gameDetail &&
-          typeof gameDetail.gameTime_epoch === 'string',
+          typeof gameDetail.gameTime_epoch === 'string' &&
+          'gameStatus' in gameDetail &&
+          typeof gameDetail.gameStatus === 'string',
       )
     );
   }

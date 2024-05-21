@@ -1,8 +1,8 @@
 import axios, { AxiosResponse } from 'axios';
 import { IPlayer } from 'nfl-feed-types';
-import { ProviderHttpRequestOptions } from '../http/ProviderHttpRequestOptions';
-import { PlayerFeedRepository } from '../repositories/PlayerFeedRepository';
-import { IPlayerDTO } from '../types/dto/info/IPlayerDTO';
+import { ProviderHttpRequestOptions } from '../../http/ProviderHttpRequestOptions';
+import { PlayerFeedRepository } from '../../repositories/PlayerFeedRepository';
+import { IPlayerDTO } from '../../types/dto/info/IPlayerDTO';
 import { IHttpResponse } from 'common-types';
 
 const relevantPositions: string[] = ['K', 'QB', 'RB', 'TE', 'WR'];
