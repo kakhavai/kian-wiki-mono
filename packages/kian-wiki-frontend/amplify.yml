@@ -1,0 +1,27 @@
+version: 1
+applications:
+  - frontend:
+      phases:
+        preBuild:
+          commands:
+            - echo "Current directory after navigating $(pwd)"
+            - echo "Running yarn new install"
+        build:
+          commands:
+            - echo "Current directory after navigating $(pwd)"
+            - echo "Running yarn build"
+            - corepack enable
+            - yarn set version stable
+            - yarn install
+            - yarn build
+            - echo "Listing contents of the build output directory:"
+            - ls -al
+      artifacts:
+        baseDirectory: .next
+        files:
+          - '**/*'
+      cache:
+        paths:
+          - packages/kian-wiki-frontend/.next/cache/**/*
+          - packages/kian-wiki-frontend/node_modules/**/*
+    appRoot: packages/kian-wiki-frontend
