@@ -8,7 +8,8 @@
     "build": "yarn run clean && yarn tsc",
     "build:prod": "yarn run clean && yarn tsc",
     "clean": "rimraf ./build",
-    "test:integration": "yarn jest --config=jest.integration.config.json"
+    "test:integration": "yarn jest --config=jest.integration.config.json",
+    "lint": "yarn eslint ./"
   },
   "license": "ISC",
   "devDependencies": {

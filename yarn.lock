@@ -6403,6 +6403,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "common-types@workspace:packages/common-types"
   dependencies:
+    eslint: "npm:^8.54.0"
     rimraf: "npm:^5.0.5"
     typescript: "npm:^5.3.3"
   languageName: unknown
@@ -10787,6 +10788,7 @@ __metadata:
     "@types/aws-lambda": "npm:^8.10.137"
     "@types/node": "npm:^20.12.10"
     "@types/serverless": "npm:^3"
+    eslint: "npm:^8.54.0"
     nfl-feed-scraper: "workspace:*"
     nfl-feed-types: "workspace:*"
     rimraf: "npm:^5.0.5"
@@ -11812,6 +11814,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "nfl-feed-types@workspace:packages/nfl-feed-types"
   dependencies:
+    eslint: "npm:^8.54.0"
     rimraf: "npm:^5.0.5"
     typescript: "npm:^5.3.3"
   languageName: unknown

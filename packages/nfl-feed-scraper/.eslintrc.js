@@ -2,13 +2,7 @@
 require('@rushstack/eslint-config/patch/modern-module-resolution');
 
 module.exports = {
-  ignorePatterns: ['build/'],
-  extends: [
-    '@rushstack/eslint-config/profile/node',
-    '@rushstack/eslint-config/mixins/friendly-locals',
-    '@rushstack/eslint-config/mixins/tsdoc',
-  ], // <---- put your profile string here
-  parserOptions: { tsconfigRootDir: __dirname },
+  extends: ['../../.eslintrc.js'], // <---- put your profile string here
   overrides: [
     {
       files: ['./src/prisma/MockPrismaSingleton.ts'],

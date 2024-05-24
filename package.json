@@ -15,7 +15,7 @@
     "packages/*"
   ],
   "scripts": {
-    "lint": "yarn eslint .",
+    "lint": "eslint ./ --ext .js,.jsx,.ts,.tsx",
     "build": "yarn lerna run build --verbose",
     "build:prod": "yarn lerna run build:prod --verbose",
     "clean": "rimraf ./.nx && yarn lerna clean --yes",

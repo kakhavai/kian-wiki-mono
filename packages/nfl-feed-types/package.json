@@ -7,10 +7,12 @@
   "scripts": {
     "build": "yarn run clean && yarn tsc",
     "build:prod": "yarn run clean && yarn tsc",
-    "clean": "rimraf ./build"
+    "clean": "rimraf ./build",
+    "lint": "yarn eslint ./"
   },
   "license": "ISC",
   "devDependencies": {
+    "eslint": "^8.54.0",
     "typescript": "^5.3.3"
   },
   "dependencies": {

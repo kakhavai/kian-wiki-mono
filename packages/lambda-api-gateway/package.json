@@ -7,13 +7,15 @@
   "scripts": {
     "build": "yarn run clean && yarn tsc",
     "build:prod": "yarn run clean && yarn tsc",
-    "clean": "rimraf ./build"
+    "clean": "rimraf ./build",
+    "lint": "yarn eslint ./"
   },
   "license": "ISC",
   "devDependencies": {
     "@types/aws-lambda": "^8.10.137",
     "@types/node": "^20.12.10",
     "@types/serverless": "^3",
+    "eslint": "^8.54.0",
     "serverless": "^3.38.0",
     "serverless-offline": "^13.5.0",
     "typescript": "^5.3.3"

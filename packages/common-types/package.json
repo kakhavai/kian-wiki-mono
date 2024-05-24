@@ -5,11 +5,13 @@
   "main": "./build/index.js",
   "scripts": {
     "build": "yarn run clean && yarn tsc",
-    "clean": "rimraf ./build"
+    "clean": "rimraf ./build",
+    "lint": "eslint ./"
   },
   "author": "kakhavai",
   "license": "ISC",
   "devDependencies": {
+    "eslint": "^8.54.0",
     "typescript": "^5.3.3"
   },
   "dependencies": {
