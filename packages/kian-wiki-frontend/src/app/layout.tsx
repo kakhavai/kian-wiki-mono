@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
-import { NextFont } from '@next/font';
+import { NextFont } from "next/font";
 
 const inter: NextFont = Inter({ subsets: ['latin'] });
 
