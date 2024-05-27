@@ -1,6 +1,6 @@
 import React from 'react';
-import Layout from '../../components/Layout';
-import LiveClock from '../../components/LiveClock';
+import Layout from '@/components/common/Layout';
+import LiveClock from '@/components/LiveClock';
 
 async function fetchTime(): Promise<string> {
   return new Date().toISOString();

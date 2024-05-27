@@ -2,7 +2,16 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import '../styles/globals.css';
 
-const inter: ReturnType<typeof Inter> = Inter({ subsets: ['latin'] });
+interface IFont {
+  className: string;
+  style: {
+    fontFamily: string;
+    fontWeight?: number;
+    fontStyle?: string;
+  };
+}
+
+const inter: IFont = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'Create Next App',

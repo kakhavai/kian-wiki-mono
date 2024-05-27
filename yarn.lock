@@ -10836,6 +10836,7 @@ __metadata:
   resolution: "kian-wiki-mono@workspace:."
   dependencies:
     "@types/eslint": "npm:^8"
+    "@types/styled-components": "npm:^5.1.34"
     dotenv-cli: "npm:^7.4.2"
     eslint: "npm:^8.56.0"
     lerna: "npm:^8.0.2"

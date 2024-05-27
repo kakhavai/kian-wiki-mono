@@ -1,95 +1,50 @@
-import Image from 'next/image';
-import styles from '../styles/page.module.css';
+'use client'; // Mark this file as a client component
 
-export default function Home(): JSX.Element {
-  return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp test;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
+import { Navbar } from '@/components/navbar/Navbar';
+import styled, { IStyledComponent, Runtime } from 'styled-components';
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
+const Wrapper: IStyledComponent<Runtime> = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: left;
+  text-align: center;
 
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
+  @media (min-width: 768px) {
+    flex-direction: row;
+    text-align: left;
+  }
+`;
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
+const Section: IStyledComponent<Runtime> = styled.section`
+  flex: 1;
+  padding: 1rem;
 
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
+  &:first-child {
+    background: #000000;
+  }
 
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  );
-}
+  &:last-child {
+    background: #000000;
+  }
+`;
+
+const HomePage: React.FC = () => (
+  <Wrapper>
+    <Navbar></Navbar>
+    <Section>
+      <h2>Welcome</h2>
+      <p>
+        This is a responsive web page designed to work on both mobile and
+        desktop devices.
+      </p>
+    </Section>
+    <Section>
+      <h2>About</h2>
+      <p>
+        It uses Next.js and styled-components for styling and responsive design.
+      </p>
+    </Section>
+  </Wrapper>
+);
+
+export default HomePage;
