@@ -1,29 +1,27 @@
 'use client'; // Mark this file as a client component
 
 // components/Layout.tsx
-import { IStyledComponent, Runtime } from 'styled-components';
-import styled from 'styled-components';
+import styled, { IStyledComponent, Runtime } from 'styled-components';
 import { ReactNode } from 'react';
-import { BaseObject } from 'styled-components/dist/types';
 
-const Container: IStyledComponent<Runtime, BaseObject> = styled.div`
+const Container: IStyledComponent<Runtime> = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 1rem;
 `;
 
-const Header: IStyledComponent<Runtime, BaseObject> = styled.header`
+const Header: IStyledComponent<Runtime> = styled.header`
   background: #333;
   color: white;
   padding: 1rem;
   text-align: center;
 `;
 
-const Main: IStyledComponent<Runtime, BaseObject> = styled.main`
+const Main: IStyledComponent<Runtime> = styled.main`
   padding: 1rem;
 `;
 
-const Footer: IStyledComponent<Runtime, BaseObject> = styled.footer`
+const Footer: IStyledComponent<Runtime> = styled.footer`
   background: #333;
   color: white;
   padding: 1rem;
