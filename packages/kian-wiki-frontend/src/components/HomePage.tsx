@@ -1,9 +1,8 @@
 'use client'; // Mark this file as a client component
 
 import styled, { IStyledComponent, Runtime } from 'styled-components';
-import { BaseObject } from 'styled-components/dist/types';
 
-const Wrapper: IStyledComponent<Runtime, BaseObject> = styled.div`
+const Wrapper: IStyledComponent<Runtime> = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -15,7 +14,7 @@ const Wrapper: IStyledComponent<Runtime, BaseObject> = styled.div`
   }
 `;
 
-const Section: IStyledComponent<Runtime, BaseObject> = styled.section`
+const Section: IStyledComponent<Runtime> = styled.section`
   flex: 1;
   padding: 1rem;
 
