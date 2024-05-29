@@ -5,32 +5,28 @@ import styled, { IStyledComponent, Runtime } from 'styled-components';
 
 const Wrapper: IStyledComponent<Runtime> = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: left;
   text-align: center;
-
-  @media (min-width: 768px) {
-    flex-direction: row;
-    text-align: left;
-  }
 `;
 
 const Section: IStyledComponent<Runtime> = styled.section`
   flex: 1;
   padding: 1rem;
+  background: #eb87ff;
 
   &:first-child {
     background: #000000;
   }
 
   &:last-child {
-    background: #000000;
+    background: #ca0000;
   }
 `;
 
 const HomePage: React.FC = () => (
   <Wrapper>
-    <Navbar></Navbar>
+    <Navbar />
     <Section>
       <h2>Welcome</h2>
       <p>
