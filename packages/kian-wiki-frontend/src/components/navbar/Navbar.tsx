@@ -199,6 +199,9 @@ export const Navbar: FC = () => {
         {/* Other elements can go here */}
       </WebTitle>
       <NavLinks>
+        <StyledLink href="/">
+          <span>Home</span>
+        </StyledLink>
         <StyledLink href="/about">
           <span>About</span>
         </StyledLink>
