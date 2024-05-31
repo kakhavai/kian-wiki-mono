@@ -208,6 +208,9 @@ export const Navbar: FC = () => {
         <StyledLink href="/contact">
           <span>Contact</span>
         </StyledLink>
+        <StyledLink href="/football">
+          <span>Football</span>
+        </StyledLink>
       </NavLinks>
     </Nav>
   );

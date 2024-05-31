@@ -1,6 +1,7 @@
 'use client'; // Mark this file as a client component
 
 import { Navbar } from '@/components/navbar/Navbar';
+import ResumeDetails from '@/components/resume/ResumeDetails';
 import styled, { IStyledComponent, Runtime } from 'styled-components';
 
 const Wrapper: IStyledComponent<Runtime> = styled.div`
@@ -8,6 +9,10 @@ const Wrapper: IStyledComponent<Runtime> = styled.div`
   flex-direction: column;
   align-items: left;
   text-align: center;
+  background: #000000;
+  padding: 1rem;
+  margin-left: 5rem;
+  margin-right: 5rem;
 `;
 
 const Section: IStyledComponent<Runtime> = styled.section`
@@ -27,19 +32,7 @@ const Section: IStyledComponent<Runtime> = styled.section`
 const HomePage: React.FC = () => (
   <Wrapper>
     <Navbar />
-    <Section>
-      <h2>Welcome</h2>
-      <p>
-        This is a responsive web page designed to work on both mobile and
-        desktop devices.
-      </p>
-    </Section>
-    <Section>
-      <h2>About</h2>
-      <p>
-        It uses Next.js and styled-components for styling and responsive design.
-      </p>
-    </Section>
+    <ResumeDetails />
   </Wrapper>
 );
 
