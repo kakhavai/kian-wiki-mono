@@ -15,20 +15,6 @@ const Wrapper: IStyledComponent<Runtime> = styled.div`
   margin-right: 5rem;
 `;
 
-const Section: IStyledComponent<Runtime> = styled.section`
-  flex: 1;
-  padding: 1rem;
-  background: #eb87ff;
-
-  &:first-child {
-    background: #000000;
-  }
-
-  &:last-child {
-    background: #ca0000;
-  }
-`;
-
 const HomePage: React.FC = () => (
   <Wrapper>
     <Navbar />

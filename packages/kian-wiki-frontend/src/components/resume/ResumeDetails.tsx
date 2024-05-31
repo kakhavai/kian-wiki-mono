@@ -9,17 +9,10 @@ import ProjectsSection from './ProjectSection';
 const ResumeWrapper: IStyledComponent<Runtime> = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 1rem;
 `;
 
 const ResumeDetails: React.FC = () => (
   <ResumeWrapper>
-    <Section title="Kian Akhavain">
-      <p>
-        San Diego - kakhavain55@gmail.com -{' '}
-        <a href="https://github.com/kakhavai">github.com/kakhavai</a>
-      </p>
-    </Section>
     <Section title="Education & Skills">
       <p>
         <strong>
