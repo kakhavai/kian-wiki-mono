@@ -11,8 +11,7 @@ interface ISectionProps {
 const SectionWrapper: IStyledComponent<Runtime> = styled.section`
   margin: 1rem 0;
   padding: 1rem;
-  background: #333; // White background for each section
-  border: 1px solid #fffdfd; // Light grey border to segment sections
+  border: 0px solid #fffdfd; // Light grey border to segment sections
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); // Subtle shadow for depth
 
   h3 {

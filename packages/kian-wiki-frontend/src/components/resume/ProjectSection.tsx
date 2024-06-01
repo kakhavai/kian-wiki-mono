@@ -2,9 +2,10 @@
 
 import React from 'react';
 import Section from '../common/Section';
+import { SectionWrapper } from '../common/SectionWrapper';
 
 const ProjectsSection: React.FC = () => (
-  <>
+  <SectionWrapper>
     <Section title="kian.wiki.mono">
       <p>
         (TypeScript, React.js, Lerna, Jest, Prisma ORM, Github Actions) - In
@@ -41,7 +42,7 @@ const ProjectsSection: React.FC = () => (
         automatically.
       </p>
     </Section>
-  </>
+  </SectionWrapper>
 );
 
 export default ProjectsSection;

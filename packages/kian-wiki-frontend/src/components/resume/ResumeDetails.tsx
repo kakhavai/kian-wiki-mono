@@ -1,18 +1,13 @@
 'use client'; // Mark this file as a client component
 
 import React from 'react';
-import styled, { IStyledComponent, Runtime } from 'styled-components';
 import WorkExperienceSection from './WorkExperienceSection';
 import Section from '../common/Section';
 import ProjectsSection from './ProjectSection';
-
-const ResumeWrapper: IStyledComponent<Runtime> = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
+import { SectionWrapper } from '../common/SectionWrapper';
 
 const ResumeDetails: React.FC = () => (
-  <ResumeWrapper>
+  <SectionWrapper>
     <Section title="Education & Skills">
       <p>
         <strong>
@@ -36,7 +31,7 @@ const ResumeDetails: React.FC = () => (
     </Section>
     <ProjectsSection />
     <WorkExperienceSection />
-  </ResumeWrapper>
+  </SectionWrapper>
 );
 
 export default ResumeDetails;

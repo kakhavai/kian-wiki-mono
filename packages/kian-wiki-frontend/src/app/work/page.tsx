@@ -1,7 +1,7 @@
 'use client'; // Mark this file as a client component
 
 import { Navbar } from '@/components/navbar/Navbar';
-import ResumeDetails from '@/components/resume/ResumeDetails';
+import WorkExperienceSection from '@/components/resume/WorkExperienceSection';
 import styled, { IStyledComponent, Runtime } from 'styled-components';
 
 const Wrapper: IStyledComponent<Runtime> = styled.div`
@@ -29,7 +29,7 @@ const Wrapper: IStyledComponent<Runtime> = styled.div`
 const HomePage: React.FC = () => (
   <Wrapper>
     <Navbar />
-    <ResumeDetails />
+    <WorkExperienceSection />
   </Wrapper>
 );
 

@@ -21,13 +21,14 @@ interface INavLinksProps extends HTMLAttributes<HTMLDivElement> {
   href?: string;
   transform?: string;
   ref?: RefObject<HTMLDivElement>;
+  passHref?: boolean;
 }
 
 const WebTitle: IStyledComponent<Runtime, INavLinksProps> = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: #fff;
+  color: #ffffffdf;
   padding: 1rem;
   position: relative;
   transition:
@@ -64,25 +65,21 @@ const WebTitle: IStyledComponent<Runtime, INavLinksProps> = styled.div`
   }
 `;
 
-const TitleText: IStyledComponent<Runtime, INavLinksProps> = styled.div`
-  font-size: 1.5em; // Similar to h1 font-size
+const TitleLink: IStyledComponent<Runtime, INavLinksProps> = styled(Link)`
+  font-size: 1.3em; // Similar to h1 font-size
   font-weight: bold; // Similar to h1 font-weight
   margin: 0; // Reset default margin
   user-select: none; // Prevent text selection
-  cursor: default; // Set cursor to default arrow
+  cursor: pointer; // Set cursor to pointer for link
+  color: inherit; // Inherit the color from the parent
 
-  @media (max-width: 428px) {
-    display: none; // Hide the title text when screen width is less than 768px
-  }
+  text-decoration: none; // Remove underline
 `;
 
 const Nav: IStyledComponent<Runtime> = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #333;
-  color: #fff;
-  padding: 1rem;
 
   @media (max-width: 428px) {
     justify-content: center; // Center the nav links when screen width is less than 428px
@@ -92,7 +89,6 @@ const Nav: IStyledComponent<Runtime> = styled.nav`
 const StyledLink: IStyledComponent<Runtime, INavLinksProps> = styled(Link)`
   position: relative;
   padding: 0.5rem 1rem;
-  color: ${({ inColor }) => inColor || '#fff'};
   text-decoration: none;
   overflow: hidden;
   transition: color 0.3s;
@@ -195,18 +191,17 @@ export const Navbar: FC = () => {
         transform={transform}
         onMouseMove={handleMouseMove}
       >
-        <TitleText>kian.wiki</TitleText>
-        {/* Other elements can go here */}
+        <TitleLink href="/">kian.wiki</TitleLink>
       </WebTitle>
       <NavLinks>
-        <StyledLink href="/about">
-          <span>About</span>
+        <StyledLink href="/work">
+          <span>work</span>
         </StyledLink>
-        <StyledLink href="/contact">
-          <span>Contact</span>
+        <StyledLink href="/projects">
+          <span>projects</span>
         </StyledLink>
-        <StyledLink href="/football">
-          <span>Football</span>
+        <StyledLink href="/fantasy">
+          <span>fantasy</span>
         </StyledLink>
       </NavLinks>
     </Nav>
