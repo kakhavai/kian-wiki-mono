@@ -2,9 +2,10 @@
 
 import React from 'react';
 import Section from '../common/Section';
+import { SectionWrapper } from '../common/SectionWrapper';
 
 const WorkExperienceSection: React.FC = () => (
-  <>
+  <SectionWrapper>
     <Section title="PlayStation - Information Systems, San Diego, CA">
       <p>Senior Software Engineer ~ Node.js (6/19 – Current)</p>
       <ul>
@@ -78,7 +79,7 @@ const WorkExperienceSection: React.FC = () => (
         </li>
       </ul>
     </Section>
-  </>
+  </SectionWrapper>
 );
 
 export default WorkExperienceSection;
