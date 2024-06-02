@@ -1,136 +1,17 @@
+// components/navbar/Navbar.tsx
 'use client';
 
-import styled, { Runtime, IStyledComponent, css } from 'styled-components';
-import Link from 'next/link';
-import {
-  FC,
-  HTMLAttributes,
-  ReactNode,
+import React, {
   useState,
-  useRef,
   useEffect,
+  useRef,
   RefObject,
   MutableRefObject,
 } from 'react';
+import Link from 'next/link';
+import styles from '@/styles/Navbar.module.css';
 
-// Define interface for NavLinks props
-interface INavLinksProps extends HTMLAttributes<HTMLDivElement> {
-  open?: boolean;
-  inColor?: string;
-  children?: ReactNode;
-  href?: string;
-  transform?: string;
-  ref?: RefObject<HTMLDivElement>;
-  passHref?: boolean;
-}
-
-const WebTitle: IStyledComponent<Runtime, INavLinksProps> = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: #ffffffdf;
-  padding: 1rem;
-  position: relative;
-  transition:
-    transform 0.5s,
-    box-shadow 0.3s;
-
-  ${({ transform }) =>
-    transform &&
-    css`
-      transform: ${transform};
-    `}
-
-  @media (max-width: 428px) {
-    display: none; // Hide the title text when screen width is less than 428px
-  }
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: -20px;
-    left: -20px;
-    right: -20px;
-    bottom: -20px;
-    z-index: -1;
-  }
-
-  &:hover::before {
-    content: '';
-    position: absolute;
-    top: -20px;
-    left: -20px;
-    right: -20px;
-    bottom: -20px;
-  }
-`;
-
-const TitleLink: IStyledComponent<Runtime, INavLinksProps> = styled(Link)`
-  font-size: 1.3em; // Similar to h1 font-size
-  font-weight: bold; // Similar to h1 font-weight
-  margin: 0; // Reset default margin
-  user-select: none; // Prevent text selection
-  cursor: pointer; // Set cursor to pointer for link
-  color: inherit; // Inherit the color from the parent
-
-  text-decoration: none; // Remove underline
-`;
-
-const Nav: IStyledComponent<Runtime> = styled.nav`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  @media (max-width: 428px) {
-    justify-content: center; // Center the nav links when screen width is less than 428px
-  }
-`;
-
-const StyledLink: IStyledComponent<Runtime, INavLinksProps> = styled(Link)`
-  position: relative;
-  padding: 0.5rem 1rem;
-  text-decoration: none;
-  overflow: hidden;
-  transition: color 0.3s;
-  border-radius: 5px;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border-radius: 10px;
-    opacity: 0;
-    transition:
-      opacity 0.3s,
-      box-shadow 0.3s;
-    z-index: 1;
-  }
-
-  &:hover::before {
-    opacity: 1;
-    box-shadow: 0 0 2px 2px rgba(0, 225, 255, 0.7);
-  }
-
-  span {
-    position: relative;
-    z-index: 2;
-  }
-`;
-
-const NavLinks: IStyledComponent<Runtime, INavLinksProps> = styled.div`
-  display: flex;
-  gap: 1rem;
-  color: ${({ inColor }) => inColor};
-
-  @media (max-width: 428px) {
-    justify-content: center; // Center the nav links when screen width is less than 428px
-  }
-`;
-
-export const Navbar: FC = () => {
+export const Navbar: React.FC = () => {
   const [transform, setTransform] = useState<string>('');
   const [isTransforming, setIsTransforming] = useState<boolean>(false);
   const titleRef: RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
@@ -150,7 +31,7 @@ export const Navbar: FC = () => {
     const y: number = e.clientY - (rect.top + rect.height / 2);
 
     const distance: number = Math.sqrt(x * x + y * y);
-    const maxDistance: number = 50; // Max distance to move the text
+    const maxDistance: number = 50;
     const moveX: number = -(x / distance) * Math.min(distance, maxDistance);
     const moveY: number = -(y / distance) * Math.min(distance, maxDistance);
 
@@ -161,7 +42,6 @@ export const Navbar: FC = () => {
     );
     setIsTransforming(true);
 
-    // Reset the timeout
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
@@ -185,26 +65,32 @@ export const Navbar: FC = () => {
   }, []);
 
   return (
-    <Nav>
-      <WebTitle
+    <nav className={styles.nav}>
+      <div
         ref={titleRef}
-        transform={transform}
+        className={styles.webTitle}
+        style={{ transform }}
         onMouseMove={handleMouseMove}
       >
-        <TitleLink href="/">kian.wiki</TitleLink>
-      </WebTitle>
-      <NavLinks>
-        <StyledLink href="/work">
+        <Link href="/" className={`${styles.titleLink} ${styles.desktopOnly}`}>
+          <span className={styles.desktopTitle}>kian.wiki</span>
+        </Link>
+      </div>
+      <div className={styles.navLinks}>
+        <Link href="/" className={`${styles.styledLink} ${styles.mobileOnly}`}>
+          <span>home</span>
+        </Link>
+        <Link href="/work" className={styles.styledLink}>
           <span>work</span>
-        </StyledLink>
-        <StyledLink href="/projects">
+        </Link>
+        <Link href="/projects" className={styles.styledLink}>
           <span>projects</span>
-        </StyledLink>
-        <StyledLink href="/fantasy">
+        </Link>
+        <Link href="/fantasy" className={styles.styledLink}>
           <span>fantasy</span>
-        </StyledLink>
-      </NavLinks>
-    </Nav>
+        </Link>
+      </div>
+    </nav>
   );
 };
 

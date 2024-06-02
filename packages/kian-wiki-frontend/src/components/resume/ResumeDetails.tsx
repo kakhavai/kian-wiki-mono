@@ -1,13 +1,11 @@
-'use client'; // Mark this file as a client component
-
 import React from 'react';
 import WorkExperienceSection from './WorkExperienceSection';
 import Section from '../common/Section';
 import ProjectsSection from './ProjectSection';
-import { SectionWrapper } from '../common/SectionWrapper';
+import styles from '@/styles/SectionWrapper.module.css';
 
 const ResumeDetails: React.FC = () => (
-  <SectionWrapper>
+  <div className={styles.sectionWrapper}>
     <Section title="Education & Skills">
       <p>
         <strong>
@@ -31,7 +29,7 @@ const ResumeDetails: React.FC = () => (
     </Section>
     <ProjectsSection />
     <WorkExperienceSection />
-  </SectionWrapper>
+  </div>
 );
 
 export default ResumeDetails;

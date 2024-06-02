@@ -1,39 +1,13 @@
-'use client'; // Mark this file as a client component
-
 // components/Layout.tsx
-import styled, { IStyledComponent, Runtime } from 'styled-components';
-import { ReactNode } from 'react';
-
-const Container: IStyledComponent<Runtime> = styled.div`
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1rem;
-`;
-
-const Header: IStyledComponent<Runtime> = styled.header`
-  background: #333;
-  color: white;
-  padding: 1rem;
-  text-align: center;
-`;
-
-const Main: IStyledComponent<Runtime> = styled.main`
-  padding: 1rem;
-`;
-
-const Footer: IStyledComponent<Runtime> = styled.footer`
-  background: #333;
-  color: white;
-  padding: 1rem;
-  text-align: center;
-`;
+import React, { ReactNode } from 'react';
+import styles from '@/styles/Layout.module.css';
 
 const Layout: React.FC<{ children: ReactNode }> = ({ children }) => (
-  <Container>
-    <Header>My Responsive Site</Header>
-    <Main>{children}</Main>
-    <Footer>&copy; 2024 My Responsive Site</Footer>
-  </Container>
+  <div className={styles.container}>
+    <header className={styles.header}>My Responsive Site</header>
+    <main className={styles.main}>{children}</main>
+    <footer className={styles.footer}>&copy; 2024 My Responsive Site</footer>
+  </div>
 );
 
 export default Layout;

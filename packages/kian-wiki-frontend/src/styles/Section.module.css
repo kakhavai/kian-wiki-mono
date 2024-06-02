@@ -1,0 +1,26 @@
+/* styles/Section.module.css */
+
+.sectionWrapper {
+  margin: 1rem 0;
+  padding: 1rem;
+  border: 0px solid #fffdfd; /* Light grey border to segment sections */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.sectionWrapper h3 {
+  border-bottom: 1px solid white;
+  padding-bottom: 0.5rem;
+}
+
+.sectionWrapper p {
+  margin: 1rem 0;
+}
+
+.sectionWrapper ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sectionWrapper ul li {
+  margin-bottom: 0.5rem;
+}

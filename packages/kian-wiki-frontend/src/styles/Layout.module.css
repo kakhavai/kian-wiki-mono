@@ -1,0 +1,25 @@
+/* styles/Layout.module.css */
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.header {
+  background: #333;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+}
+
+.main {
+  padding: 1rem;
+}
+
+.footer {
+  background: #333;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+}
