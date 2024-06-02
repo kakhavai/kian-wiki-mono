@@ -1,11 +1,9 @@
-'use client'; // Mark this file as a client component
-
 import React from 'react';
 import Section from '../common/Section';
-import { SectionWrapper } from '../common/SectionWrapper';
+import styles from '@/styles/SectionWrapper.module.css';
 
 const ProjectsSection: React.FC = () => (
-  <SectionWrapper>
+  <div className={styles.sectionWrapper}>
     <Section title="kian.wiki.mono">
       <p>
         (TypeScript, React.js, Lerna, Jest, Prisma ORM, Github Actions) - In
@@ -42,7 +40,7 @@ const ProjectsSection: React.FC = () => (
         automatically.
       </p>
     </Section>
-  </SectionWrapper>
+  </div>
 );
 
 export default ProjectsSection;
