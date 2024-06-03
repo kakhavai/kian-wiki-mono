@@ -4,7 +4,7 @@ import Section from '../common/Section';
 import ProjectsSection from './ProjectSection';
 import styles from '@/styles/SectionWrapper.module.css';
 
-const ResumeDetails: React.FC = () => (
+export const ResumeDetails: React.FC = () => (
   <div className={styles.sectionWrapper}>
     <Section title="Education & Skills">
       <p>
@@ -31,5 +31,3 @@ const ResumeDetails: React.FC = () => (
     <WorkExperienceSection />
   </div>
 );
-
-export default ResumeDetails;
