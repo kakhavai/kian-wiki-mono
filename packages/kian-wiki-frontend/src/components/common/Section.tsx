@@ -8,7 +8,7 @@ interface ISectionProps {
 }
 
 const Section: React.FC<ISectionProps> = ({ title, children }) => (
-  <section className={styles.sectionWrapper}>
+  <section className={styles.section}>
     <h3>{title}</h3>
     {children}
   </section>
