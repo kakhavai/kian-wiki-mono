@@ -2,7 +2,7 @@ import React from 'react';
 import Section from '../common/Section';
 import styles from '@/styles/SectionWrapper.module.css';
 
-const ProjectsSection: React.FC = () => (
+export const Projects: React.FC = () => (
   <div className={styles.sectionWrapper}>
     <Section title="kian.wiki.mono">
       <p>
@@ -42,5 +42,3 @@ const ProjectsSection: React.FC = () => (
     </Section>
   </div>
 );
-
-export default ProjectsSection;

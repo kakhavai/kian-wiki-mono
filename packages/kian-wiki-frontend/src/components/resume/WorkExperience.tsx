@@ -2,7 +2,7 @@ import React from 'react';
 import Section from '../common/Section';
 import styles from '@/styles/SectionWrapper.module.css';
 
-const WorkExperienceSection: React.FC = () => (
+export const WorkExperience: React.FC = () => (
   <div className={styles.sectionWrapper}>
     <Section title="PlayStation - Information Systems, San Diego, CA">
       <p>Senior Software Engineer ~ Node.js (6/19 – Current)</p>
@@ -79,5 +79,3 @@ const WorkExperienceSection: React.FC = () => (
     </Section>
   </div>
 );
-
-export default WorkExperienceSection;
