@@ -2,8 +2,6 @@
 
 .section {
   margin: 1rem 0;
-  padding: 1rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
 .section h3 {
@@ -22,4 +20,8 @@
 
 .section ul li {
   margin-bottom: 0.5rem;
+}
+
+.sectionWrapper {
+  padding: 1rem;
 }

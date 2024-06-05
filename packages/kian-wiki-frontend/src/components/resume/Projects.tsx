@@ -1,9 +1,9 @@
 import React from 'react';
 import Section from '../common/Section';
-import styles from '@/styles/SectionWrapper.module.css';
+import sectionStyles from '@/styles/Section.module.css';
 
 export const Projects: React.FC = () => (
-  <div className={styles.sectionWrapper}>
+  <div className={sectionStyles.sectionWrapper}>
     <Section title="kian.wiki.mono">
       <p>
         (TypeScript, React.js, Lerna, Jest, Prisma ORM, Github Actions) - In
