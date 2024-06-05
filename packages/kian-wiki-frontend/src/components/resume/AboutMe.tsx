@@ -1,9 +1,13 @@
 import React from 'react';
 import Section from '../common/Section';
-import styles from '@/styles/SectionWrapper.module.css';
+import Image from 'next/image';
+import imageStyles from '@/styles/Image.module.css';
+import sectionStyles from '@/styles/Section.module.css';
+
+const imageSizes: string = '(max-width: 768px) 213px, 33vw';
 
 export const AboutMe: React.FC = () => (
-  <div className={styles.sectionWrapper}>
+  <div className={sectionStyles.sectionWrapper}>
     <Section title="Hey, I'm Kian.">
       <p>
         I&apos;m a software engineer with a Bachelor&apos;s degree in Computer
@@ -12,6 +16,72 @@ export const AboutMe: React.FC = () => (
         I&apos;ve been diving into the world of machine learning, hoping to gain
         some new insights (and maybe give my fantasy football strategy a boost).
       </p>
+    </Section>
+    <Section title="">
+      <div className={imageStyles.imageGallery}>
+        <div className={imageStyles.imageContainer}>
+          <Image
+            alt="kian"
+            src="/images/kian.jpg"
+            fill
+            sizes={imageSizes}
+            priority
+            className={imageStyles.image}
+          />
+        </div>
+        <div className={`${imageStyles.imageContainer} `}>
+          <Image
+            alt="hobbes"
+            src="/images/hobbes.jpg"
+            fill
+            sizes={imageSizes}
+            priority
+            className={`${imageStyles.image} `}
+          />
+        </div>
+        <div className={imageStyles.imageContainer}>
+          <Image
+            alt="mom"
+            src="/images/mom.jpg"
+            fill
+            sizes={imageSizes}
+            priority
+            className={imageStyles.image}
+          />
+        </div>
+        <div className={`${imageStyles.imageContainer} `}>
+          <Image
+            alt="soccer"
+            src="/images/soccer.jpg"
+            fill
+            sizes={imageSizes}
+            priority
+            className={`${imageStyles.image} `}
+          />
+        </div>
+        <div className={`${imageStyles.imageContainer} `}>
+          <Image
+            alt="cousin"
+            src="/images/cousin.jpg"
+            fill
+            sizes={imageSizes}
+            priority
+            className={imageStyles.image}
+          />
+        </div>
+        <div className={imageStyles.imageContainer}>
+          <Image
+            alt="kitten"
+            src="/images/kitten.jpg"
+            fill
+            sizes={imageSizes}
+            priority
+            className={imageStyles.image}
+          />
+        </div>
+      </div>
+    </Section>
+    <Section title="">
       <p>
         I built this website using a Next.js frontend and a TypeScript backend,
         heavily leveraging AWS&apos;s serverless capabilities. I utilized
@@ -29,9 +99,10 @@ export const AboutMe: React.FC = () => (
       </p>
       <p>
         I&apos;m proficient in JavaScript, TypeScript, and Python. I&apos;m
-        largely a self-starter, constantly refining my skills and seeking out
-        mentors to further boost my architectural expertise. I continually push
-        myself to develop more refined and precise code.
+        largely a self-starter, always looking for new ways to improve my skills
+        and actively seeking out mentors to further boost my architectural
+        expertise. I continually push myself to develop more refined and precise
+        solutions.
       </p>
       <p>
         I have a passion for automation and developing robust, scalable systems.
@@ -39,11 +110,7 @@ export const AboutMe: React.FC = () => (
         systems is crucial to maintaining high standards of code quality and
         delivery efficiency.
       </p>
-      <p>
-        Hopefully, you&apos;ll enjoy exploring my work—and maybe even find some
-        humor in my attempts to enhance my fantasy football performance with
-        machine learning!
-      </p>
+      <p>Feel free to reach out: akhavainkian@gmail.com</p>
     </Section>
   </div>
 );
