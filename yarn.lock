@@ -8458,7 +8458,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fs-extra@npm:^9.1.0":
+"fs-extra@npm:^9.0.1, fs-extra@npm:^9.1.0":
   version: 9.1.0
   resolution: "fs-extra@npm:9.1.0"
   dependencies:
@@ -10815,6 +10815,7 @@ __metadata:
     rimraf: "npm:^5.0.5"
     serverless: "npm:^3.38.0"
     serverless-offline: "npm:^13.5.0"
+    serverless-plugin-monorepo: "npm:^0.11.0"
     typescript: "npm:^5.3.3"
   languageName: unknown
   linkType: soft
@@ -13807,6 +13808,17 @@ __metadata:
   peerDependencies:
     serverless: ^3.2.0
   checksum: 2662deac1190ae7341580c0022ad0610d950ea150a777b1e6b86bb1be63d8095a2a015939b134609663be096127c918c3c19f3328d2a283656050085ee6c47b0
+  languageName: node
+  linkType: hard
+
+"serverless-plugin-monorepo@npm:^0.11.0":
+  version: 0.11.0
+  resolution: "serverless-plugin-monorepo@npm:0.11.0"
+  dependencies:
+    fs-extra: "npm:^9.0.1"
+  peerDependencies:
+    serverless: 1 || 2 || 3
+  checksum: 6194c1453af328710087c4e95e44e5abb18beca2d0d098828ac6ba0b54155e79d569ba944d915445a0302069eafa95292c15bdef73072e0d2dc6b0aea40c9e92
   languageName: node
   linkType: hard
 

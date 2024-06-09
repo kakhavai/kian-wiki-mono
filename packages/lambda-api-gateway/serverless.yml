@@ -3,7 +3,7 @@ service: lambda-api-gateway
 provider:
   name: aws
   runtime: nodejs20.x
-  region: us-east-1
+  region: us-west-2
 
 functions:
   mainFunction:
@@ -11,9 +11,10 @@ functions:
     timeout: 30
     events:
       - http:
-          path: /
+          path: /hellokian
           method: get
           cors: true
 
 plugins:
   - serverless-offline
+  - serverless-plugin-monorepo
