@@ -12,3 +12,4 @@ lerna-debug*
 !**/.yarn/sdks
 !**/.yarn/versions
 **/.pnp.*
+.serverless/
