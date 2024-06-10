@@ -1,14 +1,15 @@
-'use client'; // Mark this file as a client component
+'use client';
 
+import React from 'react';
+import { FantasyAbout } from '@/components/fantasy/FantasyAbout';
 import { Navbar } from '@/components/navbar/Navbar';
-import { AboutMe } from '@/components/resume/AboutMe';
 import styles from '@/styles/page.module.css';
 
-const HomePage: React.FC = () => (
+const FantasyPage: React.FC = () => (
   <div className={styles.wrapper}>
     <Navbar />
-    <AboutMe />
+    <FantasyAbout />
   </div>
 );
 
-export default HomePage;
+export default FantasyPage;
