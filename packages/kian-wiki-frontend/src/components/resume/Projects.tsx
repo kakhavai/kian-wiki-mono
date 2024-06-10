@@ -6,20 +6,38 @@ export const Projects: React.FC = () => (
   <div className={sectionStyles.sectionWrapper}>
     <Section title="kian.wiki.mono">
       <p>
-        (TypeScript, React.js, Lerna, Jest, Prisma ORM, Github Actions) - In
-        Progress
+        (TypeScript, Next.js, AWS Amplify, Lambda, S3, Lerna, Jest, Prisma ORM,
+        GitHub Actions)
       </p>
       <p>
-        I am currently revamping my previous website into a comprehensive
-        platform for new and future projects, leveraging a monorepo structure.
-        Utilizing advanced tools like Lerna, this setup enhances scalability and
-        allows for easier integration with multiple contributors. The monorepo
-        will host a variety of applications, including a React-based front end
-        for my personal resume, machine learning tools for analyzing football
-        data, and REST APIs for accessing live sports information, all supported
-        by shared libraries and validations. Linting has been meticulously
-        configured to ensure a clear and consistent codebase, making it more
-        accessible for both new and ongoing developers.
+        I have revamped my website kian.wiki into a comprehensive platform for
+        current and future projects, utilizing a monorepo structure for better
+        scalability and integration. Lerna helps manage multiple projects within
+        the monorepo, ensuring seamless collaboration.
+      </p>
+      <p>
+        The platform includes a Next.js-based front end for my resume, machine
+        learning tools for football data analysis, and REST APIs for live sports
+        information, all supported by shared libraries. Linting ensures a
+        consistent codebase, aiding both new and existing developers.
+      </p>
+      <p>
+        AWS Lambda functions are used to generate data periodically, which is
+        then stored in S3. This precomputed data allows the Next.js front end to
+        regenerate with the latest information. Next.js&apos;s Incremental
+        Static Regeneration (ISR) re-renders pages whenever S3 data is updated,
+        ensuring the site always displays current information.
+      </p>
+      <p>
+        CI/CD is handled using GitHub Actions, with Jest ensuring code quality
+        through comprehensive testing. TypeScript and Prisma ORM enhance
+        development with type safety and efficient database management.
+      </p>
+      <p>
+        AWS Amplify simplifies deployment and hosting, providing a robust
+        infrastructure. This project significantly upgrades my previous website,
+        transforming it into a versatile, high-quality platform for various
+        applications.
       </p>
     </Section>
     <Section title="ActionRogueLike">
