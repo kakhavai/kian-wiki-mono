@@ -7,7 +7,7 @@
   "scripts": {
     "build": "yarn run clean && yarn tsc",
     "build:prod": "yarn run clean && yarn tsc",
-    "clean": "rimraf ./build",
+    "clean": "rm -rf .serverless build",
     "lint": "yarn eslint ./",
     "deploy": "yarn sls deploy"
   },
@@ -19,6 +19,7 @@
     "dotenv": "^16.4.5",
     "eslint": "^8.54.0",
     "serverless": "^3.38.0",
+    "serverless-dotenv-plugin": "^6.0.0",
     "serverless-offline": "^13.5.0",
     "serverless-plugin-monorepo": "^0.11.0",
     "typescript": "^5.3.3"

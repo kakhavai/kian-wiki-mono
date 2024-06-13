@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from '@/styles/FantasyChart.module.css';
+// AWS SDK Configuration
 
 export interface IWRProjectionData {
   name: string;
@@ -7,22 +8,58 @@ export interface IWRProjectionData {
   ml_guess: number;
 }
 
-const wrData: IWRProjectionData[] = [
-  { name: 'Puka Nacua', projection: 15, ml_guess: 21 },
-  { name: 'Tyreek Hill', projection: 12, ml_guess: 18 },
-  { name: 'Curtis Samuel', projection: 14, ml_guess: 20 },
-  { name: 'Jaylen Waddle', projection: 10, ml_guess: 15 },
-  { name: 'Keenan Allen', projection: 16, ml_guess: 22 },
-  { name: 'Devante Adams', projection: 11, ml_guess: 17 },
-  { name: 'Rashee Rice', projection: 13, ml_guess: 19 },
-  { name: 'Deebo Samuel', projection: 9, ml_guess: 14 },
-  { name: 'Justin Jefferson', projection: 17, ml_guess: 23 },
-  { name: 'Jordan Addison', projection: 8, ml_guess: 12 },
-  { name: 'D.K. Metcalf', projection: 18, ml_guess: 24 },
-  { name: 'Brandon Aiyuk', projection: 7, ml_guess: 10 },
-];
+export interface IWRStatsResponse {
+  stats: IWRProjectionData[];
+}
+
+async function fetchWrStats(): Promise<IWRProjectionData[]> {
+  try {
+    const response: Response = await fetch(`/stats`, {
+      next: { revalidate: 60 }, // Revalidate every 60 seconds
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data: IWRStatsResponse = await response.json();
+    return data.stats as IWRProjectionData[];
+  } catch (error) {
+    console.log('GET call failed: ', error);
+    throw error;
+  }
+}
 
 export const FantasyChart: React.FC = () => {
+  const [wrData, setWrData] = useState<IWRProjectionData[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    const fetchData = async (): Promise<void> => {
+      try {
+        const data: IWRProjectionData[] = await fetchWrStats();
+        setWrData(data);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching WR stats:', error);
+        setLoading(false);
+      }
+    };
+
+    fetchData().then(
+      () => {
+        console.log('success'); // Success!
+        setLoading(false);
+      },
+      (reason) => {
+        console.error(reason); // Error!
+      },
+    );
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div>
       <h2>Wide Receiver Projections</h2>

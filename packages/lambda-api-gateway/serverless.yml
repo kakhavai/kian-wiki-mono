@@ -1,9 +1,14 @@
 service: lambda-api-gateway
 
+useDotenv: true
+
 provider:
   name: aws
   runtime: nodejs20.x
   region: us-east-1
+  stage: 'stats'
+  environment:
+    NFL_SCRAPE_BUCKET_NAME: ${env:NFL_SCRAPE_BUCKET_NAME}
 
 functions:
   mainFunction:
@@ -13,7 +18,21 @@ functions:
       - http:
           path: /hellokian
           method: get
+          cors:
+            origin: 'http://localhost:3000'
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+            allowCredentials: true
+            cacheControl: 'max-age=600, s-maxage=600, proxy-revalidate'
+      - http:
+          path: /hellokian
+          method: options
           cors: true
+
   getWrStats:
     handler: build/handler.getWrStats
     timeout: 30
@@ -21,8 +40,22 @@ functions:
       - http:
           path: /getWrStats
           method: get
+          cors:
+            origin: 'http://localhost:3000'
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+            allowCredentials: true
+            cacheControl: 'max-age=600, s-maxage=600, proxy-revalidate'
+      - http:
+          path: /getWrStats
+          method: options
           cors: true
 
 plugins:
   - serverless-offline
   - serverless-plugin-monorepo
+  - serverless-dotenv-plugin
