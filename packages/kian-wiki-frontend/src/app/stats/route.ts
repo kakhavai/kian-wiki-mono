@@ -34,7 +34,7 @@ const getApiGatewayUrl = async (): Promise<string> => {
   }
 };
 
-export async function GET(req: NextRequest): Promise<unknown> {
+export async function GET(req: NextRequest): Promise<void | Response> {
   try {
     const apiUrl: string = await getApiGatewayUrl();
     const response: Response = await fetch(`${apiUrl}/getWrStats`);
