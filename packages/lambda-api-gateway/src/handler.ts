@@ -18,6 +18,12 @@ export const mainHandler = async (
   // await teamDataService.updateTeamRecords();
   return {
     statusCode: 200,
+    headers: {
+      'Access-Control-Allow-Origin': 'http://localhost:3000', // Replace with your actual origin
+      'Access-Control-Allow-Methods': 'GET,OPTIONS',
+      'Access-Control-Allow-Headers':
+        'Content-Type, X-Amz-Date, Authorization, X-Api-Key, X-Amz-Security-Token',
+    },
     body: JSON.stringify({ message: 'Hello from Lambda API Gateway!' }),
   };
 };
@@ -38,6 +44,10 @@ export const getWrStats = async (
       statusCode: 200,
       body: JSON.stringify(jsonData),
       headers: {
+        'Access-Control-Allow-Origin': 'http://localhost:3000', // Replace with your actual origin
+        'Access-Control-Allow-Methods': 'GET,OPTIONS',
+        'Access-Control-Allow-Headers':
+          'Content-Type, X-Amz-Date, Authorization, X-Api-Key, X-Amz-Security-Token',
         'Content-Type': 'application/json',
       },
     };

@@ -13,3 +13,4 @@ lerna-debug*
 !**/.yarn/versions
 **/.pnp.*
 .serverless/
+amplify/
