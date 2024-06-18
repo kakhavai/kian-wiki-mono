@@ -1,10 +1,22 @@
 import React from 'react';
+import Link from 'next/link';
 import Section from '../common/Section';
 import sectionStyles from '@/styles/Section.module.css';
+import projectStyles from '@/styles/Project.module.css';
 
 export const Projects: React.FC = () => (
   <div className={sectionStyles.sectionWrapper}>
-    <Section title="kian.wiki.mono">
+    <Section
+      title={
+        <Link
+          href="https://github.com/kakhavai/kian-wiki-mono"
+          className={projectStyles.styledLink}
+          target="_blank"
+        >
+          kian.wiki.mono
+        </Link>
+      }
+    >
       <p>
         (TypeScript, Next.js, AWS Amplify, Lambda, S3, Lerna, Jest, Prisma ORM,
         GitHub Actions)
@@ -40,7 +52,17 @@ export const Projects: React.FC = () => (
         applications.
       </p>
     </Section>
-    <Section title="ActionRogueLike">
+    <Section
+      title={
+        <Link
+          href="https://github.com/kakhavai/ActionRoguelike"
+          className={projectStyles.styledLink}
+          target="_blank"
+        >
+          ActionRogueLike
+        </Link>
+      }
+    >
       <p>(Unreal Engine 5, C++)</p>
       <p>
         Built a simple playground for a third person shooter leveraging Unreal
@@ -48,7 +70,17 @@ export const Projects: React.FC = () => (
         honing object oriented principles, and it was just fun.
       </p>
     </Section>
-    <Section title="kian.wiki">
+    <Section
+      title={
+        <Link
+          href="https://github.com/kakhavai/kian-wiki"
+          className={projectStyles.styledLink}
+          target="_blank"
+        >
+          <span>kian.wiki</span>
+        </Link>
+      }
+    >
       <p>(Node.js, React.js, Postgres, Github Actions)</p>
       <p>
         Developed a website using a React.js frontend, Node.js backend, and

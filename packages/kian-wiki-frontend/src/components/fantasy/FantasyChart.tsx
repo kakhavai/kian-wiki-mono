@@ -1,28 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import styles from '@/styles/FantasyChart.module.css';
-// AWS SDK Configuration
+import { IWrProjectionData } from 'nfl-feed-types';
 
-export interface IWRProjectionData {
-  name: string;
-  projection: number;
-  ml_guess: number;
+const revalidateCadence: number = 60 * 60 * 12; //12 hours
+
+interface IWRStatsResponse {
+  stats: IWrProjectionData[];
 }
 
-export interface IWRStatsResponse {
-  stats: IWRProjectionData[];
-}
-
-async function fetchWrStats(): Promise<IWRProjectionData[]> {
+async function fetchWrStats(): Promise<IWrProjectionData[]> {
   try {
     const response: Response = await fetch(`/stats`, {
-      next: { revalidate: 60 }, // Revalidate every 60 seconds
+      next: { revalidate: revalidateCadence }, // Revalidate every 60 seconds
     });
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const data: IWRStatsResponse = await response.json();
-    return data.stats as IWRProjectionData[];
+    return data.stats as IWrProjectionData[];
   } catch (error) {
     console.log('GET call failed: ', error);
     throw error;
@@ -30,13 +26,13 @@ async function fetchWrStats(): Promise<IWRProjectionData[]> {
 }
 
 export const FantasyChart: React.FC = () => {
-  const [wrData, setWrData] = useState<IWRProjectionData[]>([]);
+  const [wrData, setWrData] = useState<IWrProjectionData[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchData = async (): Promise<void> => {
       try {
-        const data: IWRProjectionData[] = await fetchWrStats();
+        const data: IWrProjectionData[] = await fetchWrStats();
         setWrData(data);
         setLoading(false);
       } catch (error) {
