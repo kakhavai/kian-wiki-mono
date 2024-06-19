@@ -9,10 +9,6 @@ body {
   line-height: 24px;
 }
 
-a span {
-  color: rgba(173, 216, 230, 0.8);
-}
-
 @media (max-width: 1200px) {
   body {
     font-weight: 400;

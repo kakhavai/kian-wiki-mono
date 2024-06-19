@@ -72,7 +72,7 @@ export const Navbar: React.FC = () => {
         style={{ transform }}
         onMouseMove={handleMouseMove}
       >
-        <Link href="/" className={`${styles.titleLink} ${styles.desktopOnly}`}>
+        <Link href="/" className={`${styles.titleLink} ${styles.desktopOnly} `}>
           <span className={styles.desktopTitle}>kian.wiki</span>
         </Link>
       </div>

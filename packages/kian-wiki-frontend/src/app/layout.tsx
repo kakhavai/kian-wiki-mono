@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import '@/styles/globals.css';
+import styles from '@/styles/page.module.css';
+import { Navbar } from '@/components/navbar/Navbar';
 
 interface IFont {
   className: string;
@@ -26,7 +28,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head />
-      <body className={inter.className}>{children}</body>
+      <body className={`${inter.className} ${styles.wrapper}`}>
+        <Navbar />
+        {children}
+      </body>
     </html>
   );
 }
