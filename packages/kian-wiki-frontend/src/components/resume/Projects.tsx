@@ -8,13 +8,15 @@ export const Projects: React.FC = () => (
   <div className={sectionStyles.sectionWrapper}>
     <Section
       title={
-        <Link
-          href="https://github.com/kakhavai/kian-wiki-mono"
-          className={projectStyles.styledLink}
-          target="_blank"
-        >
-          kian.wiki.mono
-        </Link>
+        <span>
+          <Link
+            href="https://github.com/kakhavai/kian-wiki-mono"
+            className={projectStyles.styledLink}
+            target="_blank"
+          >
+            <span>kian.wiki.mono</span>
+          </Link>
+        </span>
       }
     >
       <p>
@@ -59,7 +61,7 @@ export const Projects: React.FC = () => (
           className={projectStyles.styledLink}
           target="_blank"
         >
-          ActionRogueLike
+          <span>ActionRogueLike</span>
         </Link>
       }
     >
