@@ -44,8 +44,6 @@ export class S3FileUtil {
       Key: key,
     };
 
-    console.log('Here');
-
     const command: GetObjectCommand = new GetObjectCommand(downloadParams);
     const response: GetObjectCommandOutput = await this._s3Client.send(command);
 

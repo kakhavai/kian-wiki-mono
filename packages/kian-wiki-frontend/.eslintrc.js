@@ -1,8 +1,10 @@
+require('@rushstack/eslint-config/patch/modern-module-resolution');
 const path = require('path');
 
 module.exports = {
   extends: [
     'next/core-web-vitals',
+    '@rushstack/eslint-config/mixins/react',
     '../../.eslintrc.js', // Path to your main ESLint configuration file
   ],
   parserOptions: {

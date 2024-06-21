@@ -28,32 +28,29 @@ async function fetchWrStats(): Promise<IWrProjectionData[]> {
 export const FantasyChart: React.FC = () => {
   const [wrData, setWrData] = useState<IWrProjectionData[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchData = async (): Promise<void> => {
       try {
         const data: IWrProjectionData[] = await fetchWrStats();
         setWrData(data);
-        setLoading(false);
       } catch (error) {
         console.error('Error fetching WR stats:', error);
-        setLoading(false);
+        setError('Server errored fetching fantasy data...');
       }
+      setLoading(false);
     };
 
-    fetchData().then(
-      () => {
-        console.log('success'); // Success!
-        setLoading(false);
-      },
-      (reason) => {
-        console.error(reason); // Error!
-      },
-    );
+    fetchData().catch((reason) => {});
   }, []);
 
   if (loading) {
     return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
   }
 
   return (
@@ -62,11 +59,11 @@ export const FantasyChart: React.FC = () => {
       <div className={styles.chart}>
         <div className={styles.chartKey}>
           <div className={styles.keyItem}>
-            <span className={`${styles.keyColor} ${styles.expert}`}></span>
+            <span className={`${styles.keyColor} ${styles.expert}`} />
             <span>Expert Projection</span>
           </div>
           <div className={styles.keyItem}>
-            <span className={`${styles.keyColor} ${styles.ml}`}></span>
+            <span className={`${styles.keyColor} ${styles.ml}`} />
             <span>ML Projection</span>
           </div>
         </div>

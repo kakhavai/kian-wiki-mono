@@ -83,7 +83,9 @@
 }
 
 .titleLink:hover:before,
-.styledLink:hover::before {
+.styledLink:hover::before,
+.titleLink.active:before,
+.styledLink.active::before {
   opacity: 1;
   box-shadow: 0 0 2px 2px rgba(0, 225, 255, 0.7);
 }
