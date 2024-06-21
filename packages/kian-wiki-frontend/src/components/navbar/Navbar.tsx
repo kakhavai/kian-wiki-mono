@@ -1,4 +1,3 @@
-// components/navbar/Navbar.tsx
 'use client';
 
 import React, {
@@ -7,8 +6,9 @@ import React, {
   useRef,
   RefObject,
   MutableRefObject,
+  useCallback,
 } from 'react';
-import Link from 'next/link';
+import NavLink from '@/components/navbar/NavLink';
 import styles from '@/styles/Navbar.module.css';
 
 export const Navbar: React.FC = () => {
@@ -18,39 +18,43 @@ export const Navbar: React.FC = () => {
   const timeoutRef: MutableRefObject<NodeJS.Timeout | null> =
     useRef<NodeJS.Timeout | null>(null);
 
-  const resetTransform = (): void => {
+  const resetTransform: () => void = useCallback((): void => {
     setTransform('');
     setIsTransforming(false);
-  };
+  }, []);
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>): void => {
-    if (!titleRef.current || isTransforming) return;
+  const handleMouseMove: (e: React.MouseEvent<HTMLDivElement>) => void =
+    useCallback(
+      (e: React.MouseEvent<HTMLDivElement>): void => {
+        if (!titleRef.current || isTransforming) return;
 
-    const rect: DOMRect = titleRef.current.getBoundingClientRect();
-    const x: number = e.clientX - (rect.left + rect.width / 2);
-    const y: number = e.clientY - (rect.top + rect.height / 2);
+        const rect: DOMRect = titleRef.current.getBoundingClientRect();
+        const x: number = e.clientX - (rect.left + rect.width / 2);
+        const y: number = e.clientY - (rect.top + rect.height / 2);
 
-    const distance: number = Math.sqrt(x * x + y * y);
-    const maxDistance: number = 50;
-    const moveX: number = -(x / distance) * Math.min(distance, maxDistance);
-    const moveY: number = -(y / distance) * Math.min(distance, maxDistance);
+        const distance: number = Math.sqrt(x * x + y * y);
+        const maxDistance: number = 50;
+        const moveX: number = -(x / distance) * Math.min(distance, maxDistance);
+        const moveY: number = -(y / distance) * Math.min(distance, maxDistance);
 
-    setTransform(
-      `translate(${moveX}px, ${moveY}px) scale(${
-        1 - Math.min(distance, maxDistance) / 200
-      })`,
+        setTransform(
+          `translate(${moveX}px, ${moveY}px) scale(${
+            1 - Math.min(distance, maxDistance) / 200
+          })`,
+        );
+        setIsTransforming(true);
+
+        if (timeoutRef.current) {
+          clearTimeout(timeoutRef.current);
+        }
+        timeoutRef.current = setTimeout(resetTransform, 3000);
+      },
+      [isTransforming, resetTransform],
     );
-    setIsTransforming(true);
 
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-    }
-    timeoutRef.current = setTimeout(resetTransform, 3000);
-  };
-
-  const handleTransitionEnd = (): void => {
+  const handleTransitionEnd: () => void = useCallback((): void => {
     setIsTransforming(false);
-  };
+  }, []);
 
   useEffect(() => {
     const currentRef: HTMLDivElement | null = titleRef.current;
@@ -62,7 +66,7 @@ export const Navbar: React.FC = () => {
         currentRef.removeEventListener('transitionend', handleTransitionEnd);
       }
     };
-  }, []);
+  }, [handleTransitionEnd]);
 
   return (
     <nav className={styles.nav}>
@@ -72,23 +76,25 @@ export const Navbar: React.FC = () => {
         style={{ transform }}
         onMouseMove={handleMouseMove}
       >
-        <Link href="/" className={`${styles.titleLink} ${styles.desktopOnly}`}>
-          <span className={styles.desktopTitle}>kian.wiki</span>
-        </Link>
+        <NavLink
+          href="/"
+          className={`${styles.titleLink} ${styles.desktopOnly}`}
+          name="kian.wiki"
+        />
       </div>
       <div className={styles.navLinks}>
-        <Link href="/" className={`${styles.styledLink} ${styles.mobileOnly}`}>
-          <span>home</span>
-        </Link>
-        <Link href="/work" className={styles.styledLink}>
-          <span>work</span>
-        </Link>
-        <Link href="/projects" className={styles.styledLink}>
-          <span>projects</span>
-        </Link>
-        <Link href="/fantasy" className={styles.styledLink}>
-          <span>fantasy</span>
-        </Link>
+        <NavLink
+          href="/"
+          className={`${styles.styledLink} ${styles.mobileOnly}`}
+          name="home"
+        />
+        <NavLink href="/work" className={styles.styledLink} name="work" />
+        <NavLink
+          href="/projects"
+          className={styles.styledLink}
+          name="projects"
+        />
+        <NavLink href="/fantasy" className={styles.styledLink} name="fantasy" />
       </div>
     </nav>
   );

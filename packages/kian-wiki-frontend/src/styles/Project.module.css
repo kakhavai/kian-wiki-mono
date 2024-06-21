@@ -4,6 +4,7 @@
   overflow: hidden;
   transition: color 0.3s;
   border-radius: 5px;
+  display: inline-block; /* Ensure the link's parent element takes up the correct dimensions */
 }
 
 .styledLink::before {
@@ -11,8 +12,8 @@
   position: absolute;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
+  width: 100%; /* Make the pseudo-element cover the full width */
+  height: 100%; /* Make the pseudo-element cover the full height */
   border-radius: 10px;
   opacity: 0;
   transition:

@@ -42,6 +42,19 @@
   cursor: pointer;
   color: inherit;
   text-decoration: none;
+
+  position: relative;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 0.3rem;
+  padding-right: 0.3rem;
+  left: -0.3rem;
+  text-decoration: none;
+  overflow: hidden;
+  transition: color 0.3s;
+  border-radius: 5px;
+
+  box-sizing: border-box;
 }
 
 .styledLink {
@@ -53,6 +66,7 @@
   border-radius: 5px;
 }
 
+.titleLink:before,
 .styledLink::before {
   content: '';
   position: absolute;
@@ -68,7 +82,10 @@
   z-index: 1;
 }
 
-.styledLink:hover::before {
+.titleLink:hover:before,
+.styledLink:hover::before,
+.titleLink.active:before,
+.styledLink.active::before {
   opacity: 1;
   box-shadow: 0 0 2px 2px rgba(0, 225, 255, 0.7);
 }
