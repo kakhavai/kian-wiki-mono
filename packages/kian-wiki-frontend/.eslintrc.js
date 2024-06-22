@@ -5,7 +5,7 @@ module.exports = {
   extends: [
     'next/core-web-vitals',
     '@rushstack/eslint-config/mixins/react',
-    '../../.eslintrc.js', // Path to your main ESLint configuration file
+    '../../.eslintrc.js',
   ],
   parserOptions: {
     tsconfigRootDir: __dirname,
@@ -17,5 +17,4 @@ module.exports = {
       'packages/kian-wiki-frontend',
     ],
   },
-  // Additional rules or overrides for this specific directory can go here
 };

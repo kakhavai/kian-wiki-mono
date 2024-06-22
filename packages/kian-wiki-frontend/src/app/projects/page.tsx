@@ -1,4 +1,4 @@
-'use client'; // Mark this file as a client component
+'use client';
 
 import { Projects } from '@/components/resume/Projects';
 

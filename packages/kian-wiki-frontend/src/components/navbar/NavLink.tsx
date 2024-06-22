@@ -1,7 +1,5 @@
 'use client';
 
-// components/navbar/NavLink.tsx
-
 import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';

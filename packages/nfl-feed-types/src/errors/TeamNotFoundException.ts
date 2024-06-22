@@ -1,4 +1,3 @@
-// PlayerNotFoundException.ts
 import { NotFoundException } from './NotFoundException';
 
 export class TeamNotFoundException extends NotFoundException {
