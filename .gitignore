@@ -4,6 +4,8 @@ build/
 .vscode/
 .nx/
 lerna-debug*
+.lighthouseci
+
 
 **/.yarn/*
 !**/.yarn/patches
