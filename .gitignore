@@ -6,7 +6,6 @@ build/
 lerna-debug*
 .lighthouseci
 
-
 **/.yarn/*
 !**/.yarn/patches
 !**/.yarn/releases
