@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "test": "yarn lhci autorun",
+    "test:integration": "yarn lhci autorun",
     "lint": "eslint ./ --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
