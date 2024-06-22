@@ -15,9 +15,9 @@
 
 .imageContainer {
   position: relative;
-  height: 150px; /* Example height */
-  width: 100%; /* Ensure it scales within the grid cell */
-  max-width: 220px; /* Example max width */
+  height: 150px;
+  width: 100%;
+  max-width: 220px;
 }
 
 .image {

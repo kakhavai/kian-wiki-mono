@@ -19,7 +19,7 @@ export const mainHandler = async (
   return {
     statusCode: 200,
     headers: {
-      'Access-Control-Allow-Origin': 'http://localhost:3000', // Replace with your actual origin
+      'Access-Control-Allow-Origin': 'http://localhost:3000', // Replace with actual origin on prod, or make flaggable
       'Access-Control-Allow-Methods': 'GET,OPTIONS',
       'Access-Control-Allow-Headers':
         'Content-Type, X-Amz-Date, Authorization, X-Api-Key, X-Amz-Security-Token',
@@ -44,7 +44,7 @@ export const getWrStats = async (
       statusCode: 200,
       body: JSON.stringify(jsonData),
       headers: {
-        'Access-Control-Allow-Origin': 'http://localhost:3000', // Replace with your actual origin
+        'Access-Control-Allow-Origin': 'http://localhost:3000', // Replace with actual origin, or make flaggable
         'Access-Control-Allow-Methods': 'GET,OPTIONS',
         'Access-Control-Allow-Headers':
           'Content-Type, X-Amz-Date, Authorization, X-Api-Key, X-Amz-Security-Token',

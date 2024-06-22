@@ -1,4 +1,3 @@
-// components/Layout.tsx
 import React, { ReactNode } from 'react';
 import styles from '@/styles/Layout.module.css';
 

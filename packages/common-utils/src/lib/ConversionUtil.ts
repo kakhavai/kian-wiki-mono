@@ -14,6 +14,7 @@ export class ConversionUtil {
     return result;
   }
 
+  // Utility function to convert stream to json
   public static async streamToJSON(stream: Readable): Promise<JSON> {
     const chunks: Uint8Array[] = [];
     for await (const chunk of stream) {

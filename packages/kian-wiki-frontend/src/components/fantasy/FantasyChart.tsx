@@ -11,7 +11,7 @@ interface IWRStatsResponse {
 async function fetchWrStats(): Promise<IWrProjectionData[]> {
   try {
     const response: Response = await fetch(`/stats`, {
-      next: { revalidate: revalidateCadence }, // Revalidate every 60 seconds
+      next: { revalidate: revalidateCadence }, // Revalidate every 12 hours
     });
 
     if (!response.ok) {

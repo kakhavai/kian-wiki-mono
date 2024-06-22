@@ -23,6 +23,7 @@ export const Navbar: React.FC = () => {
     setIsTransforming(false);
   }, []);
 
+  //Triggers on hover of title
   const handleMouseMove: (e: React.MouseEvent<HTMLDivElement>) => void =
     useCallback(
       (e: React.MouseEvent<HTMLDivElement>): void => {
@@ -56,6 +57,7 @@ export const Navbar: React.FC = () => {
     setIsTransforming(false);
   }, []);
 
+  //When this occurs attach a transitionend listener to it when its done you can set transforming to false
   useEffect(() => {
     const currentRef: HTMLDivElement | null = titleRef.current;
     if (currentRef) {
