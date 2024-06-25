@@ -10,8 +10,6 @@ module.exports = {
         'categories:accessibility': ['error', { minScore: 0.95 }],
       },
     },
-    upload: {
-      // ...
-    },
+    upload: {},
   },
 };
