@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Bar } from 'react-chartjs-2';
+import { Bar, Chart } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -24,6 +24,9 @@ ChartJS.register(
   Legend,
   ChartDataLabels,
 );
+
+ChartJS.defaults.color = 'white';
+ChartJS.defaults.borderColor = 'white';
 
 const revalidateCadence: number = 60 * 60 * 12; // 12 hours
 
@@ -104,8 +107,7 @@ export const FantasyChart: React.FC = () => {
         backgroundColor: '#8884d8',
         datalabels: {
           anchor: 'end',
-          align: 'top',
-          color: 'white',
+          align: 'left',
         },
       },
       {
@@ -114,32 +116,25 @@ export const FantasyChart: React.FC = () => {
         backgroundColor: 'rgba(0, 225, 255, 0.7)',
         datalabels: {
           anchor: 'end',
-          align: 'top',
-          color: 'white',
+          align: 'left',
         },
       },
     ],
   };
 
   const options: ChartOptions<'bar'> = {
+    indexAxis: 'y',
     responsive: true,
     maintainAspectRatio: false,
-    color: 'white',
     plugins: {
       legend: {
         position: 'top',
-        labels: {
-          color: 'white',
-        },
       },
       title: {
         display: true,
         text: 'Wide Receiver Projections',
-        color: 'white',
       },
-
       datalabels: {
-        color: 'white',
         font: {
           size: 10,
         },
@@ -148,30 +143,22 @@ export const FantasyChart: React.FC = () => {
     scales: {
       x: {
         ticks: {
-          color: 'white',
           font: {
             size: 10,
           },
         },
         grid: {
           display: false,
-        },
-        border: {
-          color: 'white',
         },
       },
       y: {
         ticks: {
-          color: 'white',
           font: {
             size: 10,
           },
         },
         grid: {
           display: false,
-        },
-        border: {
-          color: 'white',
         },
       },
     },
