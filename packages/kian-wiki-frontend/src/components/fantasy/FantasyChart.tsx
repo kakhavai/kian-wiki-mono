@@ -1,5 +1,12 @@
+declare module 'chart.js' {
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  interface TooltipPositionerMap {
+    myCustomPositioner: TooltipPositionerFunction<ChartType>;
+  }
+}
+
 import React, { useState, useEffect } from 'react';
-import { Bar, Chart } from 'react-chartjs-2';
+import { Bar } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -10,6 +17,8 @@ import {
   Legend,
   ChartOptions,
   ChartData,
+  TooltipPositionerFunction,
+  ChartType,
 } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import styles from '@/styles/FantasyChart.module.css';
@@ -27,22 +36,23 @@ ChartJS.register(
 
 ChartJS.defaults.color = 'white';
 ChartJS.defaults.borderColor = 'white';
+ChartJS.defaults.font.size = 12;
 
 const revalidateCadence: number = 60 * 60 * 12; // 12 hours
 
 const offlineData: IWrProjectionData[] = [
-  { name: 'Puka Nacua', projection: 15, ml_guess: 14 },
-  { name: 'Tyreek Hill', projection: 12, ml_guess: 18 },
-  { name: 'Curtis Samuel', projection: 14, ml_guess: 20 },
-  { name: 'Jaylen Waddle', projection: 10, ml_guess: 15 },
-  { name: 'Keenan Allen', projection: 16, ml_guess: 22 },
-  { name: 'Devante Adams', projection: 11, ml_guess: 17 },
-  { name: 'Rashee Rice', projection: 13, ml_guess: 19 },
-  { name: 'Deebo Samuel', projection: 9, ml_guess: 14 },
-  { name: 'Justin Jefferson', projection: 17, ml_guess: 23 },
-  { name: 'Jordan Addison', projection: 8, ml_guess: 12 },
-  { name: 'D.K. Metcalf', projection: 18, ml_guess: 24 },
-  { name: 'Brandon Aiyuk', projection: 7, ml_guess: 10 },
+  { name: 'Puka Nacua', projection: 14, mlGuess: 20 },
+  { name: 'Tyreek Hill', projection: 21, mlGuess: 18 },
+  { name: 'Curtis Samuel', projection: 18, mlGuess: 25 },
+  { name: 'Jaylen Waddle', projection: 15, mlGuess: 12 },
+  { name: 'Keenan Allen', projection: 22, mlGuess: 27 },
+  { name: 'Devante Adams', projection: 17, mlGuess: 24 },
+  { name: 'Rashee Rice', projection: 12, mlGuess: 15 },
+  { name: 'Deebo Samuel', projection: 10, mlGuess: 14 },
+  { name: 'Justin Jefferson', projection: 25, mlGuess: 28 },
+  { name: 'Jordan Addison', projection: 9, mlGuess: 13 },
+  { name: 'D.K. Metcalf', projection: 19, mlGuess: 23 },
+  { name: 'Brandon Aiyuk', projection: 11, mlGuess: 17 },
 ];
 
 interface IWRStatsResponse {
@@ -59,7 +69,9 @@ async function fetchWrStats(): Promise<IWrProjectionData[]> {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const data: IWRStatsResponse = await response.json();
-    return data.stats as IWrProjectionData[];
+    return data.stats.sort(
+      (a, b) => b.mlGuess - a.mlGuess,
+    ) as IWrProjectionData[];
   } catch (error) {
     console.log('GET call failed: ', error);
     throw error;
@@ -75,7 +87,7 @@ export const FantasyChart: React.FC = () => {
     const fetchData = async (): Promise<void> => {
       try {
         // const data: IWrProjectionData[] = await fetchWrStats();
-        setWrData(offlineData);
+        setWrData(offlineData.sort((a, b) => b.mlGuess - a.mlGuess));
       } catch (error) {
         console.error('Error fetching WR stats:', error);
         setError('Server errored fetching fantasy data.');
@@ -96,7 +108,7 @@ export const FantasyChart: React.FC = () => {
 
   const labels: string[] = wrData.map((data) => data.name);
   const projections: number[] = wrData.map((data) => data.projection);
-  const mlGuesses: number[] = wrData.map((data) => data.ml_guess);
+  const mlGuesses: number[] = wrData.map((data) => data.mlGuess);
 
   const data: ChartData<'bar'> = {
     labels,
@@ -111,9 +123,10 @@ export const FantasyChart: React.FC = () => {
         },
       },
       {
-        label: 'ML Projection',
+        label: 'Machine Projection',
         data: mlGuesses,
         backgroundColor: 'rgba(0, 225, 255, 0.7)',
+        hoverBackgroundColor: 'rgba(2, 100, 199, 0.7)',
         datalabels: {
           anchor: 'end',
           align: 'left',
@@ -122,43 +135,56 @@ export const FantasyChart: React.FC = () => {
     ],
   };
 
+  // Tooltip.positioners.myCustomPositioner = function (
+  //   elements: readonly ActiveElement[],
+  //   eventPosition: Point,
+  // ) {
+  //   if (!elements.length) {
+  //     return false; // Return false to use the default positioner if there are no elements
+  //   }
+  //   // A reference to the tooltip model
+  //   const chart: ChartJS = this.chart;
+
+  //   /* ... */
+
+  //   const position: number = elements[0].element.y;
+  //   console.log(chart.width);
+  //   return {
+  //     x: 700,
+  //     y: 0,
+  //   };
+  // };
+
   const options: ChartOptions<'bar'> = {
     indexAxis: 'y',
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
+      // tooltip: {
+      //   position: 'myCustomPositioner',
+      //   animation: {
+      //     duration: 0,
+      //   },
+      // },
       legend: {
         position: 'top',
+        labels: { boxWidth: 10 },
       },
       title: {
         display: true,
-        text: 'Wide Receiver Projections',
-      },
-      datalabels: {
-        font: {
-          size: 10,
-        },
+        text: 'Wide Receiver Projections PPR',
       },
     },
     scales: {
       x: {
-        ticks: {
-          font: {
-            size: 10,
-          },
-        },
         grid: {
           display: false,
         },
       },
       y: {
-        ticks: {
-          font: {
-            size: 10,
-          },
-        },
         grid: {
           display: false,
+          lineWidth: 2,
         },
       },
     },
