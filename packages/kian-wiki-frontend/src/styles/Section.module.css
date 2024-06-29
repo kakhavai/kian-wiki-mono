@@ -24,3 +24,11 @@
 .sectionWrapper {
   padding: 1rem;
 }
+
+.flexTitle {
+  display: flex;
+}
+
+.alignRight {
+  margin-left: auto;
+}

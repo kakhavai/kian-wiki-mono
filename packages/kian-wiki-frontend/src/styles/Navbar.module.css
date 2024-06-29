@@ -66,6 +66,8 @@
   overflow: hidden;
   transition: color 0.3s;
   border-radius: 5px;
+
+  will-change: transform; /* Optimize rendering for transformations */
 }
 
 .titleLink:before,

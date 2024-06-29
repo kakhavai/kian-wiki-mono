@@ -11,6 +11,9 @@
   "dependencies": {
     "@aws-amplify/api": "^6.0.37",
     "@aws-sdk/client-api-gateway": "^3.596.0",
+    "@fortawesome/fontawesome-svg-core": "^6.5.2",
+    "@fortawesome/free-brands-svg-icons": "^6.5.2",
+    "@fortawesome/react-fontawesome": "^0.2.2",
     "aws-amplify": "^6.3.6",
     "chart.js": "^4.4.3",
     "chartjs-plugin-datalabels": "^2.2.0",
