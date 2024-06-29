@@ -8,12 +8,16 @@ import {
   RestApi,
 } from '@aws-sdk/client-api-gateway';
 
+// const client: APIGatewayClient = new APIGatewayClient({
+//   region: 'us-east-1',
+//   credentials: {
+//     accessKeyId: process.env.AWS_ACCESS_KEY_ID || '',
+//     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY || '',
+//   },
+// });
+
 const client: APIGatewayClient = new APIGatewayClient({
   region: 'us-east-1',
-  credentials: {
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID || '',
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY || '',
-  },
 });
 
 const getApiGatewayUrl = async (): Promise<string> => {
