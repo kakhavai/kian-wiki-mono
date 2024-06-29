@@ -1,22 +1,16 @@
 import React from 'react';
-import Link from 'next/link';
 import Section from '../common/Section';
 import sectionStyles from '@/styles/Section.module.css';
-import projectStyles from '@/styles/Project.module.css';
+import { ProjectTitle } from './ProjectTitle';
 
 export const Projects: React.FC = () => (
   <div className={sectionStyles.sectionWrapper}>
     <Section
       title={
-        <span>
-          <Link
-            href="https://github.com/kakhavai/kian-wiki-mono"
-            className={projectStyles.styledLink}
-            target="_blank"
-          >
-            <span>kian.wiki.mono</span>
-          </Link>
-        </span>
+        <ProjectTitle
+          url="https://github.com/kakhavai/kian-wiki-mono"
+          projectName="kian.wiki.mono"
+        />
       }
     >
       <p>
@@ -56,13 +50,10 @@ export const Projects: React.FC = () => (
     </Section>
     <Section
       title={
-        <Link
-          href="https://github.com/kakhavai/ActionRoguelike"
-          className={projectStyles.styledLink}
-          target="_blank"
-        >
-          <span>ActionRogueLike</span>
-        </Link>
+        <ProjectTitle
+          url="https://github.com/kakhavai/ActionRoguelike"
+          projectName="ActionRogueLike"
+        />
       }
     >
       <p>(Unreal Engine 5, C++)</p>
@@ -74,13 +65,10 @@ export const Projects: React.FC = () => (
     </Section>
     <Section
       title={
-        <Link
-          href="https://github.com/kakhavai/kian-wiki"
-          className={projectStyles.styledLink}
-          target="_blank"
-        >
-          <span>kian.wiki</span>
-        </Link>
+        <ProjectTitle
+          url="https://github.com/kakhavai/kian-wiki"
+          projectName="kian.wiki"
+        />
       }
     >
       <p>(Node.js, React.js, Postgres, Github Actions)</p>

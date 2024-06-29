@@ -2744,6 +2744,43 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@fortawesome/fontawesome-common-types@npm:6.5.2":
+  version: 6.5.2
+  resolution: "@fortawesome/fontawesome-common-types@npm:6.5.2"
+  checksum: 12104e93a0056ad1077f7350826f52aa26465bb1d6b4ce75dab0307072a3871301ec750c3a34d89d05e7338c9b446fa2793150cf58a5167217021943ef877d77
+  languageName: node
+  linkType: hard
+
+"@fortawesome/fontawesome-svg-core@npm:^6.5.2":
+  version: 6.5.2
+  resolution: "@fortawesome/fontawesome-svg-core@npm:6.5.2"
+  dependencies:
+    "@fortawesome/fontawesome-common-types": "npm:6.5.2"
+  checksum: 91695dd375623988d16e6f0dc69d20350ef3fa3296fe40aa08877aae7beaf64378134656a2227419fe648dcd27a81c03fe1fd9a6c87956d863164b0380ba77d0
+  languageName: node
+  linkType: hard
+
+"@fortawesome/free-brands-svg-icons@npm:^6.5.2":
+  version: 6.5.2
+  resolution: "@fortawesome/free-brands-svg-icons@npm:6.5.2"
+  dependencies:
+    "@fortawesome/fontawesome-common-types": "npm:6.5.2"
+  checksum: 4c1798930547a73bf9dfd04064288d4ce02fbf42fece056c1f5dd6596363d6a34bb86bc2e0f400b78f938f48773aceb375bc6977e55cbaec9b7bd07996ae1e8c
+  languageName: node
+  linkType: hard
+
+"@fortawesome/react-fontawesome@npm:^0.2.2":
+  version: 0.2.2
+  resolution: "@fortawesome/react-fontawesome@npm:0.2.2"
+  dependencies:
+    prop-types: "npm:^15.8.1"
+  peerDependencies:
+    "@fortawesome/fontawesome-svg-core": ~1 || ~6
+    react: ">=16.3"
+  checksum: 824f96cd9be2e637738de3073450b30fe6b5a91b4f95df804c162b47ddf7d1a43df5ed7439a01e7236e888edc093efad1e61322ac693ddc3ae01147b90318745
+  languageName: node
+  linkType: hard
+
 "@hapi/accept@npm:^6.0.1":
   version: 6.0.3
   resolution: "@hapi/accept@npm:6.0.3"
@@ -3399,6 +3436,13 @@ __metadata:
     "@jridgewell/resolve-uri": "npm:^3.1.0"
     "@jridgewell/sourcemap-codec": "npm:^1.4.14"
   checksum: 18cf19f88e2792c1c91515f2b629aae05f3cdbb2e60c3886e16e80725234ce26dd10144c4981c05d9366e7094498c0b4fe5c1a89f4a730d7376a4ba4af448149
+  languageName: node
+  linkType: hard
+
+"@kurkle/color@npm:^0.3.0":
+  version: 0.3.2
+  resolution: "@kurkle/color@npm:0.3.2"
+  checksum: a9e8e3e35dcd59dec4dd4f0105919c05e24823a96347bcf152965c29e48d6290b66d5fb96c071875db752e10930724c48ce6d338fefbd65e0ce5082d5c78970e
   languageName: node
   linkType: hard
 
@@ -7635,6 +7679,24 @@ __metadata:
   version: 0.7.0
   resolution: "chardet@npm:0.7.0"
   checksum: 96e4731b9ec8050cbb56ab684e8c48d6c33f7826b755802d14e3ebfdc51c57afeece3ea39bc6b09acc359e4363525388b915e16640c1378053820f5e70d0f27d
+  languageName: node
+  linkType: hard
+
+"chart.js@npm:^4.4.3":
+  version: 4.4.3
+  resolution: "chart.js@npm:4.4.3"
+  dependencies:
+    "@kurkle/color": "npm:^0.3.0"
+  checksum: 910113b07983d1b2f52689afcd88d0c5fecbd30fbbe89f4e122d78397fd4521e1563fd6d80f7742a391abe7cfbfa8deaf12c58b83c9636431fa77e7285d85c2e
+  languageName: node
+  linkType: hard
+
+"chartjs-plugin-datalabels@npm:^2.2.0":
+  version: 2.2.0
+  resolution: "chartjs-plugin-datalabels@npm:2.2.0"
+  peerDependencies:
+    chart.js: ">=3.0.0"
+  checksum: de4855a795e4eef34869a16db1a8a0f905b6dfed0258c733338f472625361eb56fb899214b18651c1c1064cd343a78285ba576576693a40ec51285a84f022ea0
   languageName: node
   linkType: hard
 
@@ -12341,16 +12403,22 @@ __metadata:
   dependencies:
     "@aws-amplify/api": "npm:^6.0.37"
     "@aws-sdk/client-api-gateway": "npm:^3.596.0"
+    "@fortawesome/fontawesome-svg-core": "npm:^6.5.2"
+    "@fortawesome/free-brands-svg-icons": "npm:^6.5.2"
+    "@fortawesome/react-fontawesome": "npm:^0.2.2"
     "@rushstack/eslint-config": "npm:^3.7.0"
     "@types/node": "npm:^20"
     "@types/react": "npm:^18"
     "@types/react-dom": "npm:^18"
     aws-amplify: "npm:^6.3.6"
+    chart.js: "npm:^4.4.3"
+    chartjs-plugin-datalabels: "npm:^2.2.0"
     eslint: "npm:^8"
     eslint-config-next: "npm:14.2.3"
     next: "npm:14.2.3"
     nfl-feed-types: "workspace:*"
     react: "npm:^18"
+    react-chartjs-2: "npm:^5.2.0"
     react-dom: "npm:^18"
     typescript: "npm:^5"
   languageName: unknown
@@ -14752,6 +14820,16 @@ __metadata:
   version: 5.1.1
   resolution: "quick-lru@npm:5.1.1"
   checksum: a24cba5da8cec30d70d2484be37622580f64765fb6390a928b17f60cd69e8dbd32a954b3ff9176fa1b86d86ff2ba05252fae55dc4d40d0291c60412b0ad096da
+  languageName: node
+  linkType: hard
+
+"react-chartjs-2@npm:^5.2.0":
+  version: 5.2.0
+  resolution: "react-chartjs-2@npm:5.2.0"
+  peerDependencies:
+    chart.js: ^4.1.1
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: 437e443a268b7eebab3f1a6f0f5d936e58caf650fca55f568a612a46c563d22af683a64185eac8005aa644e4960a5a72cc1075a2574b89ec46c7653aaf4025e2
   languageName: node
   linkType: hard
 

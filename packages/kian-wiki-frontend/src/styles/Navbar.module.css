@@ -13,6 +13,8 @@
   transition:
     transform 0.5s,
     box-shadow 0.3s;
+
+  will-change: transform; /* Optimize rendering for transformations */
 }
 
 .webTitle::before {
@@ -64,6 +66,8 @@
   overflow: hidden;
   transition: color 0.3s;
   border-radius: 5px;
+
+  will-change: transform; /* Optimize rendering for transformations */
 }
 
 .titleLink:before,
