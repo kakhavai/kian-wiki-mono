@@ -34,10 +34,3 @@
   position: relative;
   z-index: 2;
 }
-
-/* Media Queries */
-@media (max-width: 428px) {
-  .styledLink {
-    padding: 0.5rem 0.75rem;
-  }
-}

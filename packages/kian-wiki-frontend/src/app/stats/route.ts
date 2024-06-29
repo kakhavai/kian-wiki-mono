@@ -19,6 +19,8 @@ const client: APIGatewayClient = new APIGatewayClient({
 const getApiGatewayUrl = async (): Promise<string> => {
   try {
     const command: GetRestApisCommand = new GetRestApisCommand({});
+    console.log(process.env.AWS_SECRET_ACCESS_KEY);
+    console.log(process.env.AWS_ACCESS_KEY_ID);
     const response: GetRestApisCommandOutput = await client.send(command);
 
     const api: RestApi | undefined = response.items?.find(
@@ -37,8 +39,11 @@ const getApiGatewayUrl = async (): Promise<string> => {
 export async function GET(req: NextRequest): Promise<void | Response> {
   try {
     const apiUrl: string = await getApiGatewayUrl();
+    console.log(apiUrl);
     const response: Response = await fetch(`${apiUrl}/getWrStats`);
+    console.log(JSON.stringify(response));
     const data: string = await response.json();
+    console.log(JSON.stringify(data));
     return NextResponse.json(data);
   } catch (error) {
     console.error('Error in API route:', error);

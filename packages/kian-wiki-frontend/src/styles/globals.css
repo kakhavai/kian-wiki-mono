@@ -1,4 +1,9 @@
 /* Defaults */
+
+a {
+  -webkit-tap-highlight-color: transparent; /* Safari, Android, and other WebKit/Blink browsers */
+}
+
 body {
   font-weight: 400;
   font-size: 1rem;

@@ -40,20 +40,20 @@ ChartJS.defaults.font.size = 12;
 
 const revalidateCadence: number = 60 * 60 * 12; // 12 hours
 
-const offlineData: IWrProjectionData[] = [
-  { name: 'Puka Nacua', projection: 14, mlGuess: 20 },
-  { name: 'Tyreek Hill', projection: 21, mlGuess: 18 },
-  { name: 'Curtis Samuel', projection: 18, mlGuess: 25 },
-  { name: 'Jaylen Waddle', projection: 15, mlGuess: 12 },
-  { name: 'Keenan Allen', projection: 22, mlGuess: 27 },
-  { name: 'Devante Adams', projection: 17, mlGuess: 24 },
-  { name: 'Rashee Rice', projection: 12, mlGuess: 15 },
-  { name: 'Deebo Samuel', projection: 10, mlGuess: 14 },
-  { name: 'Justin Jefferson', projection: 25, mlGuess: 28 },
-  { name: 'Jordan Addison', projection: 9, mlGuess: 13 },
-  { name: 'D.K. Metcalf', projection: 19, mlGuess: 23 },
-  { name: 'Brandon Aiyuk', projection: 11, mlGuess: 17 },
-];
+// const offlineData: IWrProjectionData[] = [
+//   { name: 'Puka Nacua', projection: 14, mlGuess: 20 },
+//   { name: 'Tyreek Hill', projection: 21, mlGuess: 18 },
+//   { name: 'Curtis Samuel', projection: 18, mlGuess: 25 },
+//   { name: 'Jaylen Waddle', projection: 15, mlGuess: 12 },
+//   { name: 'Keenan Allen', projection: 22, mlGuess: 27 },
+//   { name: 'Devante Adams', projection: 17, mlGuess: 24 },
+//   { name: 'Rashee Rice', projection: 12, mlGuess: 15 },
+//   { name: 'Deebo Samuel', projection: 10, mlGuess: 14 },
+//   { name: 'Justin Jefferson', projection: 25, mlGuess: 28 },
+//   { name: 'Jordan Addison', projection: 9, mlGuess: 13 },
+//   { name: 'D.K. Metcalf', projection: 19, mlGuess: 23 },
+//   { name: 'Brandon Aiyuk', projection: 11, mlGuess: 17 },
+// ];
 
 interface IWRStatsResponse {
   stats: IWrProjectionData[];
@@ -86,8 +86,8 @@ export const FantasyChart: React.FC = () => {
   useEffect(() => {
     const fetchData = async (): Promise<void> => {
       try {
-        // const data: IWrProjectionData[] = await fetchWrStats();
-        setWrData(offlineData.sort((a, b) => b.mlGuess - a.mlGuess));
+        const data: IWrProjectionData[] = await fetchWrStats();
+        setWrData(data.sort((a, b) => b.mlGuess - a.mlGuess));
       } catch (error) {
         console.error('Error fetching WR stats:', error);
         setError('Server errored fetching fantasy data.');
