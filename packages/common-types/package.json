@@ -5,6 +5,7 @@
   "main": "./build/index.js",
   "scripts": {
     "build": "yarn run clean && yarn tsc",
+    "build:prod": "yarn run clean && yarn tsc",
     "clean": "rimraf ./build",
     "lint": "eslint ./"
   },
