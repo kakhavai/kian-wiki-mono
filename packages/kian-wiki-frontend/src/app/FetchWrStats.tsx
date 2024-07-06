@@ -1,11 +1,15 @@
-import { NextRequest, NextResponse } from 'next/server';
+// src/utils/FetchWrStats.ts
+
 import {
   APIGatewayClient,
   GetRestApisCommand,
   GetRestApisCommandOutput,
   RestApi,
 } from '@aws-sdk/client-api-gateway';
+import { IWrProjectionData } from 'nfl-feed-types';
+import 'server-only';
 
+const revalidateCadence: number = 60 * 60 * 12; // 12 hours
 const client: APIGatewayClient = new APIGatewayClient({
   region: 'us-east-1',
   credentials: {
@@ -14,24 +18,14 @@ const client: APIGatewayClient = new APIGatewayClient({
   },
 });
 
-interface IResponseData {
-  // Define the structure of the response data from your API here
-  [key: string]: string | undefined;
-  lastUpdateTime: string | undefined;
+interface IWRStatsResponse {
+  stats: IWrProjectionData[];
+  lastUpdateTime: string;
 }
 
-function fetchTime(): string {
-  const now: Date = new Date();
-  const options: Intl.DateTimeFormatOptions = {
-    timeZone: 'America/Los_Angeles', // PST time zone
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit',
-    hour12: false,
-  };
-  return now.toLocaleString('en-US', options) + ` PST`;
+interface IResponseData {
+  [key: string]: string | undefined | IWrProjectionData[];
+  lastUpdateTime: string | undefined;
 }
 
 const getApiGatewayUrl = async (): Promise<string> => {
@@ -52,18 +46,23 @@ const getApiGatewayUrl = async (): Promise<string> => {
   }
 };
 
-export async function GET(req: NextRequest): Promise<void | Response> {
+export const fetchWrStats = async (): Promise<IWrProjectionData[]> => {
   try {
     const apiUrl: string = await getApiGatewayUrl();
-    const response: Response = await fetch(`${apiUrl}/getWrStats`);
+    const response: Response = await fetch(`${apiUrl}/getWrStats`, {
+      next: { revalidate: revalidateCadence }, // Revalidate every 12 hours
+    });
+
     const data: IResponseData = await response.json();
-    data.lastUpdateTime = await fetchTime();
-    return NextResponse.json(data);
+
+    const wrStats: IWRStatsResponse = {
+      stats: data.stats as IWrProjectionData[],
+      lastUpdateTime: new Date().toISOString(),
+    };
+
+    return wrStats.stats;
   } catch (error) {
     console.error('Error in API route:', error);
-    return NextResponse.json(
-      { error: 'Internal Server Error' },
-      { status: 500 },
-    );
+    throw error;
   }
-}
+};

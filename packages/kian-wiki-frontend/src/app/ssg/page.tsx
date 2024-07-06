@@ -1,22 +1,13 @@
-import Layout from '../../components/common/Layout';
-import LiveClock from '../../components/LiveClock';
+import React from 'react';
 
-interface ISSGPageProps {
-  params: { time: string };
-}
+// /app/ssg/page.tsx
+export default function SsgPage(): React.JSX.Element {
+  const time: string = new Date().toISOString();
 
-// The page component itself
-export default function SSGPage({ params }: ISSGPageProps): JSX.Element {
   return (
-    <Layout>
-      <h1>Static Site Generation (SSG) Page</h1>
-      <p>This page was generated at build time: {params.time}</p>
-      <LiveClock />
-    </Layout>
+    <div>
+      <h1>Static Generation Page</h1>
+      <p>Time: {time}</p>
+    </div>
   );
-}
-
-// This function runs at build time to generate the static params
-export function generateStaticParams(): [{ time: string }] {
-  return [{ time: new Date().toISOString() }]; // Empty array because we're not generating dynamic routes
 }
