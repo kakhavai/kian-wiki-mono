@@ -1,5 +1,4 @@
-// src/utils/FetchWrStats.ts
-
+import { IWRStatsResponse } from '@/types/IWrStatsResponse';
 import {
   APIGatewayClient,
   GetRestApisCommand,
@@ -18,14 +17,13 @@ const client: APIGatewayClient = new APIGatewayClient({
   },
 });
 
-interface IWRStatsResponse {
-  stats: IWrProjectionData[];
-  lastUpdateTime: string;
-}
+console.log(process.env.API_ACCESS_KEY_ID);
+
+console.log(process.env.API_SECRET_ACCESS_KEY);
 
 interface IResponseData {
   [key: string]: string | undefined | IWrProjectionData[];
-  lastUpdateTime: string | undefined;
+  lastUpdated: string | undefined;
 }
 
 const getApiGatewayUrl = async (): Promise<string> => {
@@ -46,21 +44,24 @@ const getApiGatewayUrl = async (): Promise<string> => {
   }
 };
 
-export const fetchWrStats = async (): Promise<IWrProjectionData[]> => {
+export const fetchWrStats = async (): Promise<IWRStatsResponse> => {
   try {
     const apiUrl: string = await getApiGatewayUrl();
+    console.log(JSON.stringify(`${apiUrl}/getWrStats`));
     const response: Response = await fetch(`${apiUrl}/getWrStats`, {
       next: { revalidate: revalidateCadence }, // Revalidate every 12 hours
     });
 
     const data: IResponseData = await response.json();
 
+    console.log(JSON.stringify(data));
+
     const wrStats: IWRStatsResponse = {
       stats: data.stats as IWrProjectionData[],
-      lastUpdateTime: new Date().toISOString(),
+      lastUpdated: data.lastUpdated as string,
     };
 
-    return wrStats.stats;
+    return wrStats;
   } catch (error) {
     console.error('Error in API route:', error);
     throw error;

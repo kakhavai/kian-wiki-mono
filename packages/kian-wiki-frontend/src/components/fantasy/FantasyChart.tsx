@@ -32,13 +32,14 @@ ChartJS.defaults.borderColor = 'white';
 ChartJS.defaults.font.size = 12;
 
 interface IFantasyChartProps {
-  data: IWrProjectionData[];
+  wrData: IWrProjectionData[];
 }
 
-export const FantasyChart: React.FC<IFantasyChartProps> = ({ data }) => {
-  const labels: string[] = data.map((data) => data.name);
-  const projections: number[] = data.map((data) => data.projection);
-  const mlGuesses: number[] = data.map((data) => data.mlGuess);
+export const FantasyChart: React.FC<IFantasyChartProps> = ({ wrData }) => {
+  wrData = wrData.sort((a, b) => b.mlGuess - a.mlGuess);
+  const labels: string[] = wrData.map((wrData) => wrData.name);
+  const projections: number[] = wrData.map((wrData) => wrData.projection);
+  const mlGuesses: number[] = wrData.map((wrData) => wrData.mlGuess);
 
   const chartData: ChartData<'bar'> = {
     labels,
