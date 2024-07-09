@@ -17,11 +17,9 @@ describe('TrainingOrchestratorService Integration Test', () => {
     await trainingOrchestratorService.generateTrainingData(playerId);
 
     // Verify the file was uploaded to S3
-    const s3FileUtil = new S3FileUtil(
-      process.env.NFL_SCRAPE_BUCKET_REGION || '',
-    );
+    const s3FileUtil = new S3FileUtil(process.env.NFL_SCRAPE_BUCKET_REGION!);
     const uploadedData = await s3FileUtil.downloadFile(
-      process.env.NFL_SCRAPE_BUCKET_NAME || '',
+      process.env.NFL_SCRAPE_BUCKET_NAME!,
       `${playerId}.wr.trainingdata`,
     );
 

@@ -5978,6 +5978,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/aws4@npm:^1":
+  version: 1.11.6
+  resolution: "@types/aws4@npm:1.11.6"
+  dependencies:
+    "@types/node": "npm:*"
+  checksum: abb84d0dad0b791124389b1bfd2c4c2813077af162cac128f1eb0793f0d4fe3084aa1168f62b41e39f80730aa45b95a9a0034f85c254bebf2194721fe02bc9ad
+  languageName: node
+  linkType: hard
+
 "@types/babel__core@npm:^7.1.14":
   version: 7.20.5
   resolution: "@types/babel__core@npm:7.20.5"
@@ -7130,6 +7139,13 @@ __metadata:
     uuid: "npm:8.0.0"
     xml2js: "npm:0.6.2"
   checksum: f594832748ec08439b9f18c8bc1e1c7ae547f83cb5a0f3942a6c73826b30af7b8063f1eef185ea86855352e0fa857260c5ce0d95e86894393351bba447e40f00
+  languageName: node
+  linkType: hard
+
+"aws4@npm:^1.13.0":
+  version: 1.13.0
+  resolution: "aws4@npm:1.13.0"
+  checksum: 4c71398543e432631a226cabafaa138f8070482f99790233840d84847291ec744e739cb18684a68f52125d0e73f82f16f0246d93524ec85167fadb3cf60dfa4f
   languageName: node
   linkType: hard
 
@@ -12407,10 +12423,12 @@ __metadata:
     "@fortawesome/free-brands-svg-icons": "npm:^6.5.2"
     "@fortawesome/react-fontawesome": "npm:^0.2.2"
     "@rushstack/eslint-config": "npm:^3.7.0"
+    "@types/aws4": "npm:^1"
     "@types/node": "npm:^20"
     "@types/react": "npm:^18"
     "@types/react-dom": "npm:^18"
     aws-amplify: "npm:^6.3.6"
+    aws4: "npm:^1.13.0"
     chart.js: "npm:^4.4.3"
     chartjs-plugin-datalabels: "npm:^2.2.0"
     eslint: "npm:^8"

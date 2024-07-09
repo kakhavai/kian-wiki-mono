@@ -5,8 +5,8 @@ import { Readable } from 'stream';
 
 // const teamDataService: TeamDataService = new TeamDataService();
 
-const s3FileUtil: S3FileUtil = new S3FileUtil(process.env.AWS_REGION || '');
-const bucketName: string = process.env.NFL_SCRAPE_BUCKET_NAME || '';
+const s3FileUtil: S3FileUtil = new S3FileUtil(process.env.AWS_REGION!);
+const bucketName: string = process.env.NFL_SCRAPE_BUCKET_NAME!;
 
 const wrDataFileName: string = 'wrStats.json';
 
