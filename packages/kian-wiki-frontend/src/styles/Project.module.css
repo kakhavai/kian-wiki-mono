@@ -1,3 +1,4 @@
+/* Base styles for styledLink */
 .styledLink {
   position: relative;
   padding: 0rem 0.5rem;
@@ -5,7 +6,6 @@
   overflow: hidden;
   transition: color 0.3s;
   border-radius: 5px;
-
   will-change: transform; /* Optimize rendering for transformations */
 }
 
@@ -33,4 +33,11 @@
 .styledLink span {
   position: relative;
   z-index: 2;
+}
+
+@media (hover: none) {
+  .styledLink:hover::before {
+    opacity: 0; /* Remove hover effect */
+    box-shadow: none; /* Remove box-shadow */
+  }
 }
