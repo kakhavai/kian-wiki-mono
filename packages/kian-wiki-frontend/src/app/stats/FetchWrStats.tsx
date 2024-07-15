@@ -18,8 +18,8 @@ const service: string = 'execute-api';
 const client: APIGatewayClient = new APIGatewayClient({
   region: region,
   credentials: {
-    accessKeyId: process.env.API_ACCESS_KEY_ID!,
-    secretAccessKey: process.env.API_SECRET_ACCESS_KEY!,
+    accessKeyId: process.env.GATEWAY_ACCESS_KEY_ID!,
+    secretAccessKey: process.env.GATEWAY_SECRET_ACCESS_KEY!,
   },
 });
 
@@ -34,8 +34,8 @@ const getAwsSignedHeaders = (host: string): HeadersInit => {
       body: '',
     },
     {
-      accessKeyId: process.env.API_ACCESS_KEY_ID,
-      secretAccessKey: process.env.API_SECRET_ACCESS_KEY,
+      accessKeyId: process.env.GATEWAY_ACCESS_KEY_ID,
+      secretAccessKey: process.env.GATEWAY_SECRET_ACCESS_KEY,
     },
   );
 
