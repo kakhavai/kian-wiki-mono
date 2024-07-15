@@ -25,6 +25,8 @@ jobs:
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       NFL_SCRAPE_BUCKET_NAME: ${{secrets.NFL_SCRAPE_BUCKET_NAME}}
       NFL_SCRAPE_BUCKET_REGION: ${{secrets.NFL_SCRAPE_BUCKET_REGION}}
+      GATEWAY_ACCESS_KEY_ID: ${{ secrets.GATEWAY_ACCESS_KEY_ID }}
+      GATEWAY_SECRET_ACCESS_KEY: ${{ secrets.GATEWAY_SECRET_ACCESS_KEY }}
 
     steps:
       - uses: actions/checkout@v4

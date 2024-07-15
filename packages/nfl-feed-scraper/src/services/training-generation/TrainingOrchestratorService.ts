@@ -10,7 +10,7 @@ const MAX_POST_SEASON: number = 4;
 
 export class TrainingOrchestratorService {
   private _fileUtil: S3FileUtil = new S3FileUtil(
-    process.env.NFL_SCRAPE_BUCKET_REGION || '',
+    process.env.NFL_SCRAPE_BUCKET_REGION!,
   );
   public async generateTrainingData(playerId: string): Promise<void> {
     const boxScores: IBoxScoreDTO[] = await this._pullRelevantBoxScores();
@@ -20,7 +20,7 @@ export class TrainingOrchestratorService {
         playerId,
       );
     await this._fileUtil.uploadFile(
-      process.env.NFL_SCRAPE_BUCKET_NAME || '',
+      process.env.NFL_SCRAPE_BUCKET_NAME!,
       `${playerId}.wr.trainingdata`,
       JSON.stringify(wrResult),
     );

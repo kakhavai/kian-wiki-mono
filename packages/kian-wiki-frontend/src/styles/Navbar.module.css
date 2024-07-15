@@ -114,7 +114,7 @@
 }
 
 /* Media Queries */
-@media (max-width: 428px) {
+@media (max-width: 442px) {
   .nav {
     justify-content: center;
   }
