@@ -93,7 +93,7 @@ export const AboutMe: React.FC = () => (
         Currently, I&apos;m a Senior Software Engineer at PlayStation. Here, I
         develop full-stack financial auditing services, create data pipelines,
         and automate financial processes using Node.js, Express.js, and
-        Snowflake. Throughout my career, I&apos;ve worn many hats—from working
+        Snowflake. Throughout my career, I&apos;ve worn many hats&#8211;from working
         on imaging systems with OpenCV to developing backend services with .NET
         Core and Spring.
       </p>
