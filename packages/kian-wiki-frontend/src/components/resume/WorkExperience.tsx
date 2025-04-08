@@ -29,6 +29,13 @@ export const WorkExperience: React.FC = () => (
         high reliability.
       </p>
       <p>
+        I designed and maintained CI/CD pipelines using GitHub Actions,
+        automating everything from linting and unit tests to integration testing
+        and production deployment. I also built internal tooling for pipeline
+        observability, including Slack alert bots and status notifications to
+        keep the team informed throughout the deployment lifecycle.
+      </p>
+      <p>
         Beyond engineering, I&apos;ve mentored junior developers in both Go and
         Node.js, and played an active role in improving internal standards
         around testing, CI/CD, and observability practices.
