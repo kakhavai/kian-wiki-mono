@@ -72,12 +72,7 @@ export const Navbar: React.FC = () => {
 
   return (
     <nav className={styles.nav}>
-      <div
-        ref={titleRef}
-        className={styles.webTitle}
-        style={{ transform }}
-        onMouseMove={handleMouseMove}
-      >
+      <div ref={titleRef} className={styles.webTitle} style={{ transform }}>
         <NavLink
           href="/"
           className={`${styles.titleLink} ${styles.desktopOnly}`}

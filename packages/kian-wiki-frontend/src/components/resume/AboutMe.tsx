@@ -10,11 +10,12 @@ export const AboutMe: React.FC = () => (
   <div className={sectionStyles.sectionWrapper}>
     <Section title="Hey, I'm Kian.">
       <p>
-        I&apos;m a software engineer with a Bachelor&apos;s degree in Computer
-        Science from Cal Poly San Luis Obispo. I thrive on tackling new
-        challenges and crafting innovative, data-driven solutions. Lately,
-        I&apos;ve been diving into the world of machine learning, hoping to gain
-        some new insights (and maybe give my fantasy football strategy a boost).
+        I&apos;m a senior software engineer with over seven years of experience
+        designing back-end systems, building data pipelines, and automating
+        cloud infrastructure. I graduated from Cal Poly San Luis Obispo with a
+        degree in Computer Science, and over time I&apos;ve grown into a
+        platform-minded engineer focused on reliability, scalability, and
+        enabling others to move faster.
       </p>
     </Section>
     <Section title="">
@@ -29,14 +30,14 @@ export const AboutMe: React.FC = () => (
             className={imageStyles.image}
           />
         </div>
-        <div className={`${imageStyles.imageContainer} `}>
+        <div className={imageStyles.imageContainer}>
           <Image
             alt="hobbes"
             src="/images/hobbes.jpg"
             fill
             sizes={imageSizes}
             priority
-            className={`${imageStyles.image} `}
+            className={imageStyles.image}
           />
         </div>
         <div className={imageStyles.imageContainer}>
@@ -49,17 +50,17 @@ export const AboutMe: React.FC = () => (
             className={imageStyles.image}
           />
         </div>
-        <div className={`${imageStyles.imageContainer} `}>
+        <div className={imageStyles.imageContainer}>
           <Image
             alt="soccer"
             src="/images/soccer.jpg"
             fill
             sizes={imageSizes}
             priority
-            className={`${imageStyles.image} `}
+            className={imageStyles.image}
           />
         </div>
-        <div className={`${imageStyles.imageContainer} `}>
+        <div className={imageStyles.imageContainer}>
           <Image
             alt="cousin"
             src="/images/cousin.jpg"
@@ -83,32 +84,30 @@ export const AboutMe: React.FC = () => (
     </Section>
     <Section title="">
       <p>
-        I built this website using a Next.js frontend and a TypeScript backend,
-        heavily leveraging AWS&apos;s serverless capabilities. I utilized
-        services such as Lambda, S3, CloudFront, and RDS, along with monorepo
-        tools like Nx, Yarn Workspaces, and Lerna. For CI/CD, I relied on GitHub
-        Actions and AWS Amplify.
+        I built this site using a monorepo powered by Next.js, TypeScript, and
+        AWS services like Lambda, S3, CloudWatch, and Amplify. CI/CD pipelines
+        are fully automated with GitHub Actions and Nx, and I&apos;ve come to
+        really enjoy streamlining development experience and deployment flows.
       </p>
       <p>
-        Currently, I&apos;m a Senior Software Engineer at PlayStation. Here, I
-        develop full-stack financial auditing services, create data pipelines,
-        and automate financial processes using Node.js, Express.js, and
-        Snowflake. Throughout my career, I&apos;ve worn many hats&#8211;from working
-        on imaging systems with OpenCV to developing backend services with .NET
-        Core and Spring.
+        At PlayStation, I lead efforts around scalable financial data pipelines
+        using Go, Kafka, and Snowflake. I&apos;ve built internal tools that
+        handle millions of records each day, and have worked extensively with
+        AWS and event-driven systems to improve reliability and throughput
+        across services.
       </p>
       <p>
-        I&apos;m proficient in JavaScript, TypeScript, and Python. I&apos;m
-        largely a self-starter, always looking for new ways to improve my skills
-        and actively seeking out mentors to further boost my architectural
-        expertise. I continually push myself to develop more refined and precise
-        solutions.
+        Recently, I&apos;ve been exploring observability and platform tooling
+        with OpenTelemetry, Prometheus, and Grafana. I&apos;ve been building out
+        a telemetry pipeline that connects traces, logs, and metrics to support
+        deeper debugging and performance insights.
       </p>
       <p>
-        I have a passion for automation and developing robust, scalable systems.
-        Ensuring smooth, automated deployment processes and reliable monitoring
-        systems is crucial to maintaining high standards of code quality and
-        delivery efficiency.
+        I particularly enjoy CI/CD automation, system design, and enabling teams
+        through shared infrastructure and tooling. I focus on improving
+        developer workflows by applying consistent design patterns, enforcing
+        code quality, and building reliable, scalable systems that support
+        faster and safer software delivery.
       </p>
       <p>Feel free to reach out: akhavainkian@gmail.com</p>
     </Section>

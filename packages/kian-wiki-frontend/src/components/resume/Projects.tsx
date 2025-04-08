@@ -13,41 +13,51 @@ export const Projects: React.FC = () => (
         />
       }
     >
+      <p>(TypeScript, AWS, Next.js, Nx, Prisma, GitHub Actions, Docker)</p>
       <p>
-        (TypeScript, Next.js, AWS Amplify, Lambda, S3, Lerna, Jest, Prisma ORM,
-        GitHub Actions)
+        I built a monorepo that powers my personal website and provides APIs and
+        data pipelines to support machine learning tools and football analytics
+        workflows. It includes scheduled data generation using AWS Lambda and
+        S3, is deployed with AWS Amplify, and uses Nx to manage shared libraries
+        and maintain scalable development across services.
       </p>
       <p>
-        I have revamped my website kian.wiki into a comprehensive platform for
-        current and future projects, utilizing a monorepo structure for better
-        scalability and integration. Lerna helps manage multiple projects within
-        the monorepo, ensuring seamless collaboration.
+        REST APIs written in TypeScript handle sports analytics workloads and
+        serve precomputed data to the frontend. I use GitHub Actions to automate
+        validation, testing, and deployment across the stack; including unit
+        tests, integration tests, and automated deployment to AWS Amplify.
       </p>
       <p>
-        The platform includes a Next.js-based front end for my resume, machine
-        learning tools for football data analysis, and REST APIs for live sports
-        information, all supported by shared libraries. Linting ensures a
-        consistent codebase, aiding both new and existing developers.
-      </p>
-      <p>
-        AWS Lambda functions are used to generate data periodically, which is
-        then stored in S3. This precomputed data allows the Next.js front end to
-        regenerate with the latest information. Next.js&apos;s Incremental
-        Static Regeneration (ISR) re-renders pages whenever S3 data is updated,
-        ensuring the site always displays current information.
-      </p>
-      <p>
-        CI/CD is handled using GitHub Actions, with Jest ensuring code quality
-        through comprehensive testing. TypeScript and Prisma ORM enhance
-        development with type safety and efficient database management.
-      </p>
-      <p>
-        AWS Amplify simplifies deployment and hosting, providing a robust
-        infrastructure. This project significantly upgrades my previous website,
-        transforming it into a versatile, high-quality platform for various
-        applications.
+        One of the more interesting challenges I solved was identifying and
+        reporting a key bug in AWS Amplify&apos;s monorepo build handling, which
+        improved support for Nx-based apps.
       </p>
     </Section>
+
+    <Section
+      title={
+        <ProjectTitle
+          url="https://github.com/kakhavai/telemetry-tracker"
+          projectName="Telemetry Tracker"
+        />
+      }
+    >
+      <p>(Go, OpenTelemetry, Grafana, Prometheus, Tempo, Loki, Chi, Docker)</p>
+      <p>
+        A vendor-neutral observability pipeline built in Go using OpenTelemetry
+        for tracing, structured logging, and metrics collection. The stack
+        supports backend switching between Grafana&apos;s Tempo and Loki, as
+        well as Prometheus for metrics. Data is visualized in Grafana with full
+        correlation between logs and spans.
+      </p>
+      <p>
+        I containerized the full setup using Docker to enable quick testing and
+        real-time insights in local environments. This project helped deepen my
+        understanding of observability, tracing instrumentation, and telemetry
+        pipelines in production-grade systems.
+      </p>
+    </Section>
+
     <Section
       title={
         <ProjectTitle
@@ -58,26 +68,10 @@ export const Projects: React.FC = () => (
     >
       <p>(Unreal Engine 5, C++)</p>
       <p>
-        Built a simple playground for a third person shooter leveraging Unreal
-        Engine 5’s C++ implementations. This project was mainly important for
-        honing object oriented principles, and it was just fun.
-      </p>
-    </Section>
-    <Section
-      title={
-        <ProjectTitle
-          url="https://github.com/kakhavai/kian-wiki"
-          projectName="kian.wiki"
-        />
-      }
-    >
-      <p>(Node.js, React.js, Postgres, Github Actions)</p>
-      <p>
-        Developed a website using a React.js frontend, Node.js backend, and
-        Postgres DB. Leveraged technologies such as Docker and Github Actions to
-        create a playground for a preferred method of CI/CD; where a server
-        instance could be tested, validated, and deployed securely and
-        automatically.
+        A small playground built with Unreal Engine 5 in C++ to explore
+        object-oriented programming and gameplay mechanics in a third-person
+        shooter environment. While simple, it was a fun way to apply low-level
+        code structure in a high-performance game engine.
       </p>
     </Section>
   </div>
