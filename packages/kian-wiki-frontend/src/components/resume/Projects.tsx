@@ -8,6 +8,29 @@ export const Projects: React.FC = () => (
     <Section
       title={
         <ProjectTitle
+          url="https://github.com/kakhavai/telemetry-tracker"
+          projectName="Telemetry Tracker"
+        />
+      }
+    >
+      <p>(Go, OpenTelemetry, Grafana, Prometheus, Tempo, Loki, Chi, Docker)</p>
+      <p>
+        A vendor-neutral observability pipeline built in Go using OpenTelemetry
+        for tracing, structured logging, and metrics collection. The stack
+        supports backend switching between Grafana&apos;s Tempo and Loki, as
+        well as Prometheus for metrics. Data is visualized in Grafana with full
+        correlation between logs and spans.
+      </p>
+      <p>
+        I containerized the full setup using Docker to enable quick testing and
+        real-time insights in local environments. This project helped deepen my
+        understanding of observability, tracing instrumentation, and telemetry
+        pipelines in production-grade systems.
+      </p>
+    </Section>
+    <Section
+      title={
+        <ProjectTitle
           url="https://github.com/kakhavai/kian-wiki-mono"
           projectName="kian.wiki.mono"
         />
@@ -33,31 +56,6 @@ export const Projects: React.FC = () => (
         improved support for Nx-based apps.
       </p>
     </Section>
-
-    <Section
-      title={
-        <ProjectTitle
-          url="https://github.com/kakhavai/telemetry-tracker"
-          projectName="Telemetry Tracker"
-        />
-      }
-    >
-      <p>(Go, OpenTelemetry, Grafana, Prometheus, Tempo, Loki, Chi, Docker)</p>
-      <p>
-        A vendor-neutral observability pipeline built in Go using OpenTelemetry
-        for tracing, structured logging, and metrics collection. The stack
-        supports backend switching between Grafana&apos;s Tempo and Loki, as
-        well as Prometheus for metrics. Data is visualized in Grafana with full
-        correlation between logs and spans.
-      </p>
-      <p>
-        I containerized the full setup using Docker to enable quick testing and
-        real-time insights in local environments. This project helped deepen my
-        understanding of observability, tracing instrumentation, and telemetry
-        pipelines in production-grade systems.
-      </p>
-    </Section>
-
     <Section
       title={
         <ProjectTitle
